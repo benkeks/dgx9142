@@ -1,0 +1,42 @@
+sprite{
+ scalex = 200
+ scaley = 200
+ aem{
+  texture{
+   path = GFX/Sprites/sun2.bmp
+   mode = 3
+  }
+  material{
+   blend = 3
+     red = 245
+     green = 240
+     blue = 235
+     fx = 9
+  }
+ }
+ child{
+  sprite{
+   scalex = 400
+   scaley = 400
+   aem{
+    texture{
+    path = GFX/Sprites/sun.png
+    mode = 3
+    }
+    material{
+     red = 235
+     green = 230
+     blue = 225
+     blend = 3
+     order = -5
+     fx = 9
+    }
+    shader{
+     name = fadehide
+     updatetimer = 200
+     speed = 0.1
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,790 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.Inarie.de for more information
+
+mapicon = gfx/environ/unnamedplanet.png
+
+posx	= 25
+posy	= 15
+posz	= 120
+
+en_name	= Unexpected Resistance
+de_name = Unerwarteter Widerstand
+
+{
+	version 1.2.1
+	
+	radius	= 5000
+	minimap	= MAPS/map.png
+	mmspace = 4500
+	
+	MapInfo{
+_de_
+Auf der evianischen Kolonie Varos kam es zu einem Aufstand religiöser Fanatiker,
+der Omega. Sie halten die Y'thear für den gerechten Zorn der Götter.
+Die evianische Führung entsandte daraufhin den 23. Kampfverband, um die Rebellen
+zu neutralisieren. Doch unerwarteteterweise traf dieser auf ebenbürtigen
+Widerstand. Die Rebellen verfügen über Kreuzer und werden von Y'thear-Schiffen
+verstärkt. Eine Schlacht bis zum letzten Mann beginnt.
+_en_
+On the Evian colony Varos, religious extremists - called the Omega - have started
+to revolt. They claim that the Y'thear are the just rage of the gods.
+The Evian leaders thereupon sent the 23rd battlegroup to erase the rebels.
+Surprisingly, they meet equal resistance from the rebels, who possess destroyers
+and are backed up by Y'thear ships. A battle of material and men begins.
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen
+_en_
+The battle is won when the enemy tickets reach 0 before the own do..
+	}
+
+Ambient{
+		ambr = 0
+		ambg = 0
+		ambb = 0
+  
+		fogmode = 0
+  
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 22200
+		fogmode = 1
+		fogr = 5
+		fogg = 10
+		fogb = 12
+		fograngemin = 1200
+		fograngemax = 6200
+		camcr = 0
+		camcg = 0
+		camcb = 0
+
+		bloom = .1
+normal=GFX/ENVIRON/normalpixels.png
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII
+		tickets = 280
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = Omega Rebels
+		de_name = Omega Rebellen
+		logo = gfx/gui/logos/omega.png
+		id = 2
+		race = EvianResistance
+		tickets = 280
+		colr = 250
+		colg = 150
+		colb = 30
+	}
+	
+
+	
+
+	dust{
+		range = 300
+		size = 1
+		maxsize = 1.4
+		number = 600
+		texture = gfx/sprites/particle.png
+	}
+
+	Sky4{
+		file = GFX/environ/nebel_03b.b3d
+	}
+
+	
+	LevelStart{
+		x = -1250
+		y = 20
+		z = 0
+		pitch = -50
+		yaw = -10
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 20
+		distance	= 2000
+	}
+Object{
+		name			= EnvirSun
+		environment		= 1
+		aem{
+			piv{}
+			child{
+				afx{
+					light{
+						shadows=1
+						type = 1
+						red = 255
+						green = 255
+						blue = 255
+						child{
+							fromfile=GFX/sprites/flare.afx
+						}
+					}
+				}
+
+				entity{
+					x = 0
+					y = 0
+					z = -1000
+					yaw = 90
+					pitch = 35
+				}
+			}
+		}
+	}
+
+
+
+Object{
+		name = Ilos
+		environment = 1
+		afx{
+			sprite{
+				mode = 3
+				path = GFX/ENVIRON/unnamedplanet.png
+				scalex = 6
+				scaley = 6
+				viewmode = 2
+				aem{
+					;texture{
+					;	path = GFX/ENVIRON/ilos.tga
+					;	mode = 2
+					;}
+					material{
+						order = 4
+						fx = 25
+					}
+				}
+			}
+		}
+		entity{
+			x = 0
+			y =-8
+			z =-20
+			pointtoparent = 1	
+		}
+	}
+
+
+
+
+	Cluster{
+		x = 0
+		y = 0
+		z = 0
+		range = 6000
+		count = 50
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro1.aem
+		size = 15
+	}
+	
+	Cluster{
+		x = 0
+		y = 0
+		z = 0
+		range = 5500
+		count = 35
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro2.aem
+		size = 35
+	}
+
+	Cluster{
+		x = 0
+		y = 0
+		z = 0
+		range = 4900
+		count = 15
+		speed = 0.0005
+		rotation = 0.01
+		mesh = GFX/ENVIRON/astros/astro3.aem
+		size = 80
+	}
+
+
+
+
+
+
+	Object{
+		gate{
+			num = 1
+			to = 2
+			range = 40
+		}
+		
+		entity{
+			x = -1200
+			z = -100
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 2
+			to = 1
+			range = 40
+		}
+		
+		entity{
+			x = 900
+			z = -1300
+			y = 0
+		}
+	}
+
+	
+	Object{
+		flag{
+			en_name = Base 1
+			de_name = Basis 1
+			num = 1
+			team = 2
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -2800
+			z = 220
+			y = -140
+		}
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	
+	Object{
+		flag{
+			en_name = Base 2
+			de_name = Basis 2
+			num = 2
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 3000
+			z = 0
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 2
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Object{
+		flag{
+			en_name = Jumpgate 1a
+			de_name = Raumknoten 1a
+			num = 3
+			team = 1
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 1200
+			z = -1300
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Object{
+		flag{
+			en_name = Jumpgate 2a
+			de_name = Raumknoten 2a
+			num = 4
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 1600
+			z = -1000
+			y = 0
+		}
+	}
+	
+
+	
+
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Object{
+		flag{
+			en_name = Base 2b
+			de_name = Basis 2b
+			num = 5
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 2700
+			z = 500
+			y = -150
+		}
+	}
+	
+	Spawn{
+		flag = 5
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Object{
+		flag{
+			en_name = Jumpgate 1b
+			de_name = Raumknoten 1b
+			num = 6
+			team = 2
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = -2150
+			z = -300
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 6
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 6
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+Object{
+		flag{
+			en_name = Base 1b
+			de_name = Basis 1b
+			num = 7
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -1900
+			z = 100
+			y = -50
+		}
+	}
+	
+	Spawn{
+		flag = 7
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 7
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 7
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 7
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 7
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+Object{
+		flag{
+			en_name = Jumpgate 2b
+			de_name = Raumknoten 2b
+			num = 8
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 0
+			z = 0
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 8
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = -150
+		z = 0
+	}
+	
+	Spawn{
+		flag = 8
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = 150
+		z = 0
+	}
+
+	Spawn{
+		flag = 8
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 8
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 8
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 8
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}	
+}

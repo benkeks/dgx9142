@@ -1,0 +1,73 @@
+mesh{
+
+	file = GFX/SHIPS/yscout/yscout.3DS
+
+	scalex = 30
+
+	scaley = 30
+
+	scalez = 30
+
+	yaw = 90
+
+}
+
+entity{
+
+	x = .2
+	y = 0
+
+	z = 0
+}
+
+
+
+<dot3:1
+
+texture{
+
+	file = 	GFX/SHIPS/yscout/ytscoutnm.bmp
+
+
+	blend = 4
+	layer = 1
+}
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/yscout/ytscout.png
+
+	blend = 5
+	layer = 3
+}
+
+
+
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/yscout/ytscoutlights.png
+
+	blend = 3
+
+	layer = 6
+}
+>
+
+<dot3:0
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/yscout/ytscoutlights.png
+
+	blend = 3
+
+	layer = 4
+}
+>

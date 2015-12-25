@@ -1,0 +1,19 @@
+mesh{
+
+	file = GFX/SHIPS/ydestroyer/ydestroyer3.b3d
+
+}
+
+
+
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/ydestroyer/evan1_lightmap.jpg
+	blend = 3
+
+	layer = 4
+
+}

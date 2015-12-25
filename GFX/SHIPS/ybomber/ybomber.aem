@@ -1,0 +1,38 @@
+mesh{
+
+	file = GFX/SHIPS/ybomber/ybomber.3ds
+
+	scalex = 10
+
+	scaley = 10
+
+	scalez = 10
+
+	yaw = 180
+
+}
+
+entity{
+
+	x = .2
+	y = 0
+
+	z = 0
+
+}
+
+
+
+
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/ybomber/lightb.png
+
+	blend = 3
+
+	layer = 4
+
+}

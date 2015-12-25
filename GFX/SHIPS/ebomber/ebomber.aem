@@ -1,0 +1,30 @@
+mesh{
+
+	file = GFX/SHIPS/ebomber/ebomber.b3d
+}
+
+entity{
+
+	x = .2
+
+	y = 0
+
+	z = 0
+
+}
+
+
+
+
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/ebomber/bomber2_light.jpg
+
+	blend = 3
+
+	layer = 4
+
+}

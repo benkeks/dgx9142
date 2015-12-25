@@ -1,0 +1,573 @@
+; AE Aliens Exist-Levelmap DGX9142-Edition
+; 
+; 
+; please visit www.mrkeks.net for more information
+
+mapicon = MAPS/ilos.png
+	
+posx	= 00
+posy	= -10
+posz	= 150
+
+en_name	= Battle of Ilos
+de_name = Kampf um Ilos
+
+{
+	version 1.2.1
+	
+	radius	= 3500
+	minimap	= MAPS/map.png
+	mmspace = 5500
+	
+	
+	MapInfo{
+_de_
+Die Vernichtung der evianischen Heimatwelt durch die Y'thear hatte das Evianische Sternenimperium ins
+Chaos gestürzt. Den wenigen Überlebenden gelang es jedoch, sich auf Ilos, eine alte Bergbaukolonie
+zu retten. Ilos war ein unbedeutender Planet am Rande des bekannten Universums, weshalb die Y'thear
+für einige Jahre nichts merkten. Die Evianer begannen mit dem Wiederaufbau einer Flotte und
+versuchten, alte Kolonien zurückzugewinnen. Da es in den Nachbarsystemen von Ilos des öfteren zu
+Begegnungen mit Evianern kam, entsandten die Y'thear einige Spähschiffe und später eine ganze Flotte,
+um Ilos zu besetzen.
+_en_
+After the Y'thear had destroyed the Evian homeworld the Evian Empire sank in chaos. The few survivors
+were able to hide on Ilos, an old mining side. Ilos has been a minor planet at the rim of known space.
+That's why the Y'thear have not taken notice for some years. The Evians have been rebuilding their
+fleet and trying to win back old colonies. As they kept encountering Evian ships in the surrounding
+systems, the Y'thear sent some scouts and then a whole fleet to occupy Ilos.
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen. Die Evianer können
+die Tickets der Y'thear schrittweise Senken, indem sie die Seitenpunkte halten. Die Y'thear können
+ihrerseits den Verfall der Feindtickets beschleunigen, indem sie Ilos oder dessen Mond einnehmen.
+Die Y'thear haben sofort gewonnen, falls sie alle Punkte halten und es keine evianischen Schiffe mehr gibt.
+_en_
+The battle is won when the enemy tickets reach 0. The Evians can speed up this proccess by holding the
+flanks. The Y'thear on their part can accelerate the enemy decline in tickets by conquering Ilos or its
+moon. They will win immediately if they take all points and destroy every ship.
+	}
+
+	Ambient{
+		ambr = 30
+		ambg = 40
+		ambb = 50
+
+  		spec1 = gfx/environ/spec.png
+		spec2 = gfx/environ/ilos/spec2.png
+
+  
+		fogmode = 0
+  
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 6220
+		fogmode = 1
+		fogr = 5
+		fogg = 5
+		fogb = 5
+		fograngemin = 1200
+		fograngemax = 2200
+		camcr = 0
+		camcg = 0
+		camcb = 0
+
+		bloom = .1
+normal=GFX/ENVIRON/normalpixels(c).png
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII
+		tickets = 220
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = 2nd Y'thear-Fleet
+		de_name = 2. Y'thear-Flotte
+		logo = gfx/gui/logos/ythear2nd.png
+		id = 2
+		race = YthearWII
+		tickets = 280
+		colr = 250
+		colg = 30
+		colb = 30
+	}
+
+	dust{
+		range = 300
+		size = 1
+		maxsize = 1.4
+		number = 600
+		texture = gfx/sprites/particle.png
+	}
+
+	Sky4{
+		file = GFX/environ/background_03/backroundtest.b3d
+	}
+
+	LevelStart{
+		x = 450
+		y = 20
+		z = -700
+		pitch = -20
+		yaw = 10
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 20
+		distance	= 2000
+	}
+
+	Object{
+		name			= EnvirSun
+		environment		= 1
+		aem{
+			piv{}
+			child{
+				afx{
+					light{
+						shadows=1
+						type = 1
+						red = 255
+						green = 240
+						blue = 200
+						child{
+							fromfile=GFX/sprites/flare.afx
+						}
+					}
+				}
+
+				entity{
+					x = 2530
+					y = 1845
+					z =655
+					yaw = 90
+					pitch = 35
+				}
+			}
+		}
+	}
+	
+	<background detail: 1 
+	
+	> ## end background detail
+
+	Cluster{
+		x = 600
+		y = 110
+		z = -1400
+		range = 1200
+		count = 10
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro1.aem
+		size = 15
+	}
+	
+	Cluster{
+		x = 500
+		y = -100
+		z = -1400
+		range = 1000
+		count = 4
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro2.aem
+		size = 25
+	}
+
+	Cluster{
+		x = 700
+		y = -120
+		z = -1200
+		range = 900
+		count = 2
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro3.aem
+		size = 50
+	}
+
+
+	Object{
+		flag{
+			name = Y'thear-Jumpgate
+			num = 1
+			team = 2
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 50
+			z = -2800
+			y = -40
+		}
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 15000
+		class = 1
+		range = 30
+		x = 20
+		y = 0
+		z = -40
+	}
+	
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}	
+	
+	
+	Object{
+		flag{
+			name = Ilos
+			num = 2
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 240
+			z = 1250
+			y = -40
+		}
+	}
+	
+	Spawn{
+		flag = 2
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		type = 2
+		class = 3
+		spawntime = 25000
+		range = 10
+		x = -50
+		y = 0
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		type = 2
+		class = 3
+		spawntime = 25000
+		range = 10
+		x = 50
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	conquest{
+		flag = 2
+		ifholdby = 2
+		malus = 0.7
+		for = 1
+	}
+	
+	Object{
+		flag{
+			en_name = Moon of Ilos
+			de_name = 1. Mond von Ilos
+			num = 3
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 40
+			z = 200
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	conquest{
+		flag = 3
+		ifholdby = 2
+		malus = 0.5
+		for = 1
+	}
+
+	Object{
+		flag{
+			en_name = Asteroid-Belt
+			de_name = Asteroiden
+			num = 4
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 820
+			z = -1000
+			y = 00
+		}
+	}
+	
+	Spawn{
+		flag = 4
+		class = 1
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 2
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	conquest{
+		flag = 4
+		ifholdby = 1
+		malus = 0.2
+		for = 2
+	}
+	
+	Object{
+		flag{
+			en_name = Left Point
+			de_name = Linke Flanke
+			num = 5
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = -1400
+			z = -1000
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 5
+		class = 1
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 2
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	conquest{
+		flag = 5
+		ifholdby = 1
+		malus = 0.2
+		for = 2
+	}
+	
+	script{
+	begin_inline
+		
+		timer global("1","2000")
+		{
+			\var hello$ = "hello world";
+			print hello$.rand("100","200");\
+		}
+		
+		event flagtaken("1","flagtaken","2,3")
+		{
+			if ( get_flags_team(source())="2" )
+			{
+				print_lang "de","Die Y'thear werden Ilos gefährlich!";
+				print_lang "en","The Y'thear threaten Ilos!";
+			}
+		}
+	end_inline
+	}
+}

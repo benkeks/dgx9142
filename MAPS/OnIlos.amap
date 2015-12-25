@@ -1,0 +1,584 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.mrkeks.net for more information
+
+mapicon = MAPS/planet.png
+	
+posx	= 30
+posy	= -23
+posz	= 170
+
+en_name	= Battle on Ilos
+de_name = Kampf auf Ilos
+
+{
+	version 1.2.1
+	
+
+	radius	= 4000
+	minimap	= MAPS/map.png
+	mmspace = 3600
+	atmo = 1
+	gravi = 0.3
+	
+	MapInfo{
+_de_
+Die Y'thear wollen Ilos erobern. Die meisten Städte auf der Oberfläche haben sie
+durch Bombardement aus dem Orbit ausgelöscht, doch in der Region dieses evianischen
+Stadtturms finden sich viele waffentaugliche Bodenschätze, die durch ein orbitales
+Bombardement wohl zerstört würden. Deshalb greifen die Y'thear die Stadt direkt
+mit ihren Schiffen an. Entgegen ihren Erwartungen, trifft zeitgleich die evianische
+Verstärkung ein, um die Stadt zu verteidigen.
+_en_
+The Y'thear are trying to conquer Ilos. Most cities on the surface have already
+been destroyed from orbit. But the region of this Evian tower is rich in resources,
+which would be destroyed in an orbital raid. Therefore the Y'thear attack the city
+directly with their ships. Against their expectations, the Evian back up arrives
+at the same time to protect the city.
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen auf 0 fallen.
+Die Y'thear können dies erreichen, indem sie den evianischen Turm des Lichts zerstören.
+Hingegen müssen die Evianer lediglich die Zerstörung des Turms für eine gewisse
+Zeit verhindern oder alternativ alle Punkte halten sowie alle Feindschiffe zerstören.
+_en_
+The battle is won when the enemy tickets reach 0 before the own do.
+The Y'thear can acchieve this by destroying the Evian Tower of Light.
+Meanwhile, the Evians only need to avoid the Tower's destruction for a certain time
+or alternatively take all points and destroy all enemy ships. 
+	}
+
+	Ambient{
+		ambr = 100
+		ambg = 140
+		ambb = 180
+  
+		fogmode = 1
+
+  
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 5220
+		fogmode = 1
+		fogr = 165
+		fogg = 187
+		fogb = 245
+		fograngemin = 2500
+		fograngemax = 4600
+		camcr = 211
+		camcg = 219
+		camcb = 236
+
+		bloom = .1
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII
+		tickets = 500
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = 2nd Y'thear-Fleet
+		de_name = 2. Y'thear-Flotte
+		logo = gfx/gui/logos/ythear2nd.png
+		id = 2
+		race = YthearWII
+		tickets = 1000
+		colr = 250
+		colg = 30
+		colb = 30
+	}
+
+	Sky{
+		file = gfx/environ/sky5.png
+	}
+	
+
+	
+	LevelStart{
+		x = 450
+		y = 150
+		z = 2000
+		pitch = 10
+		yaw = -180
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 0.1
+		distance	= 0.01
+	}
+
+
+	Object{
+		name = Landscape
+		aem{
+			terrain{
+				hmap = GFX/environ/ilos/heightmap.png
+				detail = 2000
+				shading = 0
+			}
+			texture{
+				path = GFX/environ/ilos/gras2.bmp
+				mode = 9
+				scalex = 3
+				scaley = 3
+			}
+			texture{
+				path = GFX/environ/ilos/colormap.png
+				scalex = 256
+				scaley = 256
+				blend = 2
+				layer = 1
+			}
+			collision{
+				type = map
+				pickgeo = 2
+				pickcover = 1
+			}
+		}
+		
+		entity{
+			x = 7000
+			z = 7000
+			y = -300
+			yaw = 180
+			sx = 60
+			sy = 1000
+			sz = 60
+		}
+	}
+
+	vegetation{
+		range = 2000
+		size = 8
+		maxsize = 18
+		ratio = 2
+		number = 500
+		texture = gfx/environ/trees/tree1.png
+		terrain = Landscape
+		map = gfx/environ/ilos/trees.png
+	}
+
+	vegetation{
+		range = 2000
+		size = 8
+		maxsize = 18
+		ratio = 2
+		number = 500
+		texture = gfx/environ/trees/tree2.png
+		terrain = Landscape
+		map = gfx/environ/ilos/trees.png
+	}
+
+	vegetation{
+		range = 2000
+		size = 8
+		maxsize = 18
+		ratio = 2
+		number = 500
+		texture = gfx/environ/trees/tree3.png
+		terrain = Landscape
+		map = gfx/environ/ilos/trees.png
+	}
+	
+	Object{
+		flag{
+			en_name = Evian Town
+			de_name = Evianische Stadt
+			num = 4
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 450
+			z = 1450
+			y = 10
+		}
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		spawntime = 150
+		spawnonce = 1
+		class = 2
+		range = 0
+		x = -250
+		y = -150
+		z = 510
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 10
+		y = -200
+		z = 50
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 400
+		y = -200
+		z = 400
+	}
+
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 400
+		y = -200
+		z = 20
+	}
+
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = -400
+		y = -200
+		z = 20
+	}
+	
+	Spawn{
+		flag = 4
+		class = 1
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 2
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 3
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 4
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+	
+	conquest{
+		flag = 4
+		ifholdby = 1
+		malus = 1
+		for = 2
+	}
+	
+
+	Object{
+		flag{
+			de_name = Süd-West
+			en_name = South-West
+			num = 1
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 660
+			z = -1400
+			y = 1000
+		}
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 15000
+		class = 1
+		range = 30
+		x = 20
+		y = 30
+		z = -20
+	}
+	
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}
+	
+	
+	Object{
+		flag{
+			de_name = Nord-West
+			en_name = North-West
+			num = 2
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -1000
+			z = 2200
+			y = 200
+		}
+	}
+	
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}
+
+	
+	Object{
+		flag{
+			de_name = Nord-Ost
+			en_name = North-East
+			num = 3
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 100
+			z = 2500
+			y = 250
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+	conquest{
+		flag = 3
+		ifholdby = 2
+		malus = 0.5
+		for = 1
+	}
+
+	Object{
+		flag{
+			de_name = Süd-Ost
+			en_name = South-East
+			num = 5
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 1850
+			z = -300
+			y = 1250
+		}
+	}
+	
+	Spawn{
+		flag = 5
+		class = 1
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 2
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 3
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 4
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		type = 2
+		spawntime = 15000
+		class = 1
+		range = 30
+		x = 20
+		y = 30
+		z = -20
+	}
+
+	conquest{
+		flag = 5
+		ifholdby = 1
+		malus = 0.2
+		for = 2
+	}
+	
+
+}

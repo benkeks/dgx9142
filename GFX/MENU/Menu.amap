@@ -1,0 +1,66 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.Inarie.de for more information
+
+{
+	version 1.2.1
+	
+	en_name	= Main Menu
+	de_name = Hauptmenue
+	radius	= 3000
+	
+	Sky4{
+		file = GFX/environ/nebel_02b.b3d
+	}
+
+	Object{
+		aem{
+			mesh{
+				file = GFX/SHIPS/kalington.b3d
+				sx = 0.8
+				sy = 0.8
+				sz = 0.8
+			}
+		}
+		
+		
+		entity{
+			x = 11
+			z = 18
+			y = -4
+			sx = .014
+			sy = .014
+			sz = .014
+			rx = -10
+			ry = -45
+		}
+	}	
+	
+	Object{
+		afx{
+			sprite{
+				scalex = 40
+				scaley = 40
+				mode = 3
+				path = GFX\MISC\planete.png
+				viewmode = 2
+				aem{
+					material{
+						order = 4
+						fx = 25
+					}
+				}
+			}
+		}
+		
+		
+		entity{
+			x = -25
+			z = 30
+			y = -35
+			pointtocam = 1
+		}
+	}
+
+}

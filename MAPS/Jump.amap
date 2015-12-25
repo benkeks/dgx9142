@@ -1,0 +1,670 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.Inarie.de for more information
+
+mapicon = MAPS/planet.png
+
+posx	= 5
+posy	= 50
+posz	= 120
+
+en_name	= Great Leaps
+de_name = Groﬂe Spr¸nge
+
+{
+	version 1.2.1
+	
+	radius	= 4000
+	minimap	= MAPS/map.png
+	mmspace = 4500
+	
+	MapInfo{
+_de_
+In dieser Ecke des Weltraums gibt es nur zwei Raumknoten, die groﬂ genug sind,
+um von Kreuzern als Ausgang benutzt zu werden. Um diese entbrennt die Schlacht.
+_en_
+In this part of space there are only two Jumpgates which are big enough to be
+used as an exit by a cruiser. A battle for them breaks out.
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen
+oder die eigene Fraktion alle Raumknoten h‰lt und alle Feindschiffe vernichtet sind.
+_en_
+The battle is won when the enemy tickets reach 0 or when your team holds all
+Jumpgates and every enemy ship has been destroyed.
+	}
+
+	Ambient{
+		ambr = 30
+		ambg = 40
+		ambb = 50
+  
+		fogmode = 0
+  
+		spec1 = gfx/environ/spec.png
+		spec2 = gfx/environ/spec2.png
+
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 2420
+		fogmode = 1
+		fogr = 30
+		fogg = 15
+		fogb = 0
+		fograngemin = 1200
+		fograngemax = 2200
+		camcr = 0
+		camcg = 0
+		camcb = 0
+
+		bloom = .1
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII
+		tickets = 200
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = 2nd Y'thear-Fleet
+		de_name = 2. Y'thear-Flotte
+		logo = gfx/gui/logos/ythear2nd.png
+		id = 2
+		race = YthearWII
+		tickets = 200
+		colr = 250
+		colg = 30
+		colb = 30
+	}
+	
+	dust{
+		range = 300
+		size = 1
+		maxsize = 1.4
+		number = 600
+		texture = gfx/sprites/particle.png
+	}
+
+	Sky4{
+		file = GFX/environ/nebel_02b.b3d
+	}
+
+	
+	LevelStart{
+		x = -1250
+		y = 20
+		z = 0
+		pitch = -50
+		yaw = -10
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 20
+		distance	= 2000
+	}
+Object{
+		name			= EnvirSun
+		environment		= 1
+		aem{
+			piv{}
+			child{
+				afx{
+					light{
+						shadows=1
+						type = 1
+						red = 255
+						green = 240
+						blue = 200
+						child{
+							fromfile=GFX/sprites/flare.afx
+						}
+					}
+				}
+
+				entity{
+					x = 0
+					y = 0
+					z = -1000
+					yaw = 90
+					pitch = 35
+				}
+			}
+		}
+	}
+	Object{
+		gate{
+			num = 1
+			to = 2
+			range = 40
+		}
+		
+		entity{
+			x = -1200
+			z = -100
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 2
+			to = 1
+			range = 40
+		}
+		
+		entity{
+			x = 500
+			z = -1000
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 3
+			to = 4
+			range = 40
+		}
+		
+		entity{
+			x = -1200
+			z = 100
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 4
+			to = 3
+			range = 40
+		}
+		
+		entity{
+			x = 500
+			z = 2000
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 5
+			to = 6
+			range = 40
+		}
+		
+		entity{
+			x = 2700
+			z = -100
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 6
+			to = 5
+			range = 40
+		}
+		
+		entity{
+			x = 900
+			z = -2000
+			y = 0
+		}
+	}
+	
+	Object{
+		gate{
+			num = 7
+			to = 8
+			range = 40
+		}
+		
+		entity{
+			x = 2700
+			z = 100
+			y = 0
+		}
+	}
+
+	Object{
+		gate{
+			num = 8
+			to = 7
+			range = 40
+		}
+		
+		entity{
+			x = 900
+			z = 1000
+			y = 0
+		}
+	}
+
+	Object{
+		flag{
+			en_name = Base 1
+			de_name = Basis 1
+			num = 1
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -1500
+			z = 0
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 25000
+		class = 3
+		range = 60
+		x = 20
+		y = 200
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 25000
+		class = 3
+		range = 60
+		x = 20
+		y = -200
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 20
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}	
+	
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 20
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = -20
+		y = 10
+		z = 0
+	}
+	
+	Object{
+		flag{
+			en_name = Base 2
+			de_name = Basis 2
+			num = 2
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 3000
+			z = 0
+			y = 0
+		}
+	}
+
+	Spawn{
+		flag = 2
+		type = 2
+		spawntime = 25000
+		class = 3
+		range = 60
+		x = 20
+		y = 200
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		type = 2
+		spawntime = 25000
+		class = 3
+		range = 60
+		x = 20
+		y = -200
+		z = 0
+	}
+
+	
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Object{
+		flag{
+			en_name = Jumpgate 1a
+			de_name = Raumknoten 1a
+			num = 3
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 700
+			z = -1000
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Object{
+		flag{
+			en_name = Jumpgate 2a
+			de_name = Raumknoten 2a
+			num = 4
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 700
+			z = 1000
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Object{
+		flag{
+			en_name = Big Jumpgate 1b
+			de_name = Groﬂer Raumknoten 1b
+			num = 5
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 700
+			z = -2000
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 5
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Object{
+		flag{
+			en_name = Big Jumpgate 2b
+			de_name = Groﬂer Raumknoten 2b
+			num = 6
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 700
+			z = 2000
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 6
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 6
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+}

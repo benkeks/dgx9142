@@ -1,0 +1,27 @@
+mesh{
+	file = GFX/environ/astros/astro3.b3d
+}
+
+<dot3: 1	## Normalmaps auf Asteroiden nur bei aktiviertem Dot3
+	texture{
+		path = normal
+		layer = 0
+	}
+	texture{
+		path = GFX/ENVIRON/felswand_NRM.png
+		mode = 9
+		scalex = 1
+		scaley = 1
+		layer = 1
+		blend = 4
+	}
+> ## end dot3
+
+texture{
+	path = GFX/ENVIRON/felswand.jpg
+	mode = 9
+	scalex = 1
+	scaley = 1
+	layer = 3
+	blend = 2
+}

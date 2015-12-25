@@ -1,0 +1,763 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.mrkeks.net for more information
+
+mapicon = GFX\ENVIRON/moon.png
+	
+posx	= 31
+posy	= -5
+posz	= 120
+
+en_name	= Ilos' moon
+de_name = Ilos' Mond
+
+{
+	version 1.2.1
+	
+
+	radius	= 6000
+	minimap	= MAPS/map.png
+	mmspace = 3600
+	
+	
+	MapInfo{
+_de_
+Auf der Oberfläche des Monds von Ilos befindet sich eine große Mine.
+Beim Angriff auf diese trifft der Y'thear-Kampfverband unter Führung
+von zwei Mutterschiffen auf starken Widerstand.
+_en_
+On the surface of Ilos' moon there is a big mine.
+The Y'thear battlegroup lead by two motherships attacking the mine,
+meets strong resistance
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen auf 0 fallen.
+Die Y'thear können dies erreichen, indem sie die evianische Mine zerstören.
+Hingegen müssen die Evianer die zwei Mutterschiffe der Y'thear vernichten.
+_en_
+The battle is won when the enemy tickets reach 0 before your tickets do.
+The Y'thear can achieve this by destroying the Evian mine,
+whereas the Evians need to destroy the two Y'thear motherships.
+	}
+
+
+Ambient{
+		ambr = 180
+		ambg = 170
+
+		ambb = 150
+  		spec1 = gfx/environ/spec.png
+		spec2 = gfx/environ/ilosmoon/spec2.png
+
+		fogmode = 1
+  
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 18220
+		fogr = 5
+		fogg = 10
+		fogb = 20
+		fograngemin = 4000
+		fograngemax = 18000
+		camcr = 11
+		camcg = 19
+		camcb = 16
+
+		bloom = .1
+normal=GFX/ENVIRON/normalpixels(a).png
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII2
+		tickets = 400
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = 2nd Y'thear-Fleet
+		de_name = 2. Y'thear-Flotte
+		logo = gfx/gui/logos/ythear2nd.png
+		id = 2
+		race = YthearWII2
+		tickets = 350
+		colr = 250
+		colg = 30
+		colb = 30
+	}
+	
+
+	
+
+	Sky4{
+		file = GFX/environ/background_02/backroundtest.b3d
+	}
+	
+
+	
+	LevelStart{
+		x = 450
+		y = 150
+		z = 2000
+		pitch = 10
+		yaw = -180
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 0.01
+		distance	= 0.01
+	}
+
+	Object{
+		name			= EnvirSun
+		environment		= 1
+		aem{
+			piv{}
+			child{
+				afx{
+					light{
+						shadows=1
+						type = 1
+						red = 255
+						green = 240
+						blue = 200
+						child{
+							fromfile=GFX/sprites/flare.afx
+						}
+					}
+				}
+
+				entity{
+					x =3000
+					y =1000
+					z =-800
+
+				}
+			}
+		}
+	}
+
+
+
+
+
+	
+	Object{
+name = Landscape
+aem{
+<backgrounddetail:1
+terrain{
+hmap = GFX/environ/Ilosmoon/moonheightmap.jpg
+detail = 2400
+shading = 1
+}
+>
+<backgrounddetail:0
+terrain{
+hmap = GFX/environ/Ilosmoon/moonheightmap.jpg
+detail = 600
+shading = 0
+}
+>
+material{
+fx = 1
+}
+<dot3:1
+texture{
+path = normal
+layer = 0
+}
+texture{
+path = GFX/ENVIRON/Ilosmoon/12c.jpg
+mode = 1
+scalex = 6
+scaley = 6
+layer = 1
+blend = 4
+}
+
+texture{
+path = GFX/ENVIRON/Ilosmoon/12b.jpg
+mode = 1
+scalex = 6
+scaley = 6
+layer = 3
+blend = 5
+}
+>
+<dot3:0
+texture{
+path = GFX/ENVIRON/Ilosmoon/12b.jpg
+mode = 1
+scalex = 6
+scaley = 6
+layer = 3
+blend = 1
+}
+>
+texture{
+path = GFX/environ/Ilosmoon/colormap.jpg
+scalex = 256
+scaley = 256
+blend = 5
+layer = 4
+}
+texture{
+path = GFX/environ/Ilosmoon/lightmap.png
+scalex = 256
+scaley = 256
+blend = 2
+layer = 5
+}
+
+collision{
+type = map
+pickgeo = 2
+pickcover = 1
+}
+}
+
+entity{
+x =9000
+z =12500
+y=-700
+yaw = 180
+sx = 100
+sy = 800
+sz = 100
+}
+}
+
+	
+	
+	Object{
+		flag{
+			en_name = Evaian Mine
+			de_name = Evianische Mine
+			num = 4
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -1000
+			z = -2600
+			y = -300
+		}
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		spawntime = 150
+		spawnonce = 1
+		class = 2
+		range = 0
+		x = -250
+		y = -60
+		z = 510
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 400
+		y = -200
+		z = 800
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = -200
+		y = -200
+		z = 900
+	}
+
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 200
+		y = -200
+		z =900
+	}
+
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = -400
+		y = -200
+		z = 800
+	}
+	
+
+	
+
+	
+
+	Object{
+		flag{
+			de_name = Bei der Mine
+			en_name = Next to the mine
+			num = 1
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -1900
+			z = -2000
+			y =-200
+		}
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 15000
+		class = 1
+		range = 30
+		x = 20
+		y = 30
+		z = -20
+	}
+	
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}
+	
+	
+	Object{
+		flag{
+			de_name = Y'thear Basis
+			en_name = Y'thear Base
+			num = 2
+			team = 2
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -2000
+			z = 3400
+			y = -100
+		}
+	}
+	
+
+
+	Spawn{
+		flag = 2
+		type = 2
+		spawntime = 150
+		spawnonce = 1
+		class = 2
+		range = 0
+		x = -250
+		y = 150
+		z = 510
+	}
+	
+	Spawn{
+		flag = 2
+		type = 2
+		spawntime = 50000
+		spawnonce = 1
+		class = 2
+		range = 0
+		x = -250
+		y = 150
+		z = 510
+	}
+
+
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = 20
+		y = 20
+		z = 0
+	}
+
+	
+	Object{
+		flag{
+			de_name = Norden
+			en_name = North
+			num = 3
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -100
+			z = 3800
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 60
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = 20
+		y = 10
+		z = 0
+	}
+
+
+
+	Object{
+		flag{
+			de_name = Verteidigungslinie
+			en_name = Defense line
+			num = 5
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x =-1000
+			z = -700
+			y = -100
+		}
+	}
+	
+	Spawn{
+		flag = 5
+		class = 1
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 2
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		class = 3
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 5
+		class = 4
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 5
+		type = 2
+		spawntime = 15000
+		class = 1
+		range = 30
+		x = 20
+		y = 30
+		z = -20
+	}
+
+	Object{
+		flag{
+			de_name = Zentrum
+			en_name = Center
+			num = 6
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x =-1700
+			z = 300
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 6
+		class = 1
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 6
+		class = 2
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 6
+		class = 3
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 6
+		class = 4
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+
+
+	Object{
+		flag{
+			de_name = Vorposten
+			en_name = Outpost
+			num = 7
+			team = 1
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x =-2200
+			z = 1600
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 7
+		class = 1
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 7
+		class = 2
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 7
+		class = 3
+		range = 30
+		x = 0
+		y = 30
+		z = 0
+	}
+	
+	Spawn{
+		flag = 7
+		class = 4
+		range = 60
+		x = -20
+		y = 80
+		z = 0
+	}
+	Spawn{
+		flag = 7
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 10
+		y = -200
+		z = 50
+	}
+	
+	Spawn{
+		flag = 7
+		type = 2
+		class = 3
+		spawntime = 5000
+		spawnonce = 1
+		range = 0
+		x = 400
+		y = -200
+		z = 400
+	}
+
+	Spawn{
+		flag = 7
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 0
+		x = 400
+		y = -200
+		z = 20
+	}
+
+	Spawn{
+		flag = 7
+		type = 2
+		class = 3
+		spawntime = 5000
+		range = 0
+		x = -400
+		y = -200
+		z = 20
+	}
+	
+	
+
+}

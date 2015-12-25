@@ -1,0 +1,727 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.Inarie.de for more information
+
+mapicon = gfx/environ/arsis.png
+
+posx	= 50
+posy	= 47
+posz	= 130
+
+en_name	= Last Resistance
+de_name = Letzter Wiederstand
+
+{
+	version 1.2.1
+	
+	radius	= 5000
+	minimap	= MAPS/map.png
+	mmspace = 4500
+	
+	MapInfo{
+_de_
+Muss noch Beschreibung adden....
+_en_
+...
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen
+oder die eigene Fraktion alle Raumknoten hält und alle Feindschiffe vernichtet sind.
+_en_
+The battle is won when the enemy tickets reach 0 or when your team holds all
+Jumpgates and every enemy ship has been destroyed.
+	}
+
+	Ambient{
+		ambr = 5
+		ambg = 4
+		ambb = 3
+spec1 = gfx/environ/spec.png
+spec2 = gfx/environ/spec3.jpg
+
+
+
+
+
+		fogmode = 0
+  
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 10000
+		fogmode = 1
+		fogr = 5
+		fogg = 4
+		fogb = 4
+		fograngemin = 1200
+		fograngemax = 3200
+		camcr = 0
+		camcg = 0
+		camcb = 0
+
+		bloom = .1
+normal=GFX/ENVIRON/normalpixels(b).png
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII4
+		tickets = 500
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = 2nd Y'thear-Fleet
+		de_name = 2. Y'thear-Flotte
+		logo = gfx/gui/logos/ythear2nd.png
+		id = 2
+		race = YthearWII3
+		tickets = 450
+		colr = 250
+		colg = 30
+		colb = 30
+	}
+	
+
+
+
+	dust{
+		range = 300
+		size = 1
+		maxsize = 1.4
+		number = 600
+		texture = gfx/sprites/particle.png
+	}
+
+
+	dust{
+		range = 1200
+		size = 1000
+		maxsize = 1800
+		number = 80
+		texture = gfx/sprites/fog3.png
+	}
+
+
+	Sky4{
+		file = GFX/environ/background_01/backroundtest.b3d
+	}
+
+
+	
+	LevelStart{
+		x = -1250
+		y = 20
+		z = 0
+		pitch = -50
+		yaw = -10
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 20
+		distance	= 2000
+	}
+
+
+	Object{
+		name			= EnvirSun
+		environment		= 1
+		aem{
+			piv{}
+			child{
+				afx{
+					light{
+						shadows=1
+						type = 1
+						red = 255
+						green = 233
+						blue = 218
+						child{
+							fromfile=GFX/sprites/flare.afx
+						}
+					}
+				}
+
+				entity{
+					x = 4000
+					y = 2734
+					z = -2315
+					yaw = 90
+					pitch = 35
+				}
+			}
+		}
+	}
+
+
+
+	Cluster{
+		x = 0
+		y = 0
+		z = 0
+		range = 6000
+		count = 130
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro1.aem
+		size = 15
+	}
+	
+	Cluster{
+		x = 0
+		y = 0
+		z = 0
+		range = 5500
+		count = 95
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro2.aem
+		size = 25
+	}
+
+	Cluster{
+		x = 0
+		y = 0
+		z = 0
+		range = 4900
+		count = 40
+		speed = 0.0005
+		rotation = 0.02
+		mesh = GFX/ENVIRON/astros/astro3.aem
+		size = 50
+	}
+
+	
+
+
+
+
+
+
+	Object{
+		flag{
+			en_name = Base 1b
+			de_name = Basis 1b
+			num = 1
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -2200
+			z = 13
+			y = 55
+		}
+	}
+	
+	
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+
+
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+		Spawn{
+		flag = 1
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = -150
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = 150
+		z = 0
+	}
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+
+Object{
+		flag{
+			en_name = Base 2
+			de_name = Basis 2
+			num = 2
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 3200
+			z = 0
+			y = 0
+		}
+	}
+	
+
+
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+
+
+	Spawn{
+		flag = 2
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = -150
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = 150
+		z = 0
+	}
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+Object{
+	flag{
+			en_name = Jumpgate A
+			de_name = Raumknoten A
+			num = 3
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 0
+			z = 1200
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = -150
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = 150
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}	
+
+Object{
+	flag{
+			en_name = Jumpgate B
+			de_name = Raumknoten B
+			num = 4
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 0
+			z = -1200
+			y = 0
+		}
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = -150
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 3
+		spawntime = 15000
+		range = 10
+		x = 0
+		y = 150
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}	
+
+
+
+
+	
+	
+
+
+	Object{
+		flag{
+			en_name = Base 1
+			de_name = Basis 1
+			num = 7
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -3100
+			z = 30
+			y = -15
+		}
+	}
+	
+	
+Spawn{
+		flag = 7
+		type = 2
+		spawntime = 150
+		spawnonce = 1
+		class = 2
+		range = 0
+		x = 0
+		y = 0
+		z = -150
+	}
+
+
+	Object{
+		flag{
+			en_name = Base 2a
+			de_name = Basis 2a
+			num = 8
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 2400
+			z = 800
+			y = 0
+		}
+	}
+	
+	
+Spawn{
+		flag = 8
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	
+
+	Spawn{
+		flag = 8
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 8
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 8
+		class = 2
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+		Spawn{
+		flag = 8
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+
+	Object{
+		flag{
+			en_name = Base 2b
+			de_name = Basis 2b
+			num = 9
+			team = 2
+			takeable = 1
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 2400
+			z = -800
+			y = 0
+		}
+	}
+	
+	
+Spawn{
+		flag = 9
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	
+
+	Spawn{
+		flag = 9
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 9
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 9
+		class = 2
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+		Spawn{
+		flag = 9
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

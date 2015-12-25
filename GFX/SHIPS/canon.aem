@@ -1,0 +1,4 @@
+mesh{
+	file = GFX/SHIPS/canon.b3d
+	yaw = 180
+}

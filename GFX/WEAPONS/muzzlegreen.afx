@@ -1,0 +1,13 @@
+sprite{
+ scalex = 3
+ scaley = 3
+ aem{
+  texture{
+   path = GFX/WEAPONS/muzzlegreen.png
+   mode = 3
+  }
+  material{
+   blend = 3
+  }
+ }
+}

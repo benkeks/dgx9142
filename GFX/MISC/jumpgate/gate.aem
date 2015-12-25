@@ -1,0 +1,41 @@
+mesh{
+
+	file = GFX/MISC/jumpgate/gate.b3d
+}
+
+material{
+	fx = 1
+}
+<dot3:1
+texture{
+
+	path = GFX/MISC/jumpgate/tex_dot3.jpg
+	mode = 9
+	blend = 4
+	scalex = .25
+	scaley = .25
+	layer = 1
+
+}
+
+texture{
+
+	path = GFX/MISC/jumpgate/tex.jpg
+	mode = 9
+	blend = 5
+	scalex = .25
+	scaley = .25
+	layer = 3
+}
+>
+
+<dot3:0
+texture{
+
+	path = GFX/MISC/jumpgate/tex.jpg
+	mode = 9
+	scalex = .25
+	scaley = .25
+	layer = 0
+}
+>

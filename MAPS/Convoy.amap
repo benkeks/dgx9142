@@ -1,0 +1,499 @@
+; AE Aliens Exist-Levelmap DGXStarField-Edition
+; 
+; 
+; please visit www.INpac.art-fx.org / www.Inarie.de for more information
+
+mapicon = MAPS/planet.png
+
+posx	= 10
+posy	= 30
+posz	= 120
+
+en_name	= The Longest Journey
+de_name = Der lange Weg
+
+{
+	version 1.2.1
+	
+	radius	= 4000
+	minimap	= MAPS/map.png
+	mmspace = 3500
+	
+	MapInfo{
+_de_
+Die Evianer müssen große Mengen an Bevölkerung und Ausrüstung aus einem
+umkämpften Gebiet evakuieren. Der dafür eingerichtete Konvoy wird von den
+Y'thear an einem Punkt zwischen zwei Raumknoten attackiert.
+_en_
+The Evians have to evakuate lots of people and equipment from a embattled
+area. Between two Jumpgate, the Y'thear attack the convoy that has been
+established for this reason.
+	}
+
+	MapTask{
+_de_
+Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen.
+Die Evianer können dies beschleunigen, indem sie möglichst viele Frachter
+ans Ziel eskortieren.
+Die Y'thear andererseits profitieren von abgeschossenen Frachtern.
+_en_
+The battle is won when the enemy tickets reach 0 before the own do.
+The Evians can accellerate this by guiding as many freighters as possible
+to the Jumpgate.
+The Y'thear on their part profit from freighters that are destroyed on the track.
+	}
+
+
+	Ambient{
+		ambr = 30
+		ambg = 40
+		ambb = 50
+  
+		fogmode = 0
+  
+		camclsmode = 1
+		camrangemin = 1
+		camrangemax = 2420
+		fogmode = 1
+		fogr = 30
+		fogg = 15
+		fogb = 0
+		fograngemin = 1200
+		fograngemax = 2200
+		camcr = 0
+		camcg = 0
+		camcb = 0
+
+		bloom = .1
+	}
+
+	Team{
+		en_name = Evians
+		de_name = Evianer
+		logo = gfx/gui/logos/evianer.png
+		id = 1
+		race = EvianWII
+		tickets = 200
+		colr = 20
+		colg = 150
+		colb = 240
+	}
+	
+	Team{
+		en_name = 2nd Y'thear-Fleet
+		de_name = 2. Y'thear-Flotte
+		logo = gfx/gui/logos/ythear2nd.png
+		id = 2
+		race = YthearWII
+		tickets = 200
+		colr = 250
+		colg = 30
+		colb = 30
+	}
+
+	dust{
+		range = 300
+		size = 1
+		maxsize = 1.4
+		number = 600
+		texture = gfx/sprites/particle.png
+	}
+
+	Sky4{
+		file = GFX/environ/nebel_02b.b3d
+	}
+
+	
+	LevelStart{
+		x = 450
+		y = 20
+		z = -100
+		pitch = -50
+		yaw = -10
+		roll = 0
+	}
+
+	Listener{
+		rolloff		= .5
+		doppler		= 20
+		distance	= 2000
+	}
+
+	Object{
+		name			= EnvirSun
+		environment		= 1
+		aem{
+			piv{}
+			child{
+				afx{
+					light{
+						shadows=1
+						type = 1
+						red = 255
+						green = 240
+						blue = 200
+						child{
+							fromfile=GFX/sprites/flare.afx
+						}
+					}
+				}
+
+				entity{
+					x = 0
+					y = 0
+					z = -1200
+					yaw = 90
+					pitch = 35
+				}
+			}
+		}
+	}
+	
+	Object{
+		name = Planet
+		environment = 1
+		afx{
+			sprite{
+				mode = 3
+				path = GFX/MISC/planete.png
+				scalex = 60
+				scaley = 60
+				viewmode = 2
+				aem{
+					;texture{
+					;	path = GFX/ENVIRON/ilos.tga
+					;	mode = 2
+					;}
+					material{
+						order = 4
+						fx = 25
+					}
+				}
+			}
+		}
+		entity{
+			x = -10
+			y = -5
+			z = 50
+			pointtoparent = 1	
+		}
+	}
+	
+	Object{
+		flag{
+			name = Y'thear-Base
+			num = 1
+			team = 2
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = -350
+			z = -200
+			y = -40
+		}
+	}
+	
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 25000
+		class = 3
+		range = 60
+		x = 20
+		y = 400
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 25000
+		class = 3
+		range = 60
+		x = 20
+		y = -400
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 1
+		range = 60
+		x = -20
+		y = 600
+		z = 0
+	}
+	
+	Spawn{
+		flag = 1
+		class = 2
+		range = 60
+		x = 20
+		y = 650
+		z = 0
+	}	
+	
+	Spawn{
+		flag = 1
+		class = 3
+		range = 60
+		x = -20
+		y = 600
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		class = 4
+		range = 60
+		x = -20
+		y = 600
+		z = 0
+	}
+
+	Spawn{
+		flag = 1
+		type = 2
+		spawntime = 35000
+		class = 1
+		range = 30
+		x = 20
+		y = 800
+		z = -1500
+	}
+	
+	Object{
+		flag{
+			en_name = Evian Jumpgate
+			de_name = Evianischer Raumknoten
+			num = 2
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 940
+			z = 1550
+			y = -40
+		}
+	}
+	
+	Spawn{
+		flag = 2
+		type = 2
+		class = 4
+		spawntime = 16500
+		range = 30
+		flyto = 3
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		type = 2
+		class = 4
+		spawntime = 14500
+		range = 30
+		flyto = 3
+		x = 80
+		y = 0
+		z = 80
+	}
+
+	Spawn{
+		flag = 2
+		type = 2
+		class = 4
+		spawntime = 18000
+		range = 30
+		flyto = 3
+		x = 80
+		y = 80
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		type = 2
+		class = 4
+		spawntime = 13000
+		range = 30
+		flyto = 3
+		x = 0
+		y = 80
+		z = 80
+	}
+	
+	Spawn{
+		flag = 2
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 2
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 2
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Object{
+		flag{
+			en_name = 2nd Evian Jumpgate
+			de_name = 2. Evianischer Raumknoten
+			num = 3
+			team = 1
+			takeable = 0
+			takeper	= 100
+			range = 200
+		}
+		
+		entity{
+			x = 900
+			z = -1500
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 3
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 3
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 3
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Object{
+		flag{
+			en_name = Jumpgate
+			de_name = Raumknoten
+			num = 4
+			team = 0
+			takeable = 1
+			takeper	= 0
+			range = 200
+		}
+		
+		entity{
+			x = 2500
+			z = 1000
+			y = 100
+		}
+	}
+	
+	Spawn{
+		flag = 4
+		type = 2
+		class = 1
+		spawntime = 15000
+		range = 30
+		x = 0
+		y = 0
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 1
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+	
+	Spawn{
+		flag = 4
+		class = 2
+		range = 60
+		x = 20
+		y = -50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 3
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+
+	Spawn{
+		flag = 4
+		class = 4
+		range = 60
+		x = -20
+		y = 50
+		z = 0
+	}
+}

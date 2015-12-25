@@ -1,0 +1,14 @@
+sprite{
+x=0
+y=0
+z=-4.2
+type=2
+sx=.6
+sy=.4
+blend=3
+alpha=.8
+r=255
+g=255
+b=255
+trail = 8
+}

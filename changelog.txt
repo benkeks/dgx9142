@@ -1,0 +1,312 @@
+25/03/04 Entwicklungsstart
+
+09/07/05 0.0.0 Pre-Alpha-Release
+
+09/04/07 0.0.2 [erste ernstgemeinte] Alpha
+
+22/07/07 0.0.3 Alpha
+	[fixed] mehrere massive Bugs beim Rundenneustart
+	[fixed] Umlautbug
+	[fixed] verpixelte Fonts auf Billiggrakas
+	[fixed] Absturz beim Laden auf einigen Grafikkarten nach langem Kampf behoben
+	[fixed] Verdrehung der Lebensenergiewerte zwischen Supportschiff und supportetem Schiff
+	[fixed] nicht zur Klasse passende Schiffsbewaffnung bei KI-Schiffen
+	[fixed] am Vorhaltekreuz festklebende Antriebssignaturen
+	[changed] Spawnpunktwahl über die Übersichtskarte
+	[changed] Reaktivierung der Waffensounds
+	[changed] Helligkeit in Nebelkarte etwas verringert
+	[changed] Menühintergrund
+	[changed] Prozentzahlangaben bei kleineren Progressbars entfernt
+	[added] direktes Anvisieren von speziellen Feindschiffen durch anklicken mit der mittleren Maustaste
+	[added] deutsche Version des Menüs
+	[added] Gitter für XZ-Ebene auf [,] zur besseren Orientierung
+	[added] erneutes [,]-Drücken schaltet strategische Ansicht ein (Gegnerbewegungen leichter auszumachen)
+	[added] strategische Übersichtskarte mittels [M]
+	[added] Rauchspuren hinter stark beschädigten Schiffen
+	[added] Teleportertore
+	[added] Neue Map: Große Sprünge
+	[added] Ticketverfall bei Verlust aller Knoten und Schiffe
+
+31/07/07 0.0.4 Alpha
+	[fixed] versehentliche Schiffswahl
+	[changed] Fadenkreuz verkleinert
+	[changed] Maus wie im Menü
+	[added] Anzeige von Abschüssen
+	[added] Spielerliste auf F1, Zählung von Abschüssen
+	[added] Chat / Befehlskonsole
+	[added] MULTIPlAYER!!!
+
+02/01/08 0.0.5 Alpha
+	[fixed] ausbleibender Sieg auf "Große Sprünge"
+	[fixed] Steckenbleiben bei 17% der Nachladestatusanzeige des Bombers
+	[fixed] flackernde / verschwindende Spawnpunkte in der Übersichtskarte
+	[fixed] falsch einfrierende Explosionen am Rundenende
+	[fixed] versehentliche Schiffswahl (jetzt aber wirklich!)
+	[fixed] Aufmunitionieren toter Schiffe
+	[changed] Missionsstarttexte überarbeitet, einige Kamerastartpunkte neu gesetzt
+	[changed] Grundebenen-Gitter standardmäßig eingeblendet
+	[changed] Hervorhebung der ausgewählten Klasse auf dem Startscreen
+	[changed] Beschleunigung der Schiffe abgeschwächt
+	[changed] Musikwiedergabe deaktiviert
+	[changed] Kollisionssystem optimiert und erweitert
+	[added] Schaden bei Kollision 
+	[added] einen ganzen Haufen Sounds
+	[added] neue Map "Kampf auf Ilos" in Planetenatmosphäre
+	[added] "spawnonce"-Eintrag für Spawnpunkte im Mapformat
+	[added] Gravitation für "Kampf auf Illos"
+	[added] vegetation-Tag im Mapformat für Gras/Bäume etc.
+	[added] Anzeige der verbleibenden Munition im HUD
+	[added] Anzeige der Rankingplatzierung in der Spielerübersicht
+	[added] Icons an Sprungknoten, ob sie einnehmbar sind und ob sie Kreuzer spawnen
+	[added] Drohnen als Bewaffnung für evianischen Support und evianischen Geschützturm
+
+18/03/08 0.0.6 Alpha
+	[fixed] diverse Fehlerquellen im Multiplayermodus
+	[fixed] diverse Geschwindigkeitsschwankungen bei extrem hohen oder niedrigen FPS
+	[fixed] einige Spawnprobleme und plötzliche schwarze Bildschirme beim Netwerkspiel - längst nicht alle!
+	[changed/added] Bewaffnung und Balancing, vor allen Dingen bei den Evianern (Steff)
+	[changed] vieeele Modelle (Steff, Y'thear-Bomber von DerHase)
+	[changed] Waffeneffekte aufgemotzt
+	[changed] Sternenhintergründe nun vieeeel schöner
+	[changed] Schiffsträgheit erhöht
+	[changed] Bot-KI verbessert, unter anderem Ausweichen, Spawnpunktwechsel und klügere Zielwahl!
+	[changed] Warnsound ;)
+	[changed] einige Details an Waffen und Schockwellen
+	[changed] kurze Einblendung der eigenen Explosion beim Tod
+	[changed] Hintergrundkasten beim Rundenende gegen Farbverlauf ausgetauscht
+	[changed] Roll wird beim Spawnen nun stets auf 0 gesetzt (vermeidet Kopfüber-Spawnen)
+	[changed] einige Details im Menü
+	[changed] Schildeffekt etwas aufgemotzt
+	[changed] Schiffsauswahlmenü überarbeitet und wegklappbar gemacht
+	[changed] kleine Schiffsbilder werden jetzt aus den Meshes berechnet
+	[changed] bessere Steuerungsmöglichkeiten der Übersichtskarte (WASD, mittlere Maustaste, Mausrad)
+	[changed] Bewegungsverhalten von Raketen
+	[changed] Man muss genauer zielen, bevor automatisch aufs Ziel gerichtet gefeuert wird.
+	[changed] für Schiffe können nun AEM-Dateien als Mesh angegeben werden
+	[changed] Schiffssymbole auf Übersichtkarte nur noch mit schwacher perspektivischer Verkleinerung
+	[added] neue Map: Kampf um Arsis (von Steff)
+	[added] neue Map: Unerwarteter Schlag (von Steff)
+	[added] neue Map: Illos' Mond (von Steff)
+	[added] neue Map: Schmale Passage (von Steff)
+	[added] Evianische Mine und Y'thear-Mutterschiff
+	[added] von Map zu Map veränderbare Beleuchtung
+	[added] einig übersetzte Texte
+	[added] Verbot, das Schlachtfeld zu verlassen
+	[added] Hüllenschäden an Kreuzern sichtbar
+	[added] mehrstufige Explosionen
+	[added] Mündungsfeuer
+	[added] Musikverwaltung (Spielmusik einfach als ogg, mp3 oder wav nach SFX/MUSIC/ packen!)
+	[added] mehrere Musiktitel von Sebastian
+	[added] Commander-Modus mit Army-Controller-inspiriertem Panel (Aufruf über M oder nach Abschuss)
+
+19/03/08 0.0.6b Alpha (Bugfix)
+	[fixed] Absturz auf F1, wenn man als Commander seinen Namen mit /nick geändert hatte
+	[fixed] Kontrollverlust der Musikverwaltung; Fehler bei NextTrack
+	[fixed] Schockwellendarstellung auf Client, wenn eigentlich keine gezeigt werden sollten
+	[fixed] Entfernungsnebelfarben an Hintergründe angepasst
+	[fixed] zu kurze Wiedereinstiegszeiten
+	[fixed] Z-Order-Fehler bei der Anordnung von Menüelementen
+	[fixed] richtigen Text bei OnIlosMoon reingesetzt
+	[fixed] ein "0-Server" in der Serverliste
+	[fixed] eine Port-Verwechslung
+	[fixed] fehlerhaftes Schließen des UDP-Streams bei Serverabsturz
+	[changed] Spawnpunkt bleibt auch nach Spielertod ausgewählt
+	[changed] Map-Texte vollständig übersetzt
+	[changed] Load-Screen vor Spielstart
+	[added] Serverliste zeigt an, zu welchen Servern eine Testverbindung aufgebaut werden konnte
+
+20/03/08 0.0.6d Alpha (Bugfix)
+	[fixed] MAV beim Rundeneustart durch Übertragung einer alten Flagge
+	[fixed] diverse Gründe für NaN-Bug (Kamera wird schwarz) bei Extrapolationen
+	[fixed] Spielerschiffe, die beim Client noch nicht gespawnt sind, aber bei anderen schon rumfliegen
+	[fixed] fehlerhafte Spawneinschätzung bei Flaggenbezogenen Schiffen (Geisterkanonen!)
+	[fixed] Übereinander-Anzeigen der Server in der Serverliste
+	[fixed] Nichtübertragung von Schuss-Level-Kollision
+	[fixed] Nichtschließen des UDP-Streams bei fehlgeschlagener Verbindun zum Server
+	[fixed] Absturz bei Rückkehr zum Menü mit Fehleranzeige, wenn man mehrere Tasten drückte
+	[fixed] Rumeiern der Schiffe beim Wiedereinstieg
+	[fixed] nicht korrekt zugeordnete Flaggen
+	[half-fixed] BackUp-Symbol beim Client
+	[changed] für das Landen des letzten Treffers bei Objekten mit vielen Tickets gibt es jetzt nur noch begrenzt viele Punkte
+	[changed] evianische Kanonen etwas schwächer gemacht
+	[added] Client rejoint automatisch bei Mapchange
+	[added] Versionsüberprüfung bei Abfrage der Serverliste
+
+25/03/08 0.0.6e Alpha (nicht veröffentlicht, Teil von 0.0.7)
+	[fixed] Client löschte Schiffe beim Rundeneustart, die er nicht löschen durfte...
+	[fixed] Möglichkeit zur Doppelbelegung einer Schiffs-ID
+	[fixed] Darstellung zu langer Mapnamen im Menü
+	[fixed] Nicht-Verstecken von Schiffen im FirstPerson-Mode (F10)
+	[fixed] Spuren hinter Raketen jetzt sauberer und weicher
+	[fixed] Bomben von Bombern hatten keine Schockwellen
+	[fixed] Ungenauigkeiten beim automatischen Zielen
+	[fixed/changed] Nebel dreht sich jetzt, gleicht dabei das Rollen des Players aus
+	[changed] Explosionen etwas aufgebohrt
+	[changed] "bla killed by blubb" durch "blubb kills bla" ersetzt
+	[changed] genaueres Zielen erforderlich
+	[changed] Trägheitseffekte verstärkt
+	[changed] Kreuzer-Torpedos mit fetterem Schweif
+	[changed] KI zielt besser
+	[changed] schnelleres Aufmunnitionieren von MGs etc.
+	[changed] joinende Spieler treten nun automatisch dem Team mit weniger Spielern bei
+	[changed] Y'thear-Mutterschiffe etwas stärker gemacht
+	[changed] HUD frontal gemacht
+	[added] Fortschrittsbalken auf dem Ladebildschirm (... auch wenn es doch _echt_ schnell lädt..)
+	[added] JoyStick-Unterstützung
+	[added] KI-Schiffe wählen sich clever einen Einstiegspunkt passend zu ihrer Klasse
+
+06/10/09 0.0.7 Alpha (ebenfalls nie veröffentlicht, Teil von 0.0.8)
+	[fixed] Massiver Lag durch Kollisionssystem
+	[fixed] sich wild drehende Schiffe auf Clientseite
+	[fixed] Möglichkeit, sich selbst als Ziel anzuvisieren
+	[fixed] Commander-Anzeigen schon beim Herauszoomen nach dem Tod entfernt
+	[fixed] Befehle blieben auch bei Team-Wechsel erhalten
+	[fixed] Schiffe jetzt besser aufs Fadenkreuz ausgerichtet (leichteres Zielen)
+	[fixed] unkotnrolliertes Schwanken beim Runden-End-Screen
+	[fixed] Positionierung einiger Menüelemente bei Auflösungen mit ungewöhnlichem Seitenverhältnis
+	[fixed] kurzes, unbeabsichtigtes Aufflackern aller Menüelemente beim Menüstart
+	[fixed] Zeichenreihenfolgefehler bei Tastenauswahl-GUI-Element
+	[fixed] Spiel merkte sich nicht, ob man im Firstpersonmode spielte
+	[fixed] Zielmarkierungskasten wurde manchmal verzerrt
+	[fixed] Lebensenergiebalken konnten negativ werden
+	[fixed] Support-Radien und Gitter werden auf der Übersichtskarte nun sauberer dargstellt
+	[changed] HUD komplett überarbeitet
+	[changed] HUD Übersichtskarte jetzt relativ zum Spielerschiff
+	[changed] im Spectator-Mode beobachtet man jetzt nicht mehr nur Jäger
+	[changed] Anwahl des nächsten Ziels verhält sich etwas intelligenter
+	[changed] Gegner lassen sich nun gezielter auswählen, indem man mit der Maus auf sie zeigt
+	[changed] Schockwellen schwächer gemacht
+	[changed] Scouts tarnen sich auch selbst
+	[changed] Kreuzer nehmen Geschütze jetzt als Bedrohung wahr
+	[changed] Schuss-Sounds weniger nervig
+	[changed] einzwei KI-Dinge
+	[changed] Übersichts-Gitter verschiebbar gemacht, auf Terrain-Maps nun standardmäßig ausgeblendet
+	[changed] im Commander-Mode können Flaggenpunkte als Ziel angegeben werden
+	[changed] Zwei Steuerungsprofile im Menü zum bequemen Wechsel zwischen Maus- und Joystick-Steuerung
+	[changed] Antriebsstrahlen verbessert
+	[added] Antriebsstrahlen hinter Schiffen
+	[added] Kamera ruckelt bei Schockwellen, Treffern und Nachbrenner
+	[added] Skriptsystem
+	[added] Asteroiden als zerstörbare, nicht mehr ganz so statische Objekte
+	[added] Normalmaps auf Asteroiden
+	[added] evianischer Verteidigungssatelit
+	[added] evianische und ythearische Korvette als Bomberersatz
+	[added] Spezialwaffe: Support können kleine Geschütze auf die Karte setzen
+	[added] Racketen müssen jetzt erst mal "aufschalten", bevor sie gelenkt abgeschossen werden können
+	[added] Pause im Einzelspielermodus auf P
+	[added] freie Kameradrehung um Spielerschiff auf C
+	[added] HUD-Markierung von Feindschiffen
+	[added] HUD-Markierung von Supportschiffen bei kritischer Munnition oder [Shift]
+	[added] Schildenergie-Balken im Commander-Mode
+	[added] Tooltips bei einigen Ingame-Buttons und Schiffen im Commandermode
+	[added] dynamische Miniansicht des Spielerschiffes im HUD
+	[added] Zoomfunktion (default auf Leertaste)
+	[added] Kästchen bei der Ticketanzeige repräsentieren Flaggenpunkte
+	[added] Fortschritsanzeige bei Flaggenübernahme
+	[added] Ticketanzeige blinkt rot, wenn man Tickets verliert, weil das andere Team eine bestimmte Flagge hält
+	[added] ForceField-Eigenschaft im AEM-Format (Schiffe können passieren, Schüsse werden abgefangen)
+	[added] Debug-Modus lässt sich über Commandline aktivieren
+	[added] Autoteambalance mittels /teambalance [ratio], (1:ausgeglichen, 0.5=doppelt soviele Evianer, 2=doppelt soviele Y'thear etc.)
+	[added] Bots löschen mit /removebot [name] und hinzufügen mit /addbot [teamid]
+	[added] Bots bekommen ihre Namen aus Inifiles
+
+
+XX/XX/10 0.0.8 Alpha
+	[kein Code-Bug] weniger als drei Waffengruppen im HUD: Fehler in der Race-Datei!
+	[tweak] Grafik-Detail schraubt sich etwas runter bei einbrechenden FPS
+	[tweak] gewackel bei Treffern abgeschwächt
+	[tweak] das Ziel-Aufschalt-Fadenkreuz verkleinert
+	[tweak] Performanceverbesserung für Kreuzergeschütze
+	[fixed] einige Bugs mit Sprites und Windows 7 und Vista losgeworden
+	[fixed] Minen gehen wieder und verfolgen einen nicht nach einem Respawn
+	[added] gravi = 0.3 oder ähnliches bestimmt die Gravitation auf Maps
+	[added] Partikeleffekte bei Schiffs-zu-Irgendwas-Kollision
+	[added] HitColorRed/Green/Blue in Waffen-Datei bestimmt nun die Farbe der Treffer-Explosion
+	[added] Kamera-Abstand für Schiffe mittels CameraZoom = x einstellbar
+	[removed] Skript/Eventsystem weitesgehend deaktiviert, da eh unbenutzt
+
+XX/XX/11 0.0.9 Alpha
+	[tweak] Waffensignaturen lassen sich jetzt direkt in die Ship-Datei eintragen
+	[tweak] Spiel reagiert beim Start auf nicht unterstützte Grafikmodi
+	[fixed] nicht auftauchende Mündungsfeuer
+	
+
+todo:
+
+x joystick
+x ebene verschieben
+x schiffsantriebe
+x ruckeln
+- tutorial
+x HUD
+- editor
+x geschütze
+x skripts
+x fortfahrenbutton
+x pause
+x hover-infos
+x bessere steuerungsoptionen
+o sounds vielleicht mal aufbohren
+
+x scouts sollten sich auch selber tarnen
+x raketen-anvisieren verkomplizieren			net	o
+x flaggenübernahme aufbohren
+x hud-übersichtskarte
+x flugverhalten etwas komplizierter gestalten
+x beamwaffen rumgeschube abschwächen
+x manövrierende kreuzer
+- front/heck-schild?
+x schadensmodell
+x asteroiden						net	o
+? dronen/raketen-startgeschwindigkeit
+x mausscrollen auf der übersichtskarte
+x botnames
+x minen/sperrgeschütze					net?	
+x support-anzeige
+
+x fire&forget / minen					net!	o
+
+o performance
+
+o netcode
+	? Autoteambalance bei Join funzelt nich
+	? Absturz bei Spawndata?
+	x Absturz, wenn der Server kicken möchte
+	? Nicht verschwindender Siegesscreen bei Client
+	x Munitionsdaten
+	x Treffer mit Phasenkanone
+	x Gates
+
+x Befehle bleiben erhalten bei Team-Wechsel
+
+x die laserefekte spawnen bei schnellfeuernden lasern i-wann nicht mehr
+o manchmal wird die auswahl im comander mode dauernd nach 1-2 sek. zurückgestetzt
+x einstellmöglichkeit für den bloomfaktor
+
+########################
+
+!!!!!!
+o MULTIPLAYER
+
+bug
+x minen gehen nicht mehr
+? commander-schiffs-auswahl
+
+performance
+o lowpoly-kollision
+o kollisionserkennung allgemein
+
+feature
+x] cam-position für schiffstypen veränderbar machen
+! weniger als drei waffengruppen im hud
+o spawnen in kreuzern verhindern
+x gravitationsfaktor auf planis bestimmbar machen
+
+tweak
+x darstellung des anvisierens im hud kleiner machen
+o kreuzer-ki aufpolieren. (weniger crahes!)
+x verschiedenfarbige aufschlageffekte
+
+balance
+o anvisieren trotz tarnung verbessern
+x gewackel bei treffern abschwächen
