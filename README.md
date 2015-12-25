@@ -1,16 +1,16 @@
 DGX BattleSpace 9142
 ==========
 
-Benjamin "Mr.Keks" Bisping - <http://mrkeks.net> - <ben@mrkeks.net>
-Steffen "CdV" Altmeier
-DerHase - <http://www.budapestfastfood.com>
-Sebastian Schell - <http://sebastian-schell.de>
+* Benjamin "Mr.Keks" Bisping - <http://mrkeks.net> - <ben@mrkeks.net>
+* Steffen "CdV" Altmeier
+* DerHase - <http://www.budapestfastfood.com>
+* Sebastian Schell - <http://sebastian-schell.de>
 
--------------------
+![Ingame Screenshot](http://mrkeks.net/pics/dgx2/Screen31.jpg)
 
 ## 0. PREFACE: TEN YEARS ####################
 
-It's been more than ten years since I started working at DGX9142 on the
+It's been more than ten years since I started working at DGX9142 on
 25 March 2004. Actually, I planned to make a little game over the
 Easter break of 2004. I was 15 years old at that time.
 
@@ -35,67 +35,62 @@ We hope you enjoy the game anyway. :)
 
 ## 1. SYSTEM REQUIREMENTS
 
-Minimum...
-| ---- | --------------------: |
-| CPU  |  1 GHz*               |
-| RAM  |  1 GB                 |
-| Disk |  100 MB
-| GPU  |  128 MB Grafikspeicher DirektX 7 Unterstützung
-  (Achtung, seit Windows Vista ist es Glückssache,
-  ob DX7-Spiele wie DGX laufen :/;
-  In Wine auf Ubuntu lief es ganz gut) |
-\* Multicore hilft nicht, besser einen Kern mit hohem Takt! 2 Ghz
-  machen das Spiel schon flüssiger, die ganzen Schusskollisionen
-  sind seeehr hungrig.
+Minimum | Needed
+------- | --------------------
+CPU     |  1 GHz
+RAM     |  1 GB
+Disk    |  100 MB
+GPU     |  128 MB GPU Memory, DirektX 7 Support
 
+On newer Windows versions there might be problems with DX7-games. I only tested the game with Wine on Ubuntu, where it works fine.
 
 ## 2. MANUAL: HOW TO PLAY
 
-Gespielt wird wie in Battlefield, bis der Gegner keine Tickets hat. Verliert
-eine Fraktion ein Schiff, so verliert sie auch Punkte. Je nach Mission lässt
-die Einnahme bestimmter Stellungen oder das Ausführen gewisser Aufträge den
-Gegner schneller Punkte verlieren.
+The basic gameplay follows the Battlefield principle.
 
-Diese Stellungen, im Spiel Sprungtore oder JumpGates genannt, dienen zunächst
-als Einstiegspunkte für Spieler, sowie für nicht-Spieler-gesteuerte Kreuzer
-und stationäre Geschütze. Nicht alle Sprungtore lassen sich erobern. Nicht
-eroberbare Sprungtore sind durch ein Verbots-Zeichen gekennzeichnet.
-Sprungtore, die zusätzliche Kreuzer bringen, erkennt man an grünen Pfeilen.
+Every team has a certain number of *tickets*. Killing enemy ships or holding special positions decreases
+the enemy team's ticket counter. A team wins if the other team's counter hits zero.
 
-Bevor es in den Kampf geht, wählt man ebenfalls battlefieldtypisch eines der
-Sprungtore als Einstiegspunkt und eine Schiffsklasse. Es gibt vier Klassen:
-Jäger zum gewöhnlichen Kampf, Bomber zum Angriff auf Kreuzer und Stationen,
-Aufklärer für schnelle Schläge an unerwarteten Positionen (Aufklärer können
-eigene Schiffe für den Feindradar unsichtbar machen, bzw. unsichtbare
-Feindschiffe aufspüren) und Unterstützungsschiffe zum Aufmunitionieren und
-Regenerieren von Freundschiffen.
+Your ships spawn at *jump gates* held by your team.
+You can conquer further jump gates by flying close to them while there is no enemy ship around. Some gates cannot be conquered -- they are marked with a restriction symbol.
+Jump gates with a green arrow next to their name spawn NPC cruisers.
 
-Gekämpft wird so ähnlich wie in Freespace, Freelancer und anderen
-Weltraumspielen. Mit `WASD` regelt man den Schub, `Q` und `E` rollen, Tab
-aktiviert die Nachbrenner. Mit der mittleren Maustaste schaltet man die
-gewünschten Ziele durch, mit der linken und rechten feuert man auf das
-anvisierte Schiff. Das gewählte Ziel wird durch ein Rechteck hervorgehoben.
-Berfindet es sich außerhalb des Bildschirms, zeigt ein Pfeil in seine
-Richtung.
+Before joining the battle at a jump gate, you chose out of four *ship classes*.
 
-Solltest du im Gefecht die Übersicht verlieren, hilft meist ein kurzer
-Blick auf die Radarkarte mittels `M`. Dein eigenes Schiff wird dort mit
-einem leichten weißen Schimmern hervorgehoben. Als einziger menschlicher
-Spieler in einem Team darfst du den Bots Befehle erteilen. (Linke Maustaste
-wählt aus, rechte schickt los, `X` nimmt Befehle zurück.) Außerdem
-kannst du mittels `,` die Ansicht umschalten, sodass die Orientierung
-leichter fällt.
+* *Fighter* for ordinary combat.
+* *Bomber* to takle big cruisers and stations.
+* *Scout* for quick strikes at unexpected positions. (Scouts jam the enemy radar to a certain degree, but also counter enemy jamming.)
+* *Support* which regenerate friendly ships or supply them with new ammunition.
 
-Besonders für den Multiplayer ist interessant, dass sich mittels `Enter`
-die Chat-Konsole öffnen lässt. Auch im Single-Player ist diese aber nützlich,
-um die Botverteilung zwischen den Teams zu justieren und ähnliches. Eine
-Liste der Befehle wird angezeigt, wenn du `\help` eingibst.
-`F1` zeigt eine Liste der Spieler und ihrer Punkte an.
+The *fighting* is quite similar to FreeSpace, Freelancer and other space games.
 
-Viel Spaß beim Spielen!
+* `WASD`: regulate the forward/backward/sideward thrust.
+* `Q` and `E`: roll.
+* `Tab`: enable the after burner
+* Middle mouse button: lock targets (highlighted by a rectangle)
+* Left/right mouse button: fire at the targeted ship
+
+For *overview purposes* there are additional controls:
+
+* `M`: show overview map (your ship is highlighted with white)
+* `,`: toggle grid and hud info
+* `C`: pan view without rotating the ship
+* `Space`: zoom in
+
+If you are your teams *commander* (as the only human player in a team you will be), you can use the overview map to give commands to your team:
+
+* `Left mouse button`: select ships
+* `Right mouse button`: give command (move to or attack)
+* `X`: Cancel command
+
+`Enter` activates the chat. You can also control parts of the game from there, the commands are explained if you enter `\help`.
+
+`F1` shows a list of the active players and their score.
+
+Have fun playing!
 
 
-## REDISTRIBUTION?
+## 3. REDISTRIBUTION?
 
 The game is freeware. You may spread it as you whish.
 
