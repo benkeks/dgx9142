@@ -1,10 +1,10 @@
 DGX BattleSpace 9142
 ==========
 
-Benjamin "Mr.Keks" Bisping - <http://mrkeks.net> - <ben@mrkeks.net>
-Steffen "CdV" Altmeier
-DerHase - <http://www.budapestfastfood.com>
-Sebastian Schell - <http://sebastian-schell.de>
+* Benjamin "Mr.Keks" Bisping - <http://mrkeks.net> - <ben@mrkeks.net>
+* Steffen "CdV" Altmeier
+* DerHase - <http://www.budapestfastfood.com>
+* Sebastian Schell - <http://sebastian-schell.de>
 
 -------------------
 
@@ -35,64 +35,59 @@ We hope you enjoy the game anyway. :)
 
 ## 1. SYSTEM REQUIREMENTS
 
-Minimum...
-| ---- | --------------------: |
-| CPU  |  1 GHz*               |
-| RAM  |  1 GB                 |
-| Disk |  100 MB
-| GPU  |  128 MB Grafikspeicher DirektX 7 Unterstützung
-  (Achtung, seit Windows Vista ist es Glückssache,
-  ob DX7-Spiele wie DGX laufen :/;
-  In Wine auf Ubuntu lief es ganz gut) |
-\* Multicore hilft nicht, besser einen Kern mit hohem Takt! 2 Ghz
-  machen das Spiel schon flüssiger, die ganzen Schusskollisionen
-  sind seeehr hungrig.
+Minimum | Needed
+------- | --------------------
+CPU     |  1 GHz
+RAM     |  1 GB
+Disk    |  100 MB
+GPU     |  128 MB GPU Memory, DirektX 7 Support
 
+On newer Windows versions there might be problems with DX7-games. I only tested the game with Wine on Ubuntu, where it works fine.
 
 ## 2. MANUAL: HOW TO PLAY
 
 Gespielt wird wie in Battlefield, bis der Gegner keine Tickets hat. Verliert
-eine Fraktion ein Schiff, so verliert sie auch Punkte. Je nach Mission lässt
-die Einnahme bestimmter Stellungen oder das Ausführen gewisser Aufträge den
+eine Fraktion ein Schiff, so verliert sie auch Punkte. Je nach Mission lÃ¤sst
+die Einnahme bestimmter Stellungen oder das AusfÃ¼hren gewisser AuftrÃ¤ge den
 Gegner schneller Punkte verlieren.
 
-Diese Stellungen, im Spiel Sprungtore oder JumpGates genannt, dienen zunächst
-als Einstiegspunkte für Spieler, sowie für nicht-Spieler-gesteuerte Kreuzer
-und stationäre Geschütze. Nicht alle Sprungtore lassen sich erobern. Nicht
+Diese Stellungen, im Spiel Sprungtore oder JumpGates genannt, dienen zunÃ¤chst
+als Einstiegspunkte fÃ¼r Spieler, sowie fÃ¼r nicht-Spieler-gesteuerte Kreuzer
+und stationÃ¤re GeschÃ¼tze. Nicht alle Sprungtore lassen sich erobern. Nicht
 eroberbare Sprungtore sind durch ein Verbots-Zeichen gekennzeichnet.
-Sprungtore, die zusätzliche Kreuzer bringen, erkennt man an grünen Pfeilen.
+Sprungtore, die zusÃ¤tzliche Kreuzer bringen, erkennt man an grÃ¼nen Pfeilen.
 
-Bevor es in den Kampf geht, wählt man ebenfalls battlefieldtypisch eines der
+Bevor es in den Kampf geht, wÃ¤hlt man ebenfalls battlefieldtypisch eines der
 Sprungtore als Einstiegspunkt und eine Schiffsklasse. Es gibt vier Klassen:
-Jäger zum gewöhnlichen Kampf, Bomber zum Angriff auf Kreuzer und Stationen,
-Aufklärer für schnelle Schläge an unerwarteten Positionen (Aufklärer können
-eigene Schiffe für den Feindradar unsichtbar machen, bzw. unsichtbare
-Feindschiffe aufspüren) und Unterstützungsschiffe zum Aufmunitionieren und
+JÃ¤ger zum gewÃ¶hnlichen Kampf, Bomber zum Angriff auf Kreuzer und Stationen,
+AufklÃ¤rer fÃ¼r schnelle SchlÃ¤ge an unerwarteten Positionen (AufklÃ¤rer kÃ¶nnen
+eigene Schiffe fÃ¼r den Feindradar unsichtbar machen, bzw. unsichtbare
+Feindschiffe aufspÃ¼ren) und UnterstÃ¼tzungsschiffe zum Aufmunitionieren und
 Regenerieren von Freundschiffen.
 
-Gekämpft wird so ähnlich wie in Freespace, Freelancer und anderen
+GekÃ¤mpft wird so Ã¤hnlich wie in Freespace, Freelancer und anderen
 Weltraumspielen. Mit `WASD` regelt man den Schub, `Q` und `E` rollen, Tab
 aktiviert die Nachbrenner. Mit der mittleren Maustaste schaltet man die
-gewünschten Ziele durch, mit der linken und rechten feuert man auf das
-anvisierte Schiff. Das gewählte Ziel wird durch ein Rechteck hervorgehoben.
-Berfindet es sich außerhalb des Bildschirms, zeigt ein Pfeil in seine
+gewÃ¼nschten Ziele durch, mit der linken und rechten feuert man auf das
+anvisierte Schiff. Das gewÃ¤hlte Ziel wird durch ein Rechteck hervorgehoben.
+Berfindet es sich auÃŸerhalb des Bildschirms, zeigt ein Pfeil in seine
 Richtung.
 
-Solltest du im Gefecht die Übersicht verlieren, hilft meist ein kurzer
+Solltest du im Gefecht die Ãœbersicht verlieren, hilft meist ein kurzer
 Blick auf die Radarkarte mittels `M`. Dein eigenes Schiff wird dort mit
-einem leichten weißen Schimmern hervorgehoben. Als einziger menschlicher
+einem leichten weiÃŸen Schimmern hervorgehoben. Als einziger menschlicher
 Spieler in einem Team darfst du den Bots Befehle erteilen. (Linke Maustaste
-wählt aus, rechte schickt los, `X` nimmt Befehle zurück.) Außerdem
+wÃ¤hlt aus, rechte schickt los, `X` nimmt Befehle zurÃ¼ck.) AuÃŸerdem
 kannst du mittels `,` die Ansicht umschalten, sodass die Orientierung
-leichter fällt.
+leichter fÃ¤llt.
 
-Besonders für den Multiplayer ist interessant, dass sich mittels `Enter`
-die Chat-Konsole öffnen lässt. Auch im Single-Player ist diese aber nützlich,
-um die Botverteilung zwischen den Teams zu justieren und ähnliches. Eine
+Besonders fÃ¼r den Multiplayer ist interessant, dass sich mittels `Enter`
+die Chat-Konsole Ã¶ffnen lÃ¤sst. Auch im Single-Player ist diese aber nÃ¼tzlich,
+um die Botverteilung zwischen den Teams zu justieren und Ã¤hnliches. Eine
 Liste der Befehle wird angezeigt, wenn du `\help` eingibst.
 `F1` zeigt eine Liste der Spieler und ihrer Punkte an.
 
-Viel Spaß beim Spielen!
+Viel SpaÃŸ beim Spielen!
 
 
 ## REDISTRIBUTION?
