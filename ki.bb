@@ -50,7 +50,7 @@ Function KI_Update()
 				
 				If Rand(10)=1 Then
 					HideEntity ki\sh\piv
-					If LinePick(ki\sh\x,ki\sh\y,ki\sh\z, ki\sh\dx*250,ki\sh\dy*250,ki\sh\dz*250, ki\sh\shc\size*2+2) = 0 Then
+					If LinePick(ki\sh\x,ki\sh\y,ki\sh\z, ki\sh\dx*350,ki\sh\dy*350,ki\sh\dz*350, ki\sh\shc\size*2+2) = 0 Then
 						FreeEntity ki\dodge
 						ki\dodge = 0
 					EndIf
@@ -81,7 +81,7 @@ Function KI_Update()
 				ki\dodgetime = 0
 				If ki\sh\shc\size < 20 And Rand(20)=1 Then
 					HideEntity ki\sh\piv
-					If LinePick(ki\sh\x,ki\sh\y,ki\sh\z, ki\sh\dx*250,ki\sh\dy*250,ki\sh\dz*250, ki\sh\shc\size*2+2) <> 0
+					If LinePick(ki\sh\x,ki\sh\y,ki\sh\z, ki\sh\dx*250,ki\sh\dy*350,ki\sh\dz*250, ki\sh\shc\size*2+2) <> 0
 						pitch# = EntityPitch(ki\sh\piv)
 						yaw# = EntityYaw(ki\sh\piv)
 						roll# = EntityRoll(ki\sh\piv)
@@ -90,9 +90,9 @@ Function KI_Update()
 								RotateEntity ki\sh\piv,pitch,yaw,roll
 								TurnEntity ki\sh\piv,i1 * 15 * (Rand(0,1)*2-1), i2 * 15 * (Rand(0,1)*2-1),0
 								TFormVector 0,0,ki\sh\realspeed, ki\sh\piv, 0
-								If LinePick(ki\sh\x,ki\sh\y,ki\sh\z, TFormedX()*250,TFormedY()*250,TFormedZ()*250, ki\sh\shc\size*2+2) = 0
-									RotateEntity ki\sh\piv,pitch,yaw,roll
-									TurnEntity ki\sh\piv,i1 * 45 * (Rand(0,1)*2-1), i2 * 45 * (Rand(0,1)*2-1),0
+								If LinePick(ki\sh\x,ki\sh\y,ki\sh\z, TFormedX()*350,TFormedY()*350,TFormedZ()*350, ki\sh\shc\size*2+2) = 0
+									;RotateEntity ki\sh\piv,pitch,yaw,roll
+									;TurnEntity ki\sh\piv,i1 * 45 * (Rand(0,1)*2-1), i2 * 45 * (Rand(0,1)*2-1),0; what was the point of this new rotation?!
 									ki\dodge = CreatePivot(ki\sh\piv)
 									EntityParent ki\dodge,0
 									i1 = 4
