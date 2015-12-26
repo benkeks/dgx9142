@@ -1,0 +1,22 @@
+mesh{
+
+	file = GFX/SHIPS/edestroyer/edestroyer_new.b3d
+}
+
+entity{
+
+	x = 0
+
+	y = 0
+
+	z = 0
+
+}
+
+
+texture{
+        file =  GFX/SHIPS/edestroyer/tex.jpg
+
+        blend = 1
+        layer = 1
+}

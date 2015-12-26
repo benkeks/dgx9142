@@ -103,7 +103,7 @@ Function HUD_Init()
 	
 	hud_iscount = 0
 	
-	hud_font = Txt_LoadFont(hudd$+"font.png",1+2+8,5,13,hudd+"font.inf")
+	hud_font = Txt_LoadFont(hudd$+"font.png",1+2,5,13,hudd+"font.inf")
 	
 	hud_piv = CreatePivot(cc_cam)
 	PositionEntity hud_piv,-512,hud_height,512
@@ -976,8 +976,9 @@ Function HUD_Update()
 				is\hp = 0
 			EndIf
 			If is\s\spawntimer <= 0 Then
-				is\hp = Txt_UpdateText(is\hp, Int(100*is\s\hitpoints/is\s\shc\hitpoints), hud_font, is\name)
-				MoveEntity is\hp,60,0,0
+                                txt$ = Chr(9)+"1[#progr{"+Int(is\s\hitpoints * 100.0 / Float(is\s\shc\hitpoints))+"}]" + Chr(13); Int(100*is\s\hitpoints/is\s\shc\hitpoints)
+                                is\hp = Txt_UpdateText(is\hp, txt, hud_font, is\name)
+				MoveEntity is\hp,45,0,0
 				EntityOrder is\hp ,-11
 				EntityColor is\hp,is\s\colr,is\s\colg,is\s\colb
 				EntityAlpha is\name,1
