@@ -1927,7 +1927,7 @@ Function Shi_Fire(sHandle,typ,target=0)
 							s2 = Object.ship(targetd)
 							AddUDPByte(s2\id)
 						EndIf
-						Else
+					Else
 						s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 					EndIf
 				Else
