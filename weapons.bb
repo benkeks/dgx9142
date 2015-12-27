@@ -18,12 +18,14 @@ Type weapon
 	Field spawnshipclass
 	Field swarm
 	Field fxsig$
-	Field muzzle
 	Field neammo, reammo
 	Field nepower
 	Field reload
 	Field aiming
-	Field trail, trailsize#
+	
+	Field muzzle
+        Field trail, trailsize#
+	
 	Field base1, base2, gun
 	Field gunoffsety#, gunoffsetz#
 	Field defaultpitch#, minpitch#
@@ -89,8 +91,8 @@ Function Wea_LoadWeapons()
 	Until pfad$=""
 	CloseDir dir
 
-	Dim weapsigf#(25,10,4)
-	Dim weapsigi(25,10,1)
+	Dim weapsigf#(40,10,4)
+	Dim weapsigi(40,10,1)
 	dir = ReadDir(datad+"WEAPONS/SIGS")
 	NextFile(dir)
 	NextFile(dir)

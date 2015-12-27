@@ -206,7 +206,7 @@ Jumpgates and every enemy ship has been destroyed.
 			team = 2
 			takeable = 1
 			takeper	= 100
-			range = 200
+			range = 250
 		}
 		
 		entity{
@@ -282,7 +282,7 @@ Jumpgates and every enemy ship has been destroyed.
 			team = 1
 			takeable = 1
 			takeper	= 100
-			range = 200
+			range = 250
 		}
 		
 		entity{

@@ -1931,6 +1931,11 @@ Function Shi_Fire(sHandle,typ,target=0)
 						s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 					EndIf
 				Else
+                                        If weapsigf(id,i,3) <> 0 Or weapsigf(id,i,4) <> 0 Then
+                                                p = weapsigf(id,i,3)
+                                                ya= weapsigf(id,i,4)
+                                                TurnEntity tpiv,p,ya,0
+                                        EndIf
 					If target
 						s2.ship = Object.ship(target)
 						edist# = EntityDistance(s2\mesh,tpiv)
