@@ -28,8 +28,10 @@ _en_
 
 	MapTask{
 _de_
-Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen
-oder die eigene Fraktion alle Raumknoten hält und alle Feindschiffe vernichtet sind.
+Die Evianer gewinnen die Schlacht, indem sie die Y'thear zurückschlagen, bis deren
+Tickets 0 erreichen oder diese keine Knoten mehr besitzen.
+
+Die Y'thear gewinnen die Schlacht, indem sie den Sateliten der Evianer zerstören.
 _en_
 The battle is won when the enemy tickets reach 0 or when your team holds all
 Jumpgates and every enemy ship has been destroyed.
@@ -83,7 +85,7 @@ normal=GFX/ENVIRON/normalpixels(b).png
 		logo = gfx/gui/logos/ythear2nd.png
 		id = 2
 		race = YthearWII3
-		tickets = 450
+		tickets = 400
 		colr = 250
 		colg = 30
 		colb = 30
@@ -209,8 +211,8 @@ normal=GFX/ENVIRON/normalpixels(b).png
 
 	Object{
 		flag{
-			en_name = Base 1b
-			de_name = Basis 1b
+			en_name = Base 1
+			de_name = Basis 1
 			num = 1
 			team = 1
 			takeable = 0
@@ -255,7 +257,7 @@ normal=GFX/ENVIRON/normalpixels(b).png
 		y = 50
 		z = 0
 	}
-		Spawn{
+	Spawn{
 		flag = 1
 		type = 2
 		class = 1
@@ -296,7 +298,19 @@ normal=GFX/ENVIRON/normalpixels(b).png
 		z = 0
 	}
 
-
+        Spawn{
+                flag = 1
+                type = 2
+                spawntime = 150
+                spawnonce = 1
+                class = 2
+                range = 0
+                x = -500
+                y = 0
+                z = -150
+        }
+	
+	
 Object{
 		flag{
 			en_name = Base 2
@@ -531,45 +545,7 @@ Object{
 		z = 0
 	}	
 
-
-
-
 	
-	
-
-
-	Object{
-		flag{
-			en_name = Base 1
-			de_name = Basis 1
-			num = 7
-			team = 1
-			takeable = 0
-			takeper	= 100
-			range = 200
-		}
-		
-		entity{
-			x = -3100
-			z = 30
-			y = -15
-		}
-	}
-	
-	
-Spawn{
-		flag = 7
-		type = 2
-		spawntime = 150
-		spawnonce = 1
-		class = 2
-		range = 0
-		x = 0
-		y = 0
-		z = -150
-	}
-
-
 	Object{
 		flag{
 			en_name = Base 2a
@@ -627,7 +603,7 @@ Spawn{
 		z = 0
 	}
 
-		Spawn{
+	Spawn{
 		flag = 8
 		type = 2
 		class = 1
@@ -706,22 +682,6 @@ Spawn{
 		y = 0
 		z = 0
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

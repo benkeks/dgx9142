@@ -175,7 +175,7 @@ End Function
 
 Function Wreck_Update()
 	For w.wreck = Each wreck
-		w\dy = w\dy - map_gravi * .5 *main_gspe
+		w\dy = w\dy - map_gravi * .15 *main_gspe
 		TurnEntity w\mesh, w\tp*main_gspe,w\ty*main_gspe,w\tr*main_gspe
 		TranslateEntity w\mesh, w\dx*main_gspe,w\dy*main_gspe,w\dz*main_gspe
 		If CountCollisions(w\mesh) Then w\hitpoints = w\hitpoints - Rand(40,100)*main_gspe

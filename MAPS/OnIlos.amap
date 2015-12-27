@@ -107,9 +107,9 @@ or alternatively take all points and destroy all enemy ships.
 	
 	LevelStart{
 		x = 450
-		y = 150
+		y = 140
 		z = 2000
-		pitch = 10
+		pitch = 20
 		yaw = -180
 		roll = 0
 	}
