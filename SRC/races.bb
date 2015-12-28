@@ -5,7 +5,6 @@ Type class
 	Field name$
 	Field tickets#
 	Field ship
-	Field button
 	Field weapon[5]
 	Field wammo[5]
 End Type
@@ -62,8 +61,6 @@ Function Race_ParseClass(stream,team)
 					c\tickets = paras[1]
 				Case "file","ship"
 					c\ship	= Shi_LoadShipClass(paras[1])
-				Case "button"
-					c\button = LoadTexture(paras[1],1+2)
 				Case "type","typ"
 					c\typ	= paras[1]
 				End Select

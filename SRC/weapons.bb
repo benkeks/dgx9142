@@ -248,7 +248,7 @@ Function Wea_LoadWeaponSig(Pfad$)
 			End Select
 		EndIf
 	Until Eof(stream)
-	If wea_sigcount <= id Then wea_sigcount = wea_sigcount + 1
+	If wea_sigcount <= id Then wea_sigcount = id + 1
 End Function
 
 Function Wea_LoadWeaponSigForShip(stream)
