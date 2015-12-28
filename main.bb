@@ -69,58 +69,57 @@ SeedRnd MilliSecs()
 ;-------------------
 ;main.bb				;Main_
 
-Include "consts.bb"		;
+Include "SRC/consts.bb"		;
 
-Include "util.bb"		;Util_
+Include "SRC/util.bb"		;Util_
 
-Include "initgfx.bb"	;Main_
-Include "load.bb"		;
-Include "language.bb"	;lang_
+Include "SRC/initgfx.bb"	;Main_
+Include "SRC/load.bb"		;
+Include "SRC/language.bb"	;lang_
 
-Include "environ.bb"	;Env_
-Include "gates.bb"
-Include "music.bb"		;Music_
+Include "SRC/environ.bb"	;Env_
+Include "SRC/gates.bb"
+Include "SRC/music.bb"		;Music_
 
-Include "teams.bb"		;Team_
-Include "races.bb"		;Race_
+Include "SRC/teams.bb"		;Team_
+Include "SRC/races.bb"		;Race_
 
-Include "weapons.bb"	;Wea_
-Include "ships.bb"		;Shi_
-Include "ki.bb"			;KI_
-Include "botnames.bb"	;KI_
+Include "SRC/weapons.bb"	;Wea_
+Include "SRC/ships.bb"		;Shi_
+Include "SRC/ki.bb"			;KI_
+Include "SRC/botnames.bb"	;KI_
 
-Include "specialfx.bb"	;FX_
-Include "dust.bb"		;Dust_
-Include "cloak.bb"		;Cloak_
-Include "trails.bb"		;trail_
-Include "wrecks.bb"		;wreck_
-Include "asteroids.bb"	;asteroids_
-Include "turrets.bb"	;turr_
-Include "hud.bb"		;HUD_
-Include "gui.bb"		;GUI_
-Include "hudlog.bb"		;HUD_
-Include "hudplayers.bb"	;HUD_
-Include "hudcommander.bb"
-Include "hudhoverinfo.bb"
-Include "controlcam.bb"	;CC_
-Include "commander.bb"	;Com_
-Include "minimap.bb"	;HUD_
-Include "input.bb"		;Inp_
-Include "3Dmouse.bb"	;Mouse_
+Include "SRC/specialfx.bb"	;FX_
+Include "SRC/dust.bb"		;Dust_
+Include "SRC/cloak.bb"		;Cloak_
+Include "SRC/trails.bb"		;trail_
+Include "SRC/wrecks.bb"		;wreck_
+Include "SRC/asteroids.bb"	;asteroids_
+Include "SRC/turrets.bb"	;turr_
+Include "SRC/hud.bb"		;HUD_
+Include "SRC/gui.bb"		;GUI_
+Include "SRC/hudlog.bb"		;HUD_
+Include "SRC/hudplayers.bb"	;HUD_
+Include "SRC/hudcommander.bb"
+Include "SRC/hudhoverinfo.bb"
+Include "SRC/controlcam.bb"	;CC_
+Include "SRC/commander.bb"	;Com_
+Include "SRC/minimap.bb"	;HUD_
+Include "SRC/input.bb"		;Inp_
+Include "SRC/3Dmouse.bb"	;Mouse_
 
-Include "game.bb"		;game_
-Include "events.bb"
+Include "SRC/game.bb"		;game_
+Include "SRC/events.bb"
 
-Include "udp_includefile_v1.bb"
-Include "network.bb"
+Include "SRC/udp_includefile_v1.bb"
+Include "SRC/network.bb"
 
-Include "key routine.bb";Key_
+Include "SRC/key_routine.bb";Key_
 
 ; Menü
 
-
-Include "menu.bb"		;Menu_
-Include "menugui.bb"
+Include "SRC/menu.bb"		;Menu_
+Include "SRC/menugui.bb"
 
 ;-- AE-Module						
 ; (Code derived from "Aliens Exist." - a shooter programed by INpac and Mr.Keks)
