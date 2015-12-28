@@ -1,3 +1,7 @@
+Const net_listserver_addr$ = "dgx.mrkeks.net"
+Const net_listserver_port = 80
+Const net_listserver_dir$ = "/"+main_version_id+"/"
+
 Global net_port=9142
 
 Global net, net_isserver=1
@@ -427,11 +431,11 @@ Function Net_Clear()
 End Function
 
 Function Net_AddToServerList(name$,port,map$)
-	stream = OpenTCPStream("www.mrkeks.net",80)
+        stream = OpenTCPStream(net_listserver_addr, net_listserver_port)
 	If stream <> 0
 		name$ = Util_MakeURL(name$)
 		map$ = Util_MakeURL(map$)
-		WriteLine stream,"GET http://www.mrkeks.net/dgx/addserver.php?sname="+name$+"&sport="+port+"&smap="+map$
+		WriteLine stream,"GET http://"+net_listserver_addr+net_listserver_dir+"addserver.php?sname="+name$+"&sport="+port+"&smap="+map$
 		While Not Eof(stream)
 			txt$ = ReadLine(stream)
 		Wend
@@ -439,9 +443,9 @@ Function Net_AddToServerList(name$,port,map$)
 		id = paras[0]
 		time$ = paras[1]
 		CloseTCPStream stream
-		stream = OpenTCPStream("www.mrkeks.net",80)
+		stream = OpenTCPStream(net_listserver_addr, net_listserver_port)
 		If stream <> 0
-			WriteLine stream,"GET http://www.mrkeks.net/dgx/addserver.php?validate="+id
+			WriteLine stream,"GET http://"+net_listserver_addr+net_listserver_dir+"addserver.php?validate="+id
 			While Not Eof(stream)
 				txt$ = ReadLine(stream)
 			Wend
@@ -455,18 +459,18 @@ Function Net_AddToServerList(name$,port,map$)
 End Function
 
 Function Net_LifeSign()
-	stream = OpenTCPStream("www.mrkeks.net",80)
+	stream = OpenTCPStream(net_listserver_addr, net_listserver_port)
 	If stream <> 0
-		WriteLine stream,"GET http://www.mrkeks.net/dgx/addserver.php?validate="+net_listid
+		WriteLine stream,"GET http://"+net_listserver_addr+net_listserver_dir+"addserver.php?validate="+net_listid
 		CloseTCPStream stream
 	EndIf
 	net_lastcommunication = MilliSecs()
 End Function
 
 Function Net_RemoveFromServerList()
-	stream = OpenTCPStream("www.mrkeks.net",80)
+        stream = OpenTCPStream(net_listserver_addr, net_listserver_port)
 	If stream <> 0
-		WriteLine stream,"GET http://www.mrkeks.net/dgx/addserver.php?remove="+net_listid
+		WriteLine stream,"GET http://"+net_listserver_addr+net_listserver_dir+"addserver.php?remove="+net_listid
 		CloseTCPStream stream
 	EndIf
 End Function
@@ -476,9 +480,9 @@ Function Net_GetServerList()
 	If main_port Then menu_udpstream = CreateUDPStream(main_port) Else menu_udpstream = CreateUDPStream()
 	If menu_udpstream = 0 Then RuntimeError "Unable to create a UDP stream"
 	
-	stream = OpenTCPStream("www.mrkeks.net",80)
+        stream = OpenTCPStream(net_listserver_addr, net_listserver_port)
 	If stream <> 0
-		WriteLine stream,"GET http://www.mrkeks.net/dgx/serverlist.php"
+		WriteLine stream,"GET http://"+net_listserver_addr+net_listserver_dir+"serverlist.php"
 		Return stream
 	EndIf
 End Function
