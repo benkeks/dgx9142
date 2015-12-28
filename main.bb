@@ -124,25 +124,25 @@ Include "SRC/menugui.bb"
 ;-- AE-Module						
 ; (Code derived from "Aliens Exist." - a shooter programed by INpac and Mr.Keks)
 
-Const aed$ = "AEMODULE/"
+Const aed$ = "SRC/AEMODULE/"
 
-Include "AEMODULE/map.bb"
-Include "AEMODULE/aemlib.bb"
-Include "AEMODULE/afxlib.bb"
-Include "AEMODULE/parser.bb"
+Include "SRC/AEMODULE/map.bb"
+Include "SRC/AEMODULE/aemlib.bb"
+Include "SRC/AEMODULE/afxlib.bb"
+Include "SRC/AEMODULE/parser.bb"
 
-Include "AEMODULE/CubicLib.bb"
-Include "AEMODULE/OceanLib.bb"
-Include "AEMODULE/Dot3Lib.bb"
-Include "AEMODULE/audio.bb"
-Include "AEMODULE/shader.bb"
-Include "AEMODULE/textlib.bb"
+Include "SRC/AEMODULE/CubicLib.bb"
+Include "SRC/AEMODULE/OceanLib.bb"
+Include "SRC/AEMODULE/Dot3Lib.bb"
+Include "SRC/AEMODULE/audio.bb"
+Include "SRC/AEMODULE/shader.bb"
+Include "SRC/AEMODULE/textlib.bb"
 
-Include "AEMODULE/object.bb"
+Include "SRC/AEMODULE/object.bb"
 
-Include "AEMODULE/flags.bb"
+Include "SRC/AEMODULE/flags.bb"
 
-Include "AEMODULE/bloomfilter.bb"
+Include "SRC/AEMODULE/bloomfilter.bb"
 
 
 Main_EvaluateCommandLine()
