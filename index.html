@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>DGX 9142 by benkeks</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>DGX 9142</h1>
+        <p>A strategic 3d space shooter</p>
+
+        <p class="view"><a href="https://github.com/benkeks/dgx9142">View the Project on GitHub <small>benkeks/dgx9142</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/benkeks/dgx9142/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/benkeks/dgx9142/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/benkeks/dgx9142">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="dgx-battlespace-9142" class="anchor" href="#dgx-battlespace-9142" aria-hidden="true"><span class="octicon octicon-link"></span></a>DGX BattleSpace 9142</h1>
+
+<ul>
+<li>Benjamin "Mr.Keks" Bisping - <a href="http://mrkeks.net">http://mrkeks.net</a> - <a href="mailto:ben@mrkeks.net">ben@mrkeks.net</a>
+</li>
+<li>Steffen "CdV" Altmeier</li>
+<li>DerHase - <a href="http://www.budapestfastfood.com">http://www.budapestfastfood.com</a>
+</li>
+<li>Sebastian Schell - <a href="http://sebastian-schell.de">http://sebastian-schell.de</a>
+</li>
+</ul>
+
+<p><img src="http://mrkeks.net/pics/dgx2/Screen31.jpg" alt="Ingame Screenshot"></p>
+
+<h2>
+<a id="0-preface-ten-years" class="anchor" href="#0-preface-ten-years" aria-hidden="true"><span class="octicon octicon-link"></span></a>0. PREFACE: TEN YEARS</h2>
+
+<p>It's been more than ten years since I started working at DGX9142 on
+25 March 2004. Actually, I planned to make a little game over the
+Easter break of 2004. I was 15 years old at that time.</p>
+
+<p>Since then, lots of stuff has happened, but the completion of DGX9142 is
+not among it. Battlefied 1942, which inspired this game, has become some
+kind of a classic. DirectX 7, which is used for the graphics, has long
+reached the end of its life cycle. I and all the other people who have
+contributed to DGX9142 do quite different things by now. For my part,
+I am more into theoretical computer science, print design and political
+stuff today.</p>
+
+<p>Over the last six years, DGX9142 has hardly been developed any further.
+The last public alpha was released in March 2008. So I and Steff decided
+to abandon the project. We don't want it to rot on our hard drives.
+Thus we release it. This final release is ; in a way the most unfinished
+version of DGX9142 that has ever been published: Some textures are
+missing, the net code most likely won't work properly, there is no real
+balancing etc. etc.</p>
+
+<p>We hope you enjoy the game anyway. :)
+   -- 25 December 2015, Benjamin Bisping (aka Mr.Keks)</p>
+
+<h2>
+<a id="1-system-requirements" class="anchor" href="#1-system-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. SYSTEM REQUIREMENTS</h2>
+
+<table>
+<thead>
+<tr>
+<th>Minimum</th>
+<th>Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>1 GHz</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>1 GB</td>
+</tr>
+<tr>
+<td>Disk</td>
+<td>100 MB</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>128 MB GPU Memory, DirektX 7 Support</td>
+</tr>
+</tbody>
+</table>
+
+<p>On newer Windows versions there might be problems with DX7-games. I only tested the game with Wine on Ubuntu, where it works fine.</p>
+
+<h2>
+<a id="2-manual-how-to-play" class="anchor" href="#2-manual-how-to-play" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. MANUAL: HOW TO PLAY</h2>
+
+<p>The basic gameplay follows the Battlefield principle.</p>
+
+<p>Every team has a certain number of <em>tickets</em>. Killing enemy ships or holding special positions decreases
+the enemy team's ticket counter. A team wins if the other team's counter hits zero.</p>
+
+<p>Your ships spawn at <em>jump gates</em> held by your team.
+You can conquer further jump gates by flying close to them while there is no enemy ship around. Some gates cannot be conquered -- they are marked with a restriction symbol.
+Jump gates with a green arrow next to their name spawn NPC cruisers.</p>
+
+<p>Before joining the battle at a jump gate, you chose out of four <em>ship classes</em>.</p>
+
+<ul>
+<li>
+<em>Fighter</em> for ordinary combat.</li>
+<li>
+<em>Bomber</em> to takle big cruisers and stations.</li>
+<li>
+<em>Scout</em> for quick strikes at unexpected positions. (Scouts jam the enemy radar to a certain degree, but also counter enemy jamming.)</li>
+<li>
+<em>Support</em> which regenerate friendly ships or supply them with new ammunition.</li>
+</ul>
+
+<p>The <em>fighting</em> is quite similar to FreeSpace, Freelancer and other space games.</p>
+
+<ul>
+<li>
+<code>WASD</code>: regulate the forward/backward/sideward thrust.</li>
+<li>
+<code>Q</code> and <code>E</code>: roll.</li>
+<li>
+<code>Tab</code>: enable the after burner</li>
+<li>Middle mouse button: lock targets (highlighted by a rectangle)</li>
+<li>Left/right mouse button: fire at the targeted ship</li>
+</ul>
+
+<p>For <em>overview purposes</em> there are additional controls:</p>
+
+<ul>
+<li>
+<code>M</code>: show overview map (your ship is highlighted with white)</li>
+<li>
+<code>,</code>: toggle grid and hud info</li>
+<li>
+<code>C</code>: pan view without rotating the ship</li>
+<li>
+<code>Space</code>: zoom in</li>
+</ul>
+
+<p>If you are your teams <em>commander</em> (as the only human player in a team you will be), you can use the overview map to give commands to your team:</p>
+
+<ul>
+<li>
+<code>Left mouse button</code>: select ships</li>
+<li>
+<code>Right mouse button</code>: give command (move to or attack)</li>
+<li>
+<code>X</code>: Cancel command</li>
+</ul>
+
+<p><code>Enter</code> activates the chat. You can also control parts of the game from there, the commands are explained if you enter <code>\help</code>.</p>
+
+<p><code>F1</code> shows a list of the active players and their score.</p>
+
+<p>Have fun playing!</p>
+
+<h2>
+<a id="3-redistribution" class="anchor" href="#3-redistribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. REDISTRIBUTION?</h2>
+
+<p>The game is freeware. You may spread it as you whish.</p>
+
+<p>We also include the source with the game. It's not really "open source"
+as the source is not "open" in the sense of: Easy to maintain by others.
+(No documentation, poor structure, some lazy hacks, redundancies, out-dated
+programing language etc.) Still: Feel free to use the source in any way you
+like, be it in other projects or in a more polished version of DGX.</p>
+
+<p>To build the source, you will need Blitz3d. It can be obtained from
+<a href="http://blitzbasic.com">http://blitzbasic.com</a> for free. Its source code can also be found on
+<a href="https://github.com/blitz-research/blitz3d">GitHub</a>.</p>
+
+<p>If you continue DGX and publish your work, please include the original credits
+with it. The third party parts within DGX are marked as such by comments.
+The artwork is by the credited people or from freeware archives. You may use
+it in derived versions of DGX. If you want to use it in another context,
+you may have to ask the very authors for permission.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/benkeks">benkeks</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
