@@ -7,7 +7,7 @@
   
   $validate = $_GET['validate'];
   $remove = $_GET['remove'];
-  $sname = $_GET['sname';
+  $sname = $_GET['sname'];
   $sport = $_GET['sport'];
   $smap = $_GET['smap'];
 
@@ -15,14 +15,14 @@ if ($validate!="") {
   // life pulse from registered server
   $validate = addslashes($validate);
   $ip = getenv ("REMOTE_ADDR");
-  $request = "UPDATE dgx_server SET active='1', lastcommunication=NOW() WHERE id='$validate' AND serverip='$ip'";
+  $request = "UPDATE $table_name SET active='1', lastcommunication=NOW() WHERE id='$validate' AND serverip='$ip'";
   mysql_query ($request,$db);
   echo "ok";
 } elseif ($remove!="") {
   // registered server asking for removal from list
   $remove = addslashes($remove);
   $ip = getenv ("REMOTE_ADDR");
-  $request = "DELETE FROM dgx_server WHERE id='$remove' AND serverip='$ip'";
+  $request = "DELETE FROM $table_name WHERE id='$remove' AND serverip='$ip'";
   mysql_query ($request,$db);
 } else {
   // new server registering
@@ -36,13 +36,13 @@ if ($validate!="") {
    $smap = addslashes($smap);
    $ip = getenv ("REMOTE_ADDR");
 
-   $request = "DELETE FROM dgx_server WHERE serverip='$ip'";
+   $request = "DELETE FROM $table_name WHERE serverip='$ip'";
    mysql_query ($request,$db);
 
-   $sqlmsg = "INSERT INTO dgx_server (servername, serverip, port, map, lastcommunication) VALUES ('$sname','$ip','$sport','$smap',  NOW())";
+   $sqlmsg = "INSERT INTO $table_name (servername, serverip, port, map, lastcommunication) VALUES ('$sname','$ip','$sport','$smap',  NOW())";
    mysql_query($sqlmsg,$db);
 
-   $request = "SELECT *FROM `dgx_server`  ORDER BY `id`  DESC LIMIT 0,1";
+   $request = "SELECT *FROM `$table_name`  ORDER BY `id`  DESC LIMIT 0,1";
    $result = mysql_query ($request,$db);
    if (!$result) {
      echo "error";

@@ -5,4 +5,5 @@
   $db_pw = "my_db_pw";
   
   $game_version = "010";
+  $table_name = "dgx_server";
 ?>

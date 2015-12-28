@@ -1,6 +1,6 @@
 Const net_listserver_addr$ = "dgx.mrkeks.net"
 Const net_listserver_port = 80
-Const net_listserver_dir$ = "/"+main_version_id+"/"
+Const net_listserver_dir$ = "/"+main_version_id$+"/"
 
 Global net_port=9142
 

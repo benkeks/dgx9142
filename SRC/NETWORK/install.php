@@ -9,9 +9,7 @@
   mysql_select_db($db_name, $db);
   
   $request =
-    "SET SQL_MODE=\"NO_AUTO_VALUE_ON_ZERO\";
-
-    CREATE TABLE IF NOT EXISTS `dgx_server` (
+    "CREATE TABLE IF NOT EXISTS `$table_name` (
       `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
       `servername` tinytext NOT NULL,
       `serverip` tinytext NOT NULL,
