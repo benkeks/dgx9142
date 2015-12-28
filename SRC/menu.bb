@@ -581,6 +581,11 @@ Function Menu_Start()
 				server$ = ib\txt
 				ib.TInput = Object.TInput(nport\handl)
 				net_port = ib\txt
+			Case 4 ; quick
+				path$ = "Ilos.amap"
+				players = 16
+				server$ = ""
+				menu_gamemode = 1
 			End Select
 			Obj_Clear()
 			Map_Clear()

@@ -466,6 +466,10 @@ Function Main_EvaluateCommandLine()
 	lin$ = CommandLine()
 	If Instr(lin,"-debug") <> 0 Then Main_Debug = 1
 	If Instr(lin,"-windowed") <> 0 Then main_mode = 222
+	If Instr(lin,"-quickstart") <> 0 Then
+		menu_gamemode = 4
+		menu_startgame = 1
+	EndIf
 	
 	If Instr(CurrentDate(), "01 Apr") <> 0 Then
 		menu_failure = "Die Y'thear und die Evianer haben Frieden geschlossen. Es gibt nichts mehr zu kämpfen. Beende das Spiel und such dir ein anderes Schlachtfeld!"
