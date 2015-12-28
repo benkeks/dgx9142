@@ -1,6 +1,7 @@
 Global cc_camtarget
 Global cc_piv
 Global cc_cam,cam_cam
+Global cc_cam_realzoom# = 1
 Global cc_camzoom# = 1
 Global cc_camzoom2#= cc_camzoom
 Global cc_mxs#
@@ -395,7 +396,9 @@ Function CC_Update()
 		bloom_pause = 1
 		Hud_UpdateBigMap()
 	EndIf
-	ScaleEntity cc_cam,1,1,(1-bloom_effect2*.1)*cc_closeup
+	;ScaleEntity cc_cam,1,1,(1-bloom_effect2*.1)*cc_closeup
+	cc_cam_realzoom = (1-bloom_effect2*.1)*cc_closeup
+	CameraZoom cc_cam, cc_cam_realzoom
 	
 	If cc_gridmode Then cc_grid = 1 Else cc_grid = 0
 	
@@ -568,7 +571,8 @@ Function CC_CamUpdate()
 		End Select
 	EndIf
 	
-	ScaleEntity cc_cam,1,1,1-bloom_effect2*.2
+	cc_cam_realzoom = 1-bloom_effect2*.2
+        CameraZoom cc_cam, cc_cam_realzoom
 End Function
 
 Function CC_Control()

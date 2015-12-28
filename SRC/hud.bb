@@ -3,7 +3,7 @@ Global hudd$ = gfxd$+"GUI/"
 Global hud_cr,hud_cg,hud_cb
 
 Global hud_mode
-Global hud_piv
+Global hud_cam_piv, hud_piv
 Global hud_mainu
 Global hud_selected, hud_selected2
 Global hud_aim,hud_aim2
@@ -98,14 +98,16 @@ Function HUD_Init()
 	hud_cube = CreateCube()
 	HideEntity hud_cube
 	
-	GUI_Init(cc_cam)
+	hud_cam_piv = CreatePivot(cc_cam)
+	
+	GUI_Init(hud_cam_piv)
 	HUD_InitLog()
 	
 	hud_iscount = 0
 	
 	hud_font = Txt_LoadFont(hudd$+"font.png",1+2,5,13,hudd+"font.inf")
 	
-	hud_piv = CreatePivot(cc_cam)
+	hud_piv = CreatePivot(hud_cam_piv)
 	PositionEntity hud_piv,-512,hud_height,512
 	
 	hud_mainu = Util_LoadSprite(hudd$+"crosshair.png",1+2,hud_piv)
@@ -160,7 +162,7 @@ Function HUD_Init()
 	EntityColor hud_nexttpointer,255,0,0
 	HideEntity hud_nexttpointer
 	
-	hud_nextta = Util_LoadSprite(hudd$+"aim.png",1+2,cc_cam)
+	hud_nextta = Util_LoadSprite(hudd$+"aim.png",1+2,hud_cam_piv)
 	EntityFX hud_nextta,1+8+16
 	EntityOrder hud_nextta,-7
 	ScaleMesh hud_nextta,12,12,1
@@ -209,13 +211,13 @@ Function HUD_Init()
 	ScaleMesh hud_tmini,100,100,1
 	PositionEntity hud_tmini, 35, 55,0
 	
-	hud_aim = Util_LoadSprite(hudd$+"aim.png",1+2,cc_cam)
+	hud_aim = Util_LoadSprite(hudd$+"aim.png",1+2,hud_cam_piv)
 	EntityFX hud_aim,1+8+16
 	EntityOrder hud_aim,-7
 	ScaleMesh hud_aim,8,8,1
 	HideEntity hud_aim
 	
-	hud_aim2 = Util_LoadSprite(hudd$+"aim.png",1+2,cc_cam)
+	hud_aim2 = Util_LoadSprite(hudd$+"aim.png",1+2,hud_cam_piv)
 	EntityFX hud_aim2,1+8+16
 	EntityOrder hud_aim2,-7
 	ScaleMesh hud_aim2,16,16,1
@@ -305,11 +307,11 @@ Function HUD_Init()
 	
 	Hud_InitCommander()
 	
-	hud_ishippiv = CreatePivot(cc_cam)
+	hud_ishippiv = CreatePivot(hud_cam_piv)
 	PositionEntity hud_ishippiv,-480,100,512
 	
 	;score / ticket count ###############
-	hud_score = Util_LoadSprite(hudd$+"score.png",1+2,cc_cam)
+	hud_score = Util_LoadSprite(hudd$+"score.png",1+2,hud_cam_piv)
 	EntityFX hud_score,1+8+16
 	PositionEntity hud_score,410+10,hud_height-50,512
 	ScaleMesh hud_score,64,32,1
@@ -404,12 +406,12 @@ Function HUD_Init()
 	PositionEntity hud_input\piv,0,-7,0
 	
 	;start tasks
-	hud_start = CreatePivot(cc_cam)
+	hud_start = CreatePivot(hud_cam_piv)
 	PositionEntity hud_start,-80,0,400
 	
 	;really quit?
 	hud_reallyquit = 0
-	hud_rqm = Util_CreateSprite(cc_cam)
+	hud_rqm = Util_CreateSprite(hud_cam_piv)
 	EntityBlend hud_rqm,2
 	EntityColor hud_rqm,50,30,30
 	ScaleMesh hud_rqm,300,300 * main_hheight / main_hwidth,1
@@ -425,7 +427,7 @@ Function HUD_Init()
 	
 	;pause
 	hud_pause = 0
-	hud_pausemesh = Util_CreateSprite(cc_cam)
+	hud_pausemesh = Util_CreateSprite(hud_cam_piv)
 	EntityBlend hud_pausemesh,2
 	EntityColor hud_pausemesh,50,30,30
 	ScaleMesh hud_pausemesh,300,300 * main_hheight / main_hwidth,1
@@ -777,11 +779,13 @@ Function HUD_Update()
 		HideEntity hud_pausemesh
 	EndIf
 	
+	ScaleEntity hud_cam_piv, 1, 1, cc_cam_realzoom
+	
 	Select main_pl\order
 	Case ORDER_ATTACK
 		PositionEntity hud_ctarget, EntityX(main_pl\oship\piv),EntityY(main_pl\oship\piv),EntityZ(main_pl\oship\piv),1
-		PointEntity hud_ctarget,cc_cam
-		MoveEntity hud_ctarget,0,0,EntityDistance(cc_cam,hud_ctarget)*.8
+		PointEntity hud_ctarget,hud_cam_piv
+		MoveEntity hud_ctarget,0,0,EntityDistance(hud_cam_piv,hud_ctarget)*.8
 		EntityColor hud_ctshow,255,0,0
 		ShowEntity hud_ctshow
 		EntityColor hud_ctarget,255,0,0
@@ -806,8 +810,8 @@ Function HUD_Update()
 		EndIf
 	Case ORDER_MOVETO
 		PositionEntity hud_ctarget, EntityX(main_pl\opiv),EntityY(main_pl\opiv),EntityZ(main_pl\opiv),1
-		PointEntity hud_ctarget,cc_cam
-		MoveEntity hud_ctarget,0,0,EntityDistance(cc_cam,hud_ctarget)*.8
+		PointEntity hud_ctarget,hud_cam_piv
+		MoveEntity hud_ctarget,0,0,EntityDistance(hud_cam_piv,hud_ctarget)*.8
 		EntityColor hud_ctshow,255,255,255
 		ShowEntity hud_ctshow
 		EntityColor hud_ctarget,255,255,255
@@ -867,7 +871,7 @@ Function HUD_Update()
 		
 		If main_pl\leavingtheground > 0 Then
 			FreeEntity hud_leavingground
-			hud_leavingground = Txt_Text(lang_leaving_the_ground, hud_font, cc_cam)
+			hud_leavingground = Txt_Text(lang_leaving_the_ground, hud_font, hud_cam_piv)
 			EntityOrder hud_leavingground,-20
 			PositionEntity hud_leavingground ,0,10,300
 			PositionMesh hud_leavingground ,-MeshWidth(hud_leavingground)/2,-MeshHeight(hud_leavingground )/2,0
@@ -988,12 +992,12 @@ Function HUD_Update()
 		Next
 		
 		If main_pl\order Then
-			dy# = DeltaYaw(cc_cam,hud_ctarget)
-			dp# = DeltaPitch(cc_cam,hud_ctarget)
+			dy# = DeltaYaw(hud_cam_piv,hud_ctarget)
+			dp# = DeltaPitch(hud_cam_piv,hud_ctarget)
 			tdist# = Sqr(dy#^2+dp#^2)
 			If tdist>=30 Then
 				ShowEntity hud_ctshow
-				twinkel# = ((ATan2(-dy,dp)+360) Mod 360) - EntityRoll(cc_cam,1)
+				twinkel# = ((ATan2(-dy,dp)+360) Mod 360) - EntityRoll(hud_cam_piv,1)
 				RotateEntity hud_ctshow,0,0,twinkel+180
 			Else
 				HideEntity hud_ctshow
@@ -1006,7 +1010,7 @@ Function HUD_Update()
 		support.ship = Null
 		For s.ship = Each ship
 			If s\team <> main_pl\team And s\spawntimer <= 0
-				TFormPoint EntityX(s\piv,1),EntityY(s\piv,1),EntityZ(s\piv,1),0,cc_cam
+				TFormPoint EntityX(s\piv,1),EntityY(s\piv,1),EntityZ(s\piv,1),0,hud_cam_piv
 				x#	= TFormedX()
 				y#	= TFormedY()
 				z#	= TFormedZ()
@@ -1057,13 +1061,13 @@ Function HUD_Update()
 		HideEntity hud_nextta
 		
 		If support<>Null And hud_needssupport=1 Then 
-			dy# = DeltaYaw(cc_cam,support\piv)
-			dp# = DeltaPitch(cc_cam,support\piv)
+			dy# = DeltaYaw(hud_cam_piv,support\piv)
+			dp# = DeltaPitch(hud_cam_piv,support\piv)
 			tdist# = Sqr(dy#^2+dp#^2)
 			If tdist>=15 Then
 				ShowEntity hud_nexttpointer
 				EntityColor hud_nexttpointer,200,170,10
-				twinkel# = ((ATan2(-dy,dp)+360) Mod 360) - EntityRoll(cc_cam,1)
+				twinkel# = ((ATan2(-dy,dp)+360) Mod 360) - EntityRoll(hud_cam_piv,1)
 				RotateEntity hud_nexttpointer,0,0,twinkel+180
 			Else
 				HideEntity hud_nexttpointer
@@ -1111,12 +1115,12 @@ Function HUD_Update()
 			ScaleEntity hud_tdist,1.2,1.2,1.2
 			EntityOrder hud_tdist,-12
 			
-			dy# = DeltaYaw(cc_cam,main_pl\target\piv)
-			dp# = DeltaPitch(cc_cam,main_pl\target\piv)
+			dy# = DeltaYaw(hud_cam_piv,main_pl\target\piv)
+			dp# = DeltaPitch(hud_cam_piv,main_pl\target\piv)
 			tdist# = Sqr(dy#^2+dp#^2)
 			If tdist>=25 Then
 				ShowEntity hud_tshow
-				twinkel# = ((ATan2(-dy,dp)+360) Mod 360) - EntityRoll(cc_cam,1)
+				twinkel# = ((ATan2(-dy,dp)+360) Mod 360) - EntityRoll(hud_cam_piv,1)
 				RotateEntity hud_tshow,0,0,twinkel+180
 			Else
 				HideEntity hud_tshow
@@ -1126,13 +1130,13 @@ Function HUD_Update()
 			PositionEntity hud_tpiv,0,0,0
 			RotateEntity hud_tpiv,0,0,0
 			
-			TFormPoint EntityX(hud_tpiv,1),EntityY(hud_tpiv,1),EntityZ(hud_tpiv,1),0,cc_cam
+			TFormPoint EntityX(hud_tpiv,1),EntityY(hud_tpiv,1),EntityZ(hud_tpiv,1),0,hud_cam_piv
 			x#	= TFormedX()
 			y#	= TFormedY()
 			z#	= TFormedZ()
 			If z > 0
 				PositionEntity hud_aim2,x/z*512,y/z*512,512
-				PointEntity hud_aim2,cc_cam
+				PointEntity hud_aim2,hud_cam_piv
 				ShowEntity hud_aim2
 			Else
 				HideEntity hud_aim2
@@ -1141,13 +1145,13 @@ Function HUD_Update()
 			
 			distt#	= dist# / (weaponid[main_pl\weapgroup[1]]\speed#+main_pl\frontspeed*1.1)
 			TranslateEntity hud_tpiv,main_pl\target\dx*distt#,main_pl\target\dy*distt#,main_pl\target\dz*distt#,1
-			TFormPoint EntityX(hud_tpiv,1),EntityY(hud_tpiv,1),EntityZ(hud_tpiv,1),0,cc_cam
+			TFormPoint EntityX(hud_tpiv,1),EntityY(hud_tpiv,1),EntityZ(hud_tpiv,1),0,hud_cam_piv
 			x#	= TFormedX()
 			y#	= TFormedY()
 			z#	= TFormedZ()
 			If z > 0
 				PositionEntity hud_aim,x/z*512,y/z*512,512
-				PointEntity hud_aim,cc_cam
+				PointEntity hud_aim,hud_cam_piv
 				ShowEntity hud_aim
 			Else 
 				HideEntity hud_aim
@@ -1171,7 +1175,7 @@ Function HUD_Update()
 						If (MilliSecs()/500) Mod 2 = 1 Then EntityAlpha hud_targetlock,0.4 Else EntityAlpha hud_targetlock,1
 					EndIf
 					MoveEntity hud_targetlock, 0,0,EntityDistance(main_pl\targetlock, main_pl\target\piv)*(1.0-lockfact)
-					Local si# = 6+EntityDistance(hud_targetlock, cc_cam)/60
+					Local si# = 6+EntityDistance(hud_targetlock, hud_cam_piv)/60
 					ScaleSprite hud_targetlock,si, si
 				Else
 					HideEntity hud_targetlock
@@ -1468,7 +1472,7 @@ End Function
 Function HUD_EndDialog()
 	FreeEntity hud_end
 	
-	hud_end = LoadSprite(hudd$+"gameover.png",1+2,cc_cam)
+	hud_end = LoadSprite(hudd$+"gameover.png",1+2,hud_cam_piv)
 	EntityAlpha hud_end,1
 	EntityFX hud_end,1+8
 	EntityBlend hud_end,1

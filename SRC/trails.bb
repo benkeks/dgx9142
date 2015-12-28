@@ -50,7 +50,10 @@ Function Trail_Update()
 	
 	Local lenoff#
 	
+	Local gspe#
+	
 	If trail_timer < MilliSecs()
+                gspe = (MilliSecs() - trail_timer + 5.0) / 13.00
 		trail_timer = MilliSecs() + 5
 		
 		PositionEntity trail_mesh,EntityX(cc_cam,1),EntityY(cc_cam,1),EntityZ(cc_cam,1)
@@ -136,7 +139,7 @@ Function Trail_Update()
 					PositionEntity piv,t\x[i],t\y[i],t\z[i]
 					RotateEntity piv,t\pit[i],t\ya[i],t\ro[i]
 					
-					;MoveEntity piv,0,0,-t\speed*main_gspe
+					;MoveEntity piv,0,0,-t\speed*gspe
 					t\x[i] = EntityX(piv)
 					t\y[i] = EntityY(piv)
 					t\z[i] = EntityZ(piv)
