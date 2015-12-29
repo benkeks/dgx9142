@@ -54,8 +54,8 @@ moon. They will win immediately if they take all points and destroy every ship.
 		ambg = 40
 		ambb = 50
 
-  		spec1 = gfx/environ/spec.png
-		spec2 = gfx/environ/ilos/spec2.png
+  		spec1 = gfx/environ/specb.png
+		spec2 = gfx/environ/spec3.jpg
 
   
 		fogmode = 0

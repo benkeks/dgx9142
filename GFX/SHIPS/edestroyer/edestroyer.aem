@@ -9,16 +9,46 @@ material{
 }
 
 
+<dot3:1
+
+texture{
+        file =  GFX/SHIPS/edestroyer/tex_nm.png
+        blend = 4
+        layer = 1
+        scalex = .17
+        scaley = .17
+}
+
 texture{
         file =  GFX/SHIPS/edestroyer/edestroyer.png
-        blend = 1
-        layer = 0
+        blend = 2
+        layer = 3
 }
 
 texture{
         file =  GFX/SHIPS/edestroyer/tex.jpg
-        blend = 2
-        layer = 1
+        blend = 5
+        layer = 4
+        scalex = .17
+        scaley = .17
+}
+
+>
+
+<dot3:0
+
+
+texture{
+        file =  GFX/SHIPS/edestroyer/tex.jpg
+        blend = 1
+        layer = 0
         scalex = .1
         scaley = .1
 }
+
+texture{
+        file =  GFX/SHIPS/edestroyer/edestroyer.png
+        blend = 2
+        layer = 1
+}
+>
