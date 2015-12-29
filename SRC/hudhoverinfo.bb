@@ -8,7 +8,7 @@ End Type
 Function Hud_CreateHoverInfo.hud_hoverinfo(x#=0,y#=0, txt$="")
 	h.hud_hoverinfo = New hud_hoverinfo
 	
-	h\bg = CreateSprite(cc_cam)
+	h\bg = CreateSprite(hud_cam_piv)
 	HandleSprite h\bg,-1,1
 	EntityColor h\bg,0,0,0
 	EntityOrder h\bg,-20

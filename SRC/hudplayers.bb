@@ -12,7 +12,7 @@ End Type
 Global hud_list,hud_lshow=0, hud_lvictories, hud_star
 
 Function HUD_InitPlayers()
-	hud_list = CreateSprite(cc_cam)
+	hud_list = CreateSprite(hud_cam_piv)
 	hud_star = LoadSprite(gfxd+"GUI/star.png",1+2,hud_list)
 	HideEntity hud_star
 	EntityBlend hud_list,2

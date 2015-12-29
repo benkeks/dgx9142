@@ -1200,7 +1200,7 @@ Function HUD_Update()
 		GUI_Update()
 		HUD_SelectScreen()
 	Case 2
-		GUI_UpdateGadget(hud_continue)
+		GUI_UpdateGadget(hud_continue, 100*cc_cam_realzoom)
 		If gkey<>"" Or gui_event=401 Then
 			GUI_SetGadgetActivity(hud_continue,-1)
 			gui_event = 0
@@ -1219,7 +1219,7 @@ Function HUD_Update()
 			If Game_RestartTimer < MilliSecs() Then
 				If hud_continue\active <> 1 Then GUI_SetGadgetActivity(hud_continue,1)
 				gui_event = 0
-				GUI_UpdateGadget(hud_continue)
+				GUI_UpdateGadget(hud_continue, 100*cc_cam_realzoom)
 			EndIf
 		EndIf
 	Case 5
@@ -1356,7 +1356,7 @@ Function HUD_SelectScreen()
 			For s.spawn = Each spawn
 				If s\maps Then 
 					CameraProject cc_cam,EntityX(s\maps,1), EntityY(s\maps,1), EntityZ(s\maps,1)
-					If Sqr((mx-ProjectedX())^2 + (my-ProjectedY())^2) < 20
+					If (mx-ProjectedX())^2 + (my-ProjectedY())^2 < 400
 						main_pl\selspawn = s\id
 						c = 1
 					EndIf

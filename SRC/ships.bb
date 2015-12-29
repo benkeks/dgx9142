@@ -3,7 +3,7 @@ Type ship	; Die Schiffe
 	
 	;pos und move
 	Field x#,y#,z#
-	Field x2d,y2d
+	Field x2d,y2d,z2d
 	Field tspitch#,tsyaw#
 	Field xs#,zs#,zzs#
 	Field roll#
@@ -120,7 +120,6 @@ Global classid.shipclass[70]
 
 Global main_pl.ship
 
-Global shi_schildmesh, shi_schildtex
 Global shi_shieldfx, shi_support
 
 Global shi_specular, shi_specular2, shi_specular2additive
@@ -142,20 +141,8 @@ Function Shi_Init()
 	Collisions WEA_Colli,MAP_Colli,2,2
 	Collisions WEA_Colli,MAP_ForceField,2,2
 	
-	shi_schildmesh = CreateSphere(12)
-	shi_schildtex = LoadTexture("GFX/MISC/Schild.bmp",64+2+1)
-	EntityBlend shi_schildmesh,3
-	;EntityFX shi_schildmesh,2+32
-	ScaleTexture shi_schildtex,.2,.2
-	tbrush = CreateBrush()
-	BrushTexture tbrush,shi_schildtex
-	PaintMesh shi_schildmesh,tbrush
-	FreeBrush tbrush
-	
 	shi_shieldsfx = Load3DSound("SFX/HIT/shield.mp3")
 	shi_support = LoadSound("SFX/GUI/ammo.mp3")
-	
-	HideEntity shi_schildmesh
 	
 	shi_aura1 = LoadSprite("GFX/GUI/shield.png",1+2)
 	HideEntity shi_aura1
@@ -361,26 +348,27 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 	RotateEntity sh\mesh,0,0,0
 	CopyRect 0,0,256,256,0,0, BackBuffer(), TextureBuffer(sh\minitex)
 	LockBuffer TextureBuffer(sh\minitex)
+	Local miniTexBuffer = TextureBuffer(sh\minitex)
 	If main_bit = 16
 		For x = 0 To 255
 			For y = 0 To 255
-				If ReadPixelFast(x,y,TextureBuffer(sh\minitex))= $F0F000F0 Then
-					WritePixelFast x,y,0, TextureBuffer(sh\minitex)
+				If ReadPixelFast(x,y,miniTexBuffer)= $F0F000F0 Then
+					WritePixelFast x,y,0, miniTexBuffer
 				EndIf
 			Next
 		Next
 	Else
 		For x = 0 To 255
 			For y = 0 To 255
-				If ReadPixelFast(x,y,TextureBuffer(sh\minitex))= $FFF800F8 Then
-					WritePixelFast x,y,0, TextureBuffer(sh\minitex)
+				If ReadPixelFast(x,y,miniTexBuffer)= $FFF800F8 Then
+					WritePixelFast x,y,0, miniTexBuffer
 				EndIf
 			Next
 		Next
 	EndIf
 	UnlockBuffer TextureBuffer(sh\minitex)
 	EntityTexture sh\mini, sh\minitex
-	ScaleMesh sh\mini,10,10,1
+	ScaleMesh sh\mini,14,14,1
 	EntityFX sh\mini, 1+8
 	
 	Return sh\classid
@@ -604,6 +592,8 @@ Function Shi_SelectClass(sHandle,class,typ=1)
 	
 	If s = main_pl Then HUD_SetPlayer()
 	
+	HUD_CRefreshShip(s)
+	
 	HideEntity s\piv
 End Function
 
@@ -679,11 +669,11 @@ Function Shi_DeleteShip(sHandle,fin=0)	; Löscht ein Schiff bzw. eine Station
 		EndIf
 	Next
 	
-	Delete s.ship
-	
 	If fin = 0 Then
-		Hud_CResetShips()
+		Hud_CDeleteShip(s)
 	EndIf
+	
+	Delete s.ship
 End Function
 
 Function Shi_SendDeleteShip(s.ship)
@@ -751,8 +741,6 @@ Function Shi_Clear()
 	For i = 0 To 100
 		ships(i) = Null
 	Next
-	FreeEntity shi_schildmesh
-	FreeTexture shi_schildtex
 	FreeSound shi_shieldfx
 	FreeSound shi_support
 	FreeEntity shi_aura1
@@ -773,7 +761,6 @@ Function Shi_ClearClasses()
 End Function
 
 Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
-	RotateTexture shi_schildtex,(MilliSecs() Mod 1000)/2.7777
 	tr# = .995 ^ main_gspe
 	For s.ship = Each ship
 		s\indanger = 1000000
@@ -841,6 +828,9 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 							EntityOrder s\aumap,-2
 							Hud_MColor s\aumap,250,250,250,.7
 						EndIf
+						
+						HUD_CRefreshShip(s)
+						
 						ShowEntity s\piv
 						
 						s\x = EntityX(s\piv)
@@ -2134,4 +2124,16 @@ Function Shi_FindShipByMesh.ship(mesh) ; Sucht nach dem Type zu einem Mesh
 	For s.ship = Each ship
 		If s\mesh = mesh Or s\piv = mesh Then Return s
 	Next
+End Function
+
+Function Shi_Update2dCoords(s.ship)
+	TFormPoint 0,0,0, s\piv, cc_cam
+	s\z2d = TFormedZ()
+	If s\z2d <= 0 Then
+		s\x2d = -1
+		s\y2d = -1
+	Else
+		s\x2d = (TFormedX() / s\z2d+1.0)*main_hwidth
+		s\y2d = (main_ratio#-TFormedY() / s\z2d)*main_hwidth
+	EndIf
 End Function

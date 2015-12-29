@@ -16,7 +16,7 @@ Global hud_logpiv
 Global hud_logshift
 
 Function HUD_InitLog()
-	hud_logpiv = CreatePivot(cc_cam)
+	hud_logpiv = CreatePivot(hud_cam_piv)
 	hud_logshift = 0
 	PositionEntity hud_logpiv, -340,-350*main_ratio+100,350
 End Function
@@ -25,7 +25,7 @@ Function HUD_CreateInput.hudinput()
 	i.hudinput = New hudinput
 	i\active = 0
 	i\txt = ""
-	i\piv = CreatePivot(cc_cam)
+	i\piv = CreatePivot(hud_cam_piv)
 	i\mesh = CreatePivot(i\piv)
 	
 	i\bg	= CreateSprite(i\piv)
@@ -105,7 +105,7 @@ End Function
 
 Function HUD_PrintLog(txt$,r=255,g=255,b=255,time=20000,group=0)
 	l.logtxt = New logtxt
-	l\mesh = Txt_Text(txt$, hud_font, cc_cam,0,550)
+	l\mesh = Txt_Text(txt$, hud_font, hud_cam_piv,0,550)
 	If group=1
 		PositionEntity l\mesh,-MeshWidth(l\mesh)/2,150,350
 		l\group = 1
@@ -128,7 +128,7 @@ Function HUD_WriteLog(txt$,r=255,g=255,b=255,time=20000,group=0)
 		If group = l\group Then lp.logtxt = l
 	Next
 	l.logtxt = New logtxt
-	l\mesh = Txt_Text(txt$, hud_font, cc_cam)
+	l\mesh = Txt_Text(txt$, hud_font, hud_cam_piv)
 	For l2.logtxt = Each logtxt
 		If group = 1 And EntityY(l2\mesh)=EntityY(lp\mesh) Then MoveEntity l2\mesh,-MeshWidth(l\mesh)/2,0,0
 	Next

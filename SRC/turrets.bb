@@ -29,7 +29,7 @@ Function Tur_Create.turret(s.ship, id, w.weapon)
 	t\group	=  weapsigi(t\weapsig,id,1)
 	
 	PositionEntity t\base1,weapsigf(t\weapsig,id,0),weapsigf(t\weapsig,id,1),weapsigf(t\weapsig,id,2)
-	TurnEntity t\base1, weapsigf(t\weapsig,id,3),0, weapsigf(t\weapsig,id,4)
+	TurnEntity t\base1, weapsigf(t\weapsig,id,3),weapsigf(t\weapsig,id,4),0
 	TurnEntity t\gun, w\defaultpitch,0,0
 End Function
 

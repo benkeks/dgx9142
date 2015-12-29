@@ -52,8 +52,6 @@ Function Team_JoinTeam(s.ship,team,dosend=1)
 	If (s\human = 1 Or s = main_pl) And Team_CountHumans(team) = 1 And (net=0 Or net_isserver=1) Then
 		CC_Message("Command: SetCommander "+s\id)
 	EndIf
-	
-	hud_comupdate = 1
 End Function
 
 Function Team_CountShips(team, without.ship)

@@ -233,7 +233,7 @@ Function CC_Init()
 	;CameraViewport cc_cam,0,GraphicsHeight()/8,GraphicsWidth(),GraphicsHeight()*6/8
 	
 	MoveEntity cc_camtarget,0,0,-5
-	CameraZoom cc_cam,1
+	CameraZoom cc_cam, cc_cam_realzoom
 	
 	MoveEntity cc_cam,0,0,-10
 	PointEntity cc_cam,cc_piv
@@ -397,7 +397,7 @@ Function CC_Update()
 		Hud_UpdateBigMap()
 	EndIf
 	;ScaleEntity cc_cam,1,1,(1-bloom_effect2*.1)*cc_closeup
-	cc_cam_realzoom = (1-bloom_effect2*.1)*cc_closeup
+	cc_cam_realzoom = (1.0-bloom_effect2*.1)*cc_closeup
 	CameraZoom cc_cam, cc_cam_realzoom
 	
 	If cc_gridmode Then cc_grid = 1 Else cc_grid = 0
@@ -571,7 +571,7 @@ Function CC_CamUpdate()
 		End Select
 	EndIf
 	
-	cc_cam_realzoom = 1-bloom_effect2*.2
+	cc_cam_realzoom = 1.0-bloom_effect2*.2
         CameraZoom cc_cam, cc_cam_realzoom
 End Function
 

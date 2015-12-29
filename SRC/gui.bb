@@ -117,8 +117,16 @@ Function GUI_SetIcon(gh, mesh)
 	If caption <> ""
 		g\meshicon = CopyEntity(mesh, g\mesh)
 		;ScaleMesh g\meshicon,size,size,size
-		MoveEntity g\meshicon,2,-g\h/2,0
-		EntityOrder g\meshicon,-14
+		MoveEntity g\meshicon,4,-g\h/2,0
+		EntityOrder g\meshicon,-15
+		
+		For i = 1 to 3
+			shadow = CopyEntity(mesh, g\meshicon)
+			EntityOrder shadow,-14
+			MoveEntity shadow,-.03+.07*i,-.03-.2*i,0
+			EntityColor shadow,0,0,0
+			EntityAlpha shadow,.3
+		Next
 	EndIf
 End Function
 
@@ -176,7 +184,7 @@ End Function
 
 Function GUI_Update()
 	For g.gadget = Each gadget
-		GUI_UpdateGadget(g)
+		GUI_UpdateGadget(g, 100*cc_cam_realzoom)
 	Next
 End Function
 
