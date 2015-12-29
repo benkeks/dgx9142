@@ -1,22 +1,24 @@
 mesh{
 
-	file = GFX/SHIPS/edestroyer/edestroyer_new.b3d
+	file = GFX/SHIPS/edestroyer/edestroyer4.b3d
+	pitch = -90
 }
 
-entity{
-
-	x = 0
-
-	y = 0
-
-	z = 0
-
+material{
+	fx = 4
 }
 
 
 texture{
-        file =  GFX/SHIPS/edestroyer/tex.jpg
-
+        file =  GFX/SHIPS/edestroyer/edestroyer.png
         blend = 1
+        layer = 0
+}
+
+texture{
+        file =  GFX/SHIPS/edestroyer/tex.jpg
+        blend = 2
         layer = 1
+        scalex = .1
+        scaley = .1
 }
