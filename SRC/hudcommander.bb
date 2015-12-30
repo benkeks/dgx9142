@@ -374,7 +374,7 @@ Function HUD_CRefreshShipSel(s.hud_selship)
 	s\icon = CopyEntity(s2\shc\mini, s\bg)
 	PositionEntity s\icon,-10,-1,0
 	ScaleEntity s\icon,1.4+s\size*1.2,1.4+s\size*1.2,1
-	EntityOrder s\icon,-27
+	EntityOrder s\icon,-20
 	
 	s\selsprite = CopyEntity(shi_aura1, hud_compiv)
 	EntityOrder s\selsprite, -5

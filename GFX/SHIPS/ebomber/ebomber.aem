@@ -14,14 +14,16 @@ entity{
 }
 
 
+texture{
 
+	file = 	GFX/SHIPS/ebomber/ebomber.png
+	layer = 0
 
-
-
+}
 
 texture{
 
-	file = 	GFX/SHIPS/ebomber/bomber2_light.jpg
+	file = 	GFX/SHIPS/ebomber/ebomber_light.png
 
 	blend = 3
 

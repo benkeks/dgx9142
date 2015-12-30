@@ -1,0 +1,11 @@
+mesh{
+
+	file = GFX/SHIPS/efighter/efighter.b3d
+}
+
+texture{
+
+	file = 	GFX/SHIPS/efighter/efighter.jpg
+	layer = 0
+
+}

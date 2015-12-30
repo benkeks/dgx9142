@@ -124,7 +124,7 @@ Function Map_Parse(stream,size = 1)
 		Rect 0,GraphicsHeight()-5,GraphicsWidth()*FilePos(stream)/size,5
 		SetBuffer BackBuffer()
 	Until lin = "}" Or Eof(stream)
-	
+		
 	If shi_specular = 0 Then
 		shi_specular = LoadTexture("GFX/Environ/spec.png",1+128)
 		TextureBlend shi_specular,3
@@ -529,6 +529,8 @@ Function Map_Clear()
 	FreeEntity map_ent
 	If shi_specular <> 0 Then FreeTexture shi_specular
 	If shi_specular2 <> 0 Then FreeTexture shi_specular2
+	If shi_specular2additive <> 0 Then FreeTexture shi_specular2additive
 	shi_specular = 0
 	shi_specular2 = 0
+	shi_specular2additive = 0
 End Function

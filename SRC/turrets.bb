@@ -6,6 +6,7 @@ Type turret
 	Field gun
 	Field target.ship
 	Field cacheddist#
+	Field hideprogress#
 End Type
 
 
@@ -62,11 +63,27 @@ Function Tur_Update()
 			HideEntity t\base1
 		Else
 			TFormPoint 0,0,0,t\base1, cc_cam
-			If TFormedZ()>-20 And TFormedZ()<1500 / Main_CriticalFPS Then
+			If TFormedZ()>-20*cc_cam_realzoom And TFormedZ()<1500*cc_cam_realzoom / Main_CriticalFPS Then
+				t\hideprogress = t\hideprogress - 0.2*main_gspe
+			Else
+				t\hideprogress = t\hideprogress + 0.2*main_gspe
+			EndIf
+			If t\hideprogress <= 0
 				ShowEntity t\base1
+				EntityAlpha t\base1, 1.0
+				EntityAlpha t\base2, 1.0
+				EntityAlpha t\gun, 1.0
+				If t\hideprogress < -2 Then t\hideprogress = -2
+			ElseIf t\hideprogress <= 1
+				ShowEntity t\base1
+				EntityAlpha t\base1, 1.0 - t\hideprogress
+				EntityAlpha t\base2, 1.0 - t\hideprogress
+				EntityAlpha t\gun, 1.0 - t\hideprogress
 			Else
 				HideEntity t\base1
+				If t\hideprogress > 3 Then t\hideprogress = 3
 			EndIf
+				
 			If t\target = Null Then
 				If Rand(10)=4 And (net_isserver=1 Or net=0)
 					dist# = 1001

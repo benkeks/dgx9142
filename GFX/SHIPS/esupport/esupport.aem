@@ -1,0 +1,14 @@
+mesh{
+
+	file = GFX/SHIPS/esupport/esupport.b3d
+	scalex = 1.2
+	scaley = 1.2
+	scalez = 1.2
+}
+
+texture{
+
+	file = 	GFX/SHIPS/esupport/esupport.png
+	layer = 0
+
+}
