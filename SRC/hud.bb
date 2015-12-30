@@ -1046,6 +1046,8 @@ Function HUD_Update()
 						
 						If z > 2000 Then 
 							EntityAlpha s\hudhl,1-Float(z-2000)/1000.0
+						ElseIf z < 1 Then
+							EntityAlpha s\hudhl,0
 						Else
 							EntityAlpha s\hudhl,1
 						EndIf
@@ -1322,26 +1324,26 @@ Function HUD_SelectScreen()
 		Select gui_eventsource
 		Case hud_but[0]
 			Team_JoinTeam(main_pl,1)
-			Shi_SelectClass(Handle(main_pl),main_pl\selclass)
+			Shi_SelectClass(main_pl,main_pl\selclass)
 			HUD_SetSpawns(main_pl\selclass,main_pl\team)
 		Case hud_but[1]
 			Team_JoinTeam(main_pl,2)
-			Shi_SelectClass(Handle(main_pl),main_pl\selclass)
+			Shi_SelectClass(main_pl,main_pl\selclass)
 			HUD_SetSpawns(main_pl\selclass,main_pl\team)
 		Case hud_but[2]
-			Shi_SelectClass(Handle(main_pl),1)
+			Shi_SelectClass(main_pl,1)
 			HUD_SetSpawns(main_pl\selclass,main_pl\team)
 			Shi_SendSpawnData(main_pl)
 		Case hud_but[3]
-			Shi_SelectClass(Handle(main_pl),2)
+			Shi_SelectClass(main_pl,2)
 			HUD_SetSpawns(main_pl\selclass,main_pl\team)
 			Shi_SendSpawnData(main_pl)
 		Case hud_but[4]
-			Shi_SelectClass(Handle(main_pl),3)
+			Shi_SelectClass(main_pl,3)
 			HUD_SetSpawns(main_pl\selclass,main_pl\team)
 			Shi_SendSpawnData(main_pl)
 		Case hud_but[5]
-			Shi_SelectClass(Handle(main_pl),4)
+			Shi_SelectClass(main_pl,4)
 			HUD_SetSpawns(main_pl\selclass,main_pl\team)
 			Shi_SendSpawnData(main_pl)
 		Case hud_but[6]

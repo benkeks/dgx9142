@@ -286,7 +286,7 @@ Function Wea_LoadWeaponSigForShip(stream)
 	Return id
 End Function
 
-Function Wea_CreateShoot(x#,y#,z#,p#,ya#,r#,class,target=0,par.ship,dist# = 0,id=-1,turret=0)
+Function Wea_CreateShoot.shoot(x#,y#,z#,p#,ya#,r#,class,target.ship,par.ship,dist# = 0,id=-1,turret=0)
 	For i = 1 To weaponid[class]\swarm
 		sho.shoot	= New shoot
 		If id = -1 Then
@@ -323,11 +323,11 @@ Function Wea_CreateShoot(x#,y#,z#,p#,ya#,r#,class,target=0,par.ship,dist# = 0,id
 			MoveEntity sho\mesh,0,0,sho\speed
 		EndIf
 		
-		If target Then 
+		If target <> Null Then 
 			If par<>Null
-				If par\targeting >= 100 Or turret = 1 Then sho\tar.ship = Object.ship(target)
+				If par\targeting >= 100 Or turret = 1 Then sho\tar.ship = target
 			Else
-				sho\tar.ship = Object.ship(target)
+				sho\tar.ship = target
 			EndIf
 			If sho\swc\typ=4
 				sho\crtime = dist/sho\speed+Rand(-1,9);EntityDistance(sho\tar\piv,sho\mesh)/sho\speed+Rand(-5,5)
@@ -357,7 +357,7 @@ Function Wea_CreateShoot(x#,y#,z#,p#,ya#,r#,class,target=0,par.ship,dist# = 0,id
 		FX_Fake3dSound(sho\swc\sound,x#,y#,z#,.9)
 	EndIf
 	
-	Return Handle(sho)
+	Return sho
 End Function
 
 Function Wea_UpdateShoots()
@@ -382,7 +382,7 @@ Function Wea_UpdateShoots()
 				y#	= PickedY()
 				z#	= PickedZ()
 				sholen# = Util_CoordinateDistance(x,y,z,EntityX(sho\mesh,1),EntityY(sho\mesh,1),EntityZ(sho\mesh,1))/10
-				s.ship = Object.ship(Shi_FindByMesh(tcoll))
+				s.ship = Shi_FindByMesh(tcoll)
 				If s <> Null Then 
 					If sho\par <> Null And (net_isserver=1 Or net = 0)
 						If s\team <> sho\par\team Then s\shields	= s\shields - sho\swc\sdamage * main_gspe
@@ -521,7 +521,7 @@ Function Wea_UpdateShoots()
 			tcoll = EntityCollided(sho\mesh,shi_colli2)
 			If tcoll = 0 Then tcoll = EntityCollided(sho\mesh,shi_collibig)
 			If tcoll Then
-				s.ship = Object.ship(Shi_FindByMesh(tcoll))
+				s.ship = Shi_FindByMesh(tcoll)
 				If Not (sho\par = s And sho\crtime > sho\swc\livetime-4*main_gspe)
 					If s <> Null And (net_isserver = 1 Or net = 0 ) Then
 						If sho\par <> Null
@@ -688,7 +688,7 @@ Function Wea_UpdateShoots()
 				EndIf
 				If sho\swc\typ = WEA_SPAWNER And sho\par <> Null
 					c.class = Race_GetClassByID(sho\swc\spawnshipclass,sho\par\team,3)
-					s.ship = Object.ship(Shi_CreateShip(sho\x,sho\y,sho\z,sho\swc\spawnshipclass,c\name,sho\par\team,2,3))
+					s.ship = Shi_CreateShip(sho\x,sho\y,sho\z,sho\swc\spawnshipclass,c\name,sho\par\team,2,3)
 					s\team	 = sho\par\team
 					s\selclass = sho\swc\spawnshipclass
 					s\selspawn = 255

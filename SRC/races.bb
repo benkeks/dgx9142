@@ -112,7 +112,7 @@ Function Race_GetClassByID.class(id,team,typ)
 End Function
 
 
-Function Race_Equip(sh,team,classi,typ=1)
+Function Race_Equip(sh.ship,team,classi,typ=1)
 	;If typ = 2 Then Stop
 	For c.class = Each class
 		If c\team = team And c\typ = typ

@@ -670,18 +670,18 @@ Function CC_Control()
 		EndIf
 		
 		If Inp_KeyDown(cc_fireprimary)
-			Shi_Fire(Handle(main_pl),1,Handle(main_pl\target))
+			Shi_Fire(main_pl,1,main_pl\target)
 		EndIf
 		
 		If Inp_KeyDown(cc_firesecondary)
-			Shi_Fire(Handle(main_pl),2,Handle(main_pl\target))
+			Shi_Fire(main_pl,2,main_pl\target)
 		EndIf
 		
 		If Inp_KeyDown(cc_specialweapon)
-			Shi_Fire(Handle(main_pl),4,Handle(main_pl\target))
+			Shi_Fire(main_pl,4,main_pl\target)
 		EndIf
 		
-		Shi_Fire(Handle(main_pl),3,Handle(main_pl\target))
+		Shi_Fire(main_pl,3,main_pl\target)
 		
 		If Inp_KeyHit(cc_retarget) Then
 			HUD_Retarget()
@@ -785,7 +785,7 @@ Function CC_ParseCommand(txt$)
 				Next
 				If ts <> Null Then 
 					HUD_PrintLog("Removed bot "+paras[1]+".")
-					Shi_DeleteShip(Handle(ts))
+					Shi_DeleteShip(ts)
 				Else
 					HUD_PrintLog("There's no bot called "+paras[1]+"!",255,255,0)
 				EndIf

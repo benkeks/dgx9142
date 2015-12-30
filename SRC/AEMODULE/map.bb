@@ -305,9 +305,9 @@ Function Map_ParseAmbient(stream)
 				ambg	= paras[1]
 			Case "ambb"
 				ambb	= paras[1]
-			Case "spec1"
+			Case "spec1", "diffuse"
 				spec1$	= paras[1]
-			Case "spec2"
+			Case "spec2", "specular"
 				spec2$	= paras[1]
 			Case "normal"
 				normal$ = paras[1]

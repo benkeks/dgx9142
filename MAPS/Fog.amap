@@ -51,7 +51,9 @@ for a certain ammount of time.
 		ambb = 30
   
 		fogmode = 0
-
+		
+		specular = gfx/environ/sky2.png
+		diffuse = gfx/environ/spec3b.png
   
 		camclsmode = 1
 		camrangemin = 1

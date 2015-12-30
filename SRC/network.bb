@@ -379,7 +379,7 @@ Function Net_Server(UDP_UserID,UDP_UserName$,UDP_UserIP,UDP_UserPort)
 				team = 1+(Team_CountShips(1,Null)>Team_CountShips(2,Null))
 				DebugLog "Select team: "+team
 				If UDP_Users(UDP_UserID)\ship = Null Then
-					s.ship = Object.ship(Shi_CreateShip(1,0,4,1,UDP_UserName,team,0, 1,0,0))
+					s.ship = Shi_CreateShip(1,0,4,1,UDP_UserName,team,0, 1,0,0)
 					AddUDPByte(C_PlayerShip)
 					AddUDPByte(UDP_UserID)
 					AddUDPByte(s\id)

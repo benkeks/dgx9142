@@ -204,7 +204,7 @@ Function Fla_Update()
 					If s\s = Null
 						Fla_SendData(s\f)
 						c.class = Race_GetClassByID(s\class,s\f\team,2)
-						s\s = Object.ship(Shi_CreateShip(0,0,0,s\class,c\name,s\f\team,2,2))
+						s\s = Shi_CreateShip(0,0,0,s\class,c\name,s\f\team,2,2)
 						s\s\team	 = s\f\team
 						s\s\selclass = s\class
 						s\s\selspawn = s\id
@@ -223,7 +223,7 @@ Function Fla_Update()
 							wa = FX_CreateWarp(s\s,1)
 							c.class = Race_GetShipsClass(s\s\shc\classid,s\s\team,s\s\typ)
 							teamid[3-f\team]\tickets = teamid[3-f\team]\tickets - c\tickets
-							Shi_DeleteShip(Handle(s\s))
+							Shi_DeleteShip(s\s)
 							s\s = Null
 						EndIf
 					EndIf

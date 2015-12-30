@@ -367,6 +367,7 @@ Function HUD_CRefreshShipSel(s.hud_selship)
 	If s\tar <> 0 Then FreeEntity s\tar
 	
 	s\size = s2\shc\mmapsize
+	If s\size > 3 Then s\size = 3
 	
 	s\bg = CopyEntity(hud_cbg, hud_compiv)
 	ScaleEntity s\bg,s\size,s\size,1

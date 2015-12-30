@@ -152,7 +152,7 @@ Function EraseUDPUser(UDP_UserID=0)
   s.ship = Null
   s.ship = UDP_TempUser\ship
   Delete UDP_TempUser
-  If s.ship <> Null Then Shi_DeleteShip(Handle(s))
+  If s.ship <> Null Then Shi_DeleteShip(s)
  EndIf
 End Function
 
@@ -258,7 +258,7 @@ Function UDP_HandleServer()
  	 s.ship = UDP_TempUser\ship  
      UDP_Users(UDP_TempUser\ID) = Null
      Delete UDP_TempUser
-     If s.ship <> Null Then Shi_DeleteShip(Handle(s))
+     If s.ship <> Null Then Shi_DeleteShip(s)
     EndIf
    Next
   EndIf

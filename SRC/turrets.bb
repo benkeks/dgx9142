@@ -89,7 +89,7 @@ Function Tur_Update()
 					dist# = 1001
 					For s2.ship = Each ship
 						If s2\team <> t\s\team And s2\spawntimer <= 0
-							edist# = EntityDistanceB(s2\mesh,t\base1,dist+500)-200*(s2\shc\typ=4)-300*(t\s\target=s2)
+							edist# = EntityDistanceB(s2\mesh,t\base1,dist+500)-200*(s2\shc\typ=4)-400*(t\s\target=s2)
 							If edist < dist
 								distt#	= edist# / t\w\speed#
 								TranslateEntity s2\piv,s2\dx*distt#,s2\dy*distt#,s2\dz*distt#
@@ -111,7 +111,7 @@ Function Tur_Update()
 				EndIf
 				edist# = t\cacheddist
 				
-				If edist < 1000 And t\target\spawntimer <= 0
+				If edist < 1500 And t\target\spawntimer <= 0
 					distt#	= edist# / t\w\speed#
 					TranslateEntity t\target\piv,t\target\dx*distt#,t\target\dy*distt#,t\target\dz*distt#
 					TFormPoint 0,0,0, t\target\piv, t\base1
@@ -142,7 +142,7 @@ Function Tur_Update()
 							If t\s\weapreload[t\id]<=.1 And t\s\weapammo[t\group] >= t\w\neAmmo And t\s\power > t\w\NePower And (net=0 Or net_isserver=1) Then
 								TFormPoint 0,t\w\gunoffsety,t\w\gunoffsetz, t\gun, 0
 								c = wea_count
-								Wea_CreateShoot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],Handle(t\target),t\s,dist2, -1,1  )
+								Wea_CreateShoot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],t\target,t\s,dist2, -1,1  )
 								t\s\weapreload[t\id] = t\w\reload
 								t\s\weapammo[t\group] = t\s\weapammo[t\group] - t\w\neAmmo
 								t\s\power = t\s\power - t\w\NePower
@@ -210,7 +210,7 @@ Function Tur_GetFire()
 		For t.turret = Each turret
 			If t\id = turret And t\s = s Then
 				TFormPoint 0,t\w\gunoffsety,t\w\gunoffsetz, t\gun, 0
-				Wea_CreateShoot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],Handle(t\target),t\s,dist2, wid,1  )
+				Wea_CreateShoot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],t\target,t\s,dist2, wid,1  )
 				Exit
 			EndIf
 		Next

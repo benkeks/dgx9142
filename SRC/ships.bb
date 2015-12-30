@@ -122,7 +122,8 @@ Global main_pl.ship
 
 Global shi_shieldfx, shi_support
 
-Global shi_specular, shi_specular2, shi_specular2additive
+Global shi_specular; cubemap for specular lighting
+Global shi_specular2, shi_specular2additive ; cube map for diffuse/ambient illumination (!)
 
 Global shi_aura1, shi_aura2
 
@@ -375,7 +376,7 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 End Function
 
 
-Function Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoints=0,id=-1)	; Erstellt ein(e) Schiff/Station
+Function Shi_CreateShip.ship(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoints=0,id=-1)	; Erstellt ein(e) Schiff/Station
 	s.ship = New ship
 	
 	If id = -1
@@ -388,7 +389,7 @@ Function Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoints=0
 			EndIf
 		Next
 	Else
-		If ships(id) <> Null Then Shi_DeleteShip(Handle(ships(id)))
+		If ships(id) <> Null Then Shi_DeleteShip(ships(id))
 		ships.ship(id)	= s.ship
 		s\id		= id
 	EndIf
@@ -406,10 +407,10 @@ Function Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoints=0
 	
 	s\hudhl = CopyEntity(hud_nextta, hud_cam_piv)
 	
-	Shi_SelectClass(Handle(s),class,typ)
+	Shi_SelectClass(s,class,typ)
 	
-	If ki=1 Then KI_AddKIPlayer(Handle(s.ship))
-	If ki=2 Then KI_AddKIPlayer(Handle(s.ship))
+	If ki=1 Then KI_AddKIPlayer(s.ship)
+	If ki=2 Then KI_AddKIPlayer(s.ship)
 	
 	s\spawntimer = Rand(1,2)*5000
 	If main_pl = s Then
@@ -431,7 +432,7 @@ Function Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoints=0
 	
 	If net_isserver=1 Then Shi_SendCreateShip(s.ship)
 	
-	Return Handle(s.ship)
+	Return s
 End Function
 
 Function Shi_SendCreateShip(s.ship)
@@ -465,12 +466,12 @@ Function Shi_GetCreateShip()
 	selspawn = ReadUDPByte()
 	spawntimer = ReadUDPInteger()
 	If ships(id) = Null Then 
-		s.ship = Object.ship(Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ,shields,hitpoints,id))
+		s.ship = Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ,shields,hitpoints,id)
 		s\selspawn = selspawn
 		s\spawntimer = spawntimer
 		If s\spawntimer <= 0
 			If s\selclass <> 0 And s\selspawn <> 0
-				Race_Equip(Handle(s),s\team,s\selclass,s\typ)
+				Race_Equip(s,s\team,s\selclass,s\typ)
 				If main_pl = s Then Hud_SetMode(0)
 				s\mmap = Hud_AddMiniMapObject(s\piv,s\shc\mmap,0,s\shc\mmapsize*50+150)
 				Hud_MColor s\mmap,s\colr,s\colg,s\colb
@@ -514,9 +515,7 @@ Function Shi_GetCreateShip()
 	EndIf
 End Function
 
-Function Shi_SelectClass(sHandle,class,typ=1)
-	s.ship = Object.ship(shandle)
-	
+Function Shi_SelectClass(s.ship,class,typ=1)
 	s\selclass = class
 	s\class	= class
 	class	= Race_GetClass(s\selclass,s\team,typ)
@@ -587,7 +586,7 @@ Function Shi_SelectClass(sHandle,class,typ=1)
 	EndIf
 	
 	If s\shc\cloak Then Cloak_CreateCloak(s)
-	Race_Equip(Handle(s),s\team,s\selclass,typ)
+	Race_Equip(s,s\team,s\selclass,typ)
 	Tur_ApplyTurrets(s)
 	
 	If s = main_pl Then HUD_SetPlayer()
@@ -605,8 +604,7 @@ Function Shi_SetHuman(s.ship)
 	EntityOrder s\nmesh,-7
 End Function
 
-Function Shi_DeleteShip(sHandle,fin=0)	; Löscht ein Schiff bzw. eine Station
-	s.ship = Object.ship(shandle)
+Function Shi_DeleteShip(s.ship,fin=0)	; Löscht ein Schiff bzw. eine Station
 	
 	If s\nmesh And cc_cam Then FreeEntity s\nmesh s\nmesh = 0
 	
@@ -685,7 +683,7 @@ Function Shi_GetDeleteShip()
 	id = ReadUDPByte()
 	s.ship	= ships.ship(id)
 	If s <> Null Then
-		Shi_DeleteShip(Handle(s))
+		Shi_DeleteShip(s)
 	EndIf
 End Function
 
@@ -707,12 +705,12 @@ Function Shi_Reset()
 		s\opiv = 0
 		If sp <> Null And (net=0 Or net_isserver=1)
 			If s = sp\s Then
-				Shi_DeleteShip(Handle(s))
+				Shi_DeleteShip(s)
 				sp\s = Null
 				t = 1
 			EndIf
 		ElseIf s\selspawn = 255 And (net=0 Or net_isserver=1)
-			Shi_DeleteShip(Handle(s))
+			Shi_DeleteShip(s)
 			t = 1
 		EndIf
 		If t = 0
@@ -736,7 +734,7 @@ End Function
 
 Function Shi_Clear()
 	For s.ship = Each ship
-		Shi_DeleteShip(Handle(s.ship),1)
+		Shi_DeleteShip(s.ship,1)
 	Next
 	For i = 0 To 100
 		ships(i) = Null
@@ -793,7 +791,7 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 					ElseIf sp\f\team <> s\team Or sp\f\takeper < 90 And (s = main_pl Or net=0 Or net_isserver = 1)
 						If sp\s = s
 							If net_isserver=1 Or net=0 Then
-								Shi_DeleteShip(Handle(s))
+								Shi_DeleteShip(s)
 								sp\s = Null
 							EndIf
 						Else
@@ -806,7 +804,7 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 					EndIf
 					
 					If launchship
-						Race_Equip(Handle(s),s\team,s\selclass,s\typ)
+						Race_Equip(s,s\team,s\selclass,s\typ)
 						If net = 0 Or net_isserver = 1 Or s = main_pl
 							If s\selspawn <> 255
 								PositionEntity s\piv,EntityX(sp\piv,1)+Rand(-sp\range,sp\range),EntityY(sp\piv,1)+Rand(-sp\range,sp\range),EntityZ(sp\piv,1)+Rand(-sp\range,sp\range)
@@ -1345,7 +1343,7 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 				s\hitby = -1
 				HideEntity s\piv
 				
-				If s\typ = 3 Then Shi_DeleteShip(Handle(s))
+				If s\typ = 3 Then Shi_DeleteShip(s)
 				;Shi_SendSpawnData(s.ship)
 			EndIf
 		EndIf
@@ -1806,7 +1804,7 @@ Function Shi_GetSpawnData()
 		EndIf
 		DebugLog "spawndata for "+s\name
 		Team_JoinTeam(s,s\team,0)
-		If (s\team <> oteam Or s\selclass <> oclass) And s\selclass <> 0 Then Shi_SelectClass(Handle(s),s\selclass,s\typ)
+		If (s\team <> oteam Or s\selclass <> oclass) And s\selclass <> 0 Then Shi_SelectClass(s,s\selclass,s\typ)
 		If Net_isserver Then Shi_SendSpawnData(s.ship)
 	Else
 		ReadUDPByte()
@@ -1830,22 +1828,19 @@ Function Shi_Explode(x#,y#,z#,s#=1,t#=1)
 End Function
 
 
-Function Shi_SetWeapon(sHandle,group,weapon,ammo)
-	s.ship				= Object.ship(shandle)
+Function Shi_SetWeapon(s.ship,group,weapon,ammo)
 	s\weapgroup[group]	= weapon
 	s\weapammo[group]	= ammo 
 	s\weapammomax[group]= ammo 
 End Function
 
-Function Shi_Fire(sHandle,typ,target=0)
-	s.ship	= Object.ship(shandle)
-	
+Function Shi_Fire(s.ship,typ,ts.ship)
+
 	If net=1 And net_isserver = 0
 		AddUDPByte(S_Fire)
 		AddUDPByte(s\id)
 		AddUDPByte(s\targeting)
 		AddUDPByte(typ)
-		ts.ship = Object.ship(target)
 		If ts <> Null Then
 			AddUDPByte(ts\id)
 		Else
@@ -1873,7 +1868,7 @@ Function Shi_Fire(sHandle,typ,target=0)
 					For s2.ship = Each ship
 						If s2\team <> s\team And s2\spawntimer <= 0
 							edist# = EntityDistance(s2\mesh,tpiv)-400*(s2\shc\typ=4)
-							If target = Handle(s2) Then edist = edist/3-300
+							If ts = s2 Then edist = edist/3-300
 							If edist < dist
 								distt#	= edist# / weaponid[s\weapgroup[twg]]\speed#
 								TranslateEntity s2\piv,s2\dx*distt#,s2\dy*distt#,s2\dz*distt#
@@ -1882,7 +1877,7 @@ Function Shi_Fire(sHandle,typ,target=0)
 									p# = DeltaPitch(tpiv,s2\piv)
 									ya# = DeltaYaw(tpiv,s2\piv)
 									PointEntity tpiv,s2\piv
-									targetd = Handle(s2)
+									targetd.ship = s2
 									dist2 = EntityDistance(tpiv,s2\piv)
 									;If target = targetd Then dist = dist/3
 								EndIf
@@ -1914,7 +1909,7 @@ Function Shi_Fire(sHandle,typ,target=0)
 							EndIf
 							AddUDPByte(i)
 							AddUDPShort(c)
-							s2 = Object.ship(targetd)
+							s2 = targetd
 							AddUDPByte(s2\id)
 						EndIf
 					Else
@@ -1926,8 +1921,8 @@ Function Shi_Fire(sHandle,typ,target=0)
                                                 ya= weapsigf(id,i,4)
                                                 TurnEntity tpiv,p,ya,0
                                         EndIf
-					If target
-						s2.ship = Object.ship(target)
+					If ts<>Null
+						s2.ship = ts
 						edist# = EntityDistance(s2\mesh,tpiv)
 						distt#	= edist# / (weaponid[s\weapgroup[twg]]\speed#+s\frontspeed#)
 						TranslateEntity s2\piv,s2\dx*distt#,s2\dy*distt#,s2\dz*distt#
@@ -1953,7 +1948,7 @@ Function Shi_Fire(sHandle,typ,target=0)
 					r#	= EntityRoll(tpiv)
 					
 					c = wea_count
-					Wea_CreateShoot(  x, y, z, p, ya, 0, s\weapgroup[ weapsigi(id,i,1) ],target,s  )
+					Wea_CreateShoot(  x, y, z, p, ya, 0, s\weapgroup[ weapsigi(id,i,1) ],ts,s  )
 					s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 					s\weapammo[twg] = s\weapammo[twg] - weaponid[s\weapgroup[twg]]\neAmmo
 					s\power = s\power - weaponid[s\weapgroup[twg]]\NePower
@@ -1967,7 +1962,7 @@ Function Shi_Fire(sHandle,typ,target=0)
 						EndIf
 						AddUDPByte(i)
 						AddUDPShort(c)
-						s2 = Object.ship(target)
+						s2 = ts
 						If s2<>Null Then AddUDPByte(s2\id) Else AddUDPByte(255)
 					EndIf
 				EndIf
@@ -1992,7 +1987,7 @@ Function Shi_GetFire()
 			at = ReadUDPByte()
 			If at <> 255 Then s2.ship = ships(at)
 			mesh = 0
-			If s2 <> Null Then mesh = s2\piv target=Handle(s2)
+			If s2 <> Null Then mesh = s2\piv target.ship=s2
 			
 			If s <> Null
 				i = byte
@@ -2014,7 +2009,7 @@ Function Shi_GetFire()
 						TranslateEntity s2\piv,s2\dx*distt#,s2\dy*distt#,s2\dz*distt#
 						dist = edist
 						PointEntity tpiv,s2\piv
-						targetd = Handle(s2)
+						targetd.ship = s2
 						dist2 = EntityDistance(tpiv,s2\piv)
 						TranslateEntity s2\piv,-s2\dx*distt#,-s2\dy*distt#,-s2\dz*distt#
 					EndIf
@@ -2083,12 +2078,7 @@ Function Shi_GetCFire()
 	If s <> Null
 		s\targeting = targeting
 		If tid <> 255 Then t.ship = ships(tid)
-		If t<>Null
-			target = Handle(t)
-		Else
-			target = 0
-		EndIf
-		Shi_Fire(Handle(s),typ,target)
+		Shi_Fire(s,typ,t)
 	EndIf
 End Function
 
@@ -2114,9 +2104,9 @@ Function Shi_FindClassByID(id)
 	Next
 End Function
 
-Function Shi_FindByMesh(mesh) ; Sucht nach dem Type zu einem Mesh
+Function Shi_FindByMesh.ship(mesh) ; Sucht nach dem Type zu einem Mesh
 	For s.ship = Each ship
-		If s\mesh = mesh Or s\piv = mesh Then Return Handle(s)
+		If s\mesh = mesh Or s\piv = mesh Then Return s
 	Next
 End Function
 

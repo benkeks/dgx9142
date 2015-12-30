@@ -226,22 +226,21 @@ Function Main_Play(map$,players,mode=1,server$="")
 		EndIf
 		
 		If net_isserver = 1 Or net = 0
-			main_pl.ship = Object.ship(Shi_CreateShip(1,0,4,1,main_name,1,0, 1,0,0,  net_isserver))
+			main_pl.ship = Shi_CreateShip(1,0,4,1,main_name,1,0, 1,0,0,  net_isserver)
 			HUD_SetPlayer()
 			Team_JoinTeam(main_pl,1)
 			
 			KI_ReadBotnames()
 			
 			For i = 1 To players/8
-				ts = Shi_CreateShip(0,0,0,	1,KI_BotName(1),1,1)
-				ts = Shi_CreateShip(0,0,0,	2,KI_BotName(1),1,1)
-				ts = Shi_CreateShip(0,0,0,	3,KI_BotName(1),1,1)
-				ts = Shi_CreateShip(0,0,0,	4,KI_BotName(1),1,1)
-				
-				ts = Shi_CreateShip(0,0,0,	1,KI_BotName(2),2,1)
-				ts = Shi_CreateShip(0,0,0,	2,KI_BotName(2),2,1)
-				ts = Shi_CreateShip(0,0,0,	3,KI_BotName(2),2,1)
-				ts = Shi_CreateShip(0,0,0,	4,KI_BotName(2),2,1)
+				Shi_CreateShip(0,0,0,	1,KI_BotName(1),1,1)
+				Shi_CreateShip(0,0,0,	2,KI_BotName(1),1,1)
+				Shi_CreateShip(0,0,0,	3,KI_BotName(1),1,1)
+				Shi_CreateShip(0,0,0,	4,KI_BotName(1),1,1)
+				Shi_CreateShip(0,0,0,	1,KI_BotName(2),2,1)
+				Shi_CreateShip(0,0,0,	2,KI_BotName(2),2,1)
+				Shi_CreateShip(0,0,0,	3,KI_BotName(2),2,1)
+				Shi_CreateShip(0,0,0,	4,KI_BotName(2),2,1)
 			Next
 		EndIf
 		

@@ -11,10 +11,10 @@ End Type
 
 Global ki_tpiv
 
-Function KI_AddKIPlayer(shandle)
+Function KI_AddKIPlayer.kiplayer(s.ship)
 	ki.kiplayer = New kiplayer
-	ki\sh.ship	= Object.ship(shandle)
-	Return Handle(ki.kiplayer)
+	ki\sh.ship	= s
+	Return ki
 End Function
 
 
@@ -119,7 +119,7 @@ Function KI_Update()
 										For f.flag = Each flag
 											dist# = EntityDistanceB(f\mesh, ki\sh\piv,1001)
 											If dist < 1000 Then
-												If Rand(0,dist/20)=0 Then Shi_Fire(Handle(ki\sh),weapsigi(ki\sh\shc\weapsig,i2,0),0)
+												If Rand(0,dist/20)=0 Then Shi_Fire(ki\sh,weapsigi(ki\sh\shc\weapsig,i2,0),Null)
 											EndIf
 										Next
 										If ki\sh\weapreload[i2] <= 0
@@ -130,7 +130,7 @@ Function KI_Update()
 													If dist < 1500 Then t = t + (1500-dist)
 												EndIf
 											Next
-											If t > 5000 - (weaponid[weap]\actrange > 20 And weaponid[weap]\sspeed < 0.1)*4000 Then Shi_Fire(Handle(ki\sh),weapsigi(ki\sh\shc\weapsig,i2,0),0)
+											If t > 5000 - (weaponid[weap]\actrange > 20 And weaponid[weap]\sspeed < 0.1)*4000 Then Shi_Fire(ki\sh,weapsigi(ki\sh\shc\weapsig,i2,0),Null)
 										EndIf
 									EndIf
 								EndIf
@@ -149,7 +149,7 @@ Function KI_Update()
 												EndIf
 											EndIf
 										Next
-										If t < weaponid[weap]\emp Then Shi_Fire(Handle(ki\sh),weapsigi(ki\sh\shc\weapsig,i2,0),0)
+										If t < weaponid[weap]\emp Then Shi_Fire(ki\sh,weapsigi(ki\sh\shc\weapsig,i2,0),Null)
 									EndIf
 								EndIf
 							EndIf
@@ -181,7 +181,7 @@ Function KI_Update()
 					Else
 						ki\sh\selclass = Rand(1,4)
 					EndIf
-					Shi_SelectClass(Handle(ki\sh),ki\sh\selclass)
+					Shi_SelectClass(ki\sh,ki\sh\selclass)
 				EndIf
 				ospawn = ki\sh\selspawn
 				tspawn = ospawn
@@ -266,30 +266,30 @@ Function KI_Ship(ki.kiplayer)
 					EndIf
 				EndIf
 			Next
-			If tdist<=1200 And thandle>-1
+			If tdist<=1200 And thandle<>-1
 				ki\tars.ship	= Object.ship(thandle)
 				ki\target		= ki\tars\piv
 				ki\globaction	= 1 ; attack
 			Else
 				tdist# = 30001
-				thandle = -1
+				thandleM = -1
 				For f.flag = Each flag
 					dist = EntityDistanceB(ki\sh\piv,f\mesh, tdist+1)
 					If (f\team <> ki\sh\team Or f\takeper<90) And tdist > dist And Rand(0,1)
 						tdist = dist
-						thandle = f\mesh
+						thandleM = f\mesh
 						For c.conquest = Each conquest
 							
 						Next
 					EndIf
 				Next
-				If tdist <= 30000 And thandle <> -1
-					ki\target		= CreatePivot(thandle)
+				If tdist <= 30000 And thandleM <> -1
+					ki\target		= CreatePivot(thandleM)
 					ki\globaction	= 2 ; flyto
 				EndIf
 			EndIf
 			If ki\sh\shc\typ = 3
-				Shi_Fire(Handle(ki\sh),3)
+				Shi_Fire(ki\sh,3, Null)
 			EndIf
 		EndIf
 	Case 1 ; attack
@@ -337,14 +337,14 @@ Function KI_Ship(ki.kiplayer)
 		EndIf
 		
 		If Abs(dy)+Abs(dp)<10 And Rand(7)=4
-			Shi_Fire(Handle(ki\sh),1,Handle(ki\tars))
-			Shi_Fire(Handle(ki\sh),2,Handle(ki\tars))
+			Shi_Fire(ki\sh,1,ki\tars)
+			Shi_Fire(ki\sh,2,ki\tars)
 			If ki\sh\shc\typ = 3
-				Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+				Shi_Fire(ki\sh,3,ki\tars)
 			EndIf
 		EndIf
 		If ki\sh\shc\typ = 3
-			Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+			Shi_Fire(ki\sh,3,ki\tars)
 		EndIf
 	Case 2 ; fly to
 		ki\ttarget = ki\target
@@ -509,7 +509,7 @@ Function KI_Bomber(ki.kiplayer)
 				EndIf
 			EndIf
 			If ki\sh\shc\typ = 3
-				Shi_Fire(Handle(ki\sh),3)
+				Shi_Fire(ki\sh,3,Null)
 			EndIf
 		EndIf
 	Case 1 ; attack
@@ -562,12 +562,12 @@ Function KI_Bomber(ki.kiplayer)
 			ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
 			
 			If Abs(dy)+Abs(dp)<10 And dist < ki\sh\shc\attackrange*2 And Rand(7)=4
-				Shi_Fire(Handle(ki\sh),1,Handle(ki\tars))
+				Shi_Fire(ki\sh,1,ki\tars)
 				If dist < ki\sh\shc\attackrange * ki\sh\shc\hitpoints / ki\sh\hitpoints
-					Shi_Fire(Handle(ki\sh),2,Handle(ki\tars))
+					Shi_Fire(ki\sh,2,ki\tars)
 				EndIf
 				If ki\sh\shc\typ = 3
-					Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+					Shi_Fire(ki\sh,3,ki\tars)
 				EndIf
 			EndIf
 		Else
@@ -592,7 +592,7 @@ Function KI_Bomber(ki.kiplayer)
 			ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
 		EndIf
 		If ki\sh\shc\typ = 3
-			Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+			Shi_Fire(ki\sh,3,ki\tars)
 		EndIf
 	Case 2 ; fly to
 		ki\ttarget = ki\target
@@ -718,7 +718,7 @@ Function KI_Scout(ki.kiplayer)
 				EndIf
 			EndIf
 			If ki\sh\shc\typ = 3
-				Shi_Fire(Handle(ki\sh),3)
+				Shi_Fire(ki\sh,3, Null)
 			EndIf
 		EndIf
 	Case 1 ; attack
@@ -766,14 +766,14 @@ Function KI_Scout(ki.kiplayer)
 		EndIf
 		
 		If Abs(dy)+Abs(dp)<10 And Rand(7)=4
-			Shi_Fire(Handle(ki\sh),1,Handle(ki\tars))
-			Shi_Fire(Handle(ki\sh),2,Handle(ki\tars))
+			Shi_Fire(ki\sh,1,ki\tars)
+			Shi_Fire(ki\sh,2,ki\tars)
 			If ki\sh\shc\typ = 3
-				Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+				Shi_Fire(ki\sh,3,ki\tars)
 			EndIf
 		EndIf
 		If ki\sh\shc\typ = 3
-			Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+			Shi_Fire(ki\sh,3,ki\tars)
 		EndIf
 	Case 2 ; fly to
 		ki\ttarget = ki\target
@@ -920,7 +920,7 @@ Function KI_Cargo(ki.kiplayer)
 		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
 		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
 		
-		Shi_Fire(Handle(ki\sh),3)
+		Shi_Fire(ki\sh,3,Null)
 	End Select
 End Function
 
@@ -972,7 +972,7 @@ Function KI_BigShip(ki.kiplayer)
 					ki\globaction	= 2 ; flyto
 				EndIf
 			EndIf
-			Shi_Fire(Handle(ki\sh),3)	
+			Shi_Fire(ki\sh,3,Null)	
 		EndIf
 	Case 1 ; attack
 		dist# = EntityDistance(ki\sh\piv,ki\target)
@@ -1001,10 +1001,10 @@ Function KI_BigShip(ki.kiplayer)
 		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
 		
 		If Abs(dy)+Abs(dp)<5 And Rand(7)=4
-			Shi_Fire(Handle(ki\sh),1)
-			Shi_Fire(Handle(ki\sh),2,Handle(ki\tars))
+			Shi_Fire(ki\sh,1,ki\tars)
+			Shi_Fire(ki\sh,2,ki\tars)
 		EndIf
-		Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+		Shi_Fire(ki\sh,3,ki\tars)
 	Case 2 ; fly to
 		dist# = EntityDistance(ki\sh\piv,ki\target)
 		dy# = DeltaYaw(ki\sh\piv,ki\target)
@@ -1028,7 +1028,7 @@ Function KI_BigShip(ki.kiplayer)
 		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
 		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
 		
-		Shi_Fire(Handle(ki\sh),3)
+		Shi_Fire(ki\sh,3,Null)
 		
 		If Rand(0,10) = 5 And ki\sh\order <> ORDER_MOVETO
 			tdist# = 2001
@@ -1088,7 +1088,7 @@ Function KI_Cannon(ki.kiplayer)
 				ki\target		= ki\tars\piv
 				ki\globaction	= 1 ; attack
 			EndIf
-			Shi_Fire(Handle(ki\sh),3)	
+			Shi_Fire(ki\sh,3,Null)	
 		EndIf
 	Case 1 ; attack
 		dist# = EntityDistance(ki\sh\piv,ki\target)
@@ -1112,10 +1112,10 @@ Function KI_Cannon(ki.kiplayer)
 		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
 		
 		If Abs(dy)+Abs(dp)<10 And Rand(7)=4
-			Shi_Fire(Handle(ki\sh),1)
-			Shi_Fire(Handle(ki\sh),2,Handle(ki\tars))
+			Shi_Fire(ki\sh,1,ki\tars)
+			Shi_Fire(ki\sh,2,ki\tars)
 		EndIf
-		Shi_Fire(Handle(ki\sh),3,Handle(ki\tars))
+		Shi_Fire(ki\sh,3,ki\tars)
 	End Select
 End Function
 
