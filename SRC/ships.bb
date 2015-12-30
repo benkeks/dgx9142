@@ -404,7 +404,7 @@ Function Shi_CreateShip(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoints=0
 	s\typ = typ
 	Team_JoinTeam(s,team)
 	
-	s\hudhl = CopyEntity(hud_nextta,cc_cam)
+	s\hudhl = CopyEntity(hud_nextta, hud_cam_piv)
 	
 	Shi_SelectClass(Handle(s),class,typ)
 	

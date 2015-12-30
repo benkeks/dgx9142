@@ -1006,7 +1006,7 @@ Function HUD_Update()
 		
 		sels = 0
 		selz = 2000
-		supportdist = 4000
+		supportdist = 4000^2
 		support.ship = Null
 		For s.ship = Each ship
 			If s\team <> main_pl\team And s\spawntimer <= 0
@@ -1038,17 +1038,23 @@ Function HUD_Update()
 						ShowEntity s\hudhl
 						EntityColor s\hudhl,200,170,10
 						ScaleEntity s\hudhl,2,2,1
-						dist# = EntityDistance(s\piv,main_pl\piv)
+						
+						TFormPoint EntityX(s\piv,1),EntityY(s\piv,1),EntityZ(s\piv,1),0,hud_cam_piv
+						x#	= TFormedX()
+						y#	= TFormedY()
+						z#	= TFormedZ()
+						
 						If z > 2000 Then 
 							EntityAlpha s\hudhl,1-Float(z-2000)/1000.0
 						Else
 							EntityAlpha s\hudhl,1
 						EndIf
-						PositionEntity s\hudhl,EntityX(s\piv,1), EntityY(s\piv,1), EntityZ(s\piv,1), 1
-						MoveEntity s\hudhl,0,0,dist/2.0
 						
-						If dist < supportdist
-							supportdist = dist
+						PositionEntity s\hudhl,x/z*512,y/z*512,512
+						
+						dist2# = x*x + y*y + z*z
+						If dist2 < supportdist
+							supportdist = dist2
 							support = s
 						EndIf
 					EndIf
