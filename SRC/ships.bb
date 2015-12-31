@@ -964,9 +964,15 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 								fx_createexplosion2( CollisionX(s\piv,i)+Rnd(-1,1), CollisionY(s\piv,i)+Rnd(-1,1), CollisionZ(s\piv,i)+Rnd(-1,1),t*Rnd(2,3),t*Rnd(2,3),Rnd(230,255),Rnd(110,200),Rnd(90),Rand(100,200),Rnd(1.02,1.025),1)
 							Next
 						EndIf
-						s\dx = s\dx*.9 + CollisionNX(s\piv,i)*t/2
-						s\dy = s\dy*.9 + CollisionNY(s\piv,i)*t/2
-						s\dz = s\dz*.9 + CollisionNZ(s\piv,i)*t/2
+						Local cnx# = CollisionX(s\piv,i)-s\x
+						Local cny# = CollisionY(s\piv,i)-s\y
+						Local cnz# = CollisionZ(s\piv,i)-s\z
+						Local cnd# = Util_VectorLength(cnx,cny,cnz)
+						cnx = cnx / cnd : cny = cny / cnd : cnz = cnz / cnd
+						
+						s\dx = s\dx*.9 + CollisionNX(s\piv,i)*t/2 - cnx * s\realspeed * .4
+						s\dy = s\dy*.9 + CollisionNY(s\piv,i)*t/2 - cny * s\realspeed * .4
+						s\dz = s\dz*.9 + CollisionNZ(s\piv,i)*t/2 - cnz * s\realspeed * .4
 					Next
 				EndIf
 				
@@ -1831,7 +1837,7 @@ End Function
 Function Shi_SetWeapon(s.ship,group,weapon,ammo)
 	s\weapgroup[group]	= weapon
 	s\weapammo[group]	= ammo 
-	s\weapammomax[group]= ammo 
+	s\weapammomax[group]	= ammo
 End Function
 
 Function Shi_Fire(s.ship,typ,ts.ship)

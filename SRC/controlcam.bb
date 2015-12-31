@@ -223,6 +223,7 @@ Function CC_Init()
 	cc_cam		= CreateCamera(cc_piv)
 	
 	cc_superpiv	= CreatePivot()
+	PositionEntity cc_superpiv,-100,0,-100; set overview map camera position to be a little left of the map center
 	
 	;cc_camlight	= CreateLight()
 	;LightColor cc_camlight,255,250,240
@@ -533,7 +534,7 @@ Function CC_CamUpdate()
 			Util_Approach(cc_piv,EntityX(cc_target)-dx*200.0/dist,EntityY(cc_target)-dy*200.0/dist,EntityZ(cc_target)-dz*200.0/dist,.25)
 		Case 6 ; überblick
 			Util_Approach(cc_piv,0,0,-hud_mspace*cc_overviewzoom,.15)
-			If cc_overviewinput=0 Then Util_Approach(cc_superpiv, 0,0,0 ,.15)
+			If cc_overviewinput=0 Then Util_Approach(cc_superpiv, -500,0,-500 ,.15)
 			PointEntity cc_piv,cc_superpiv
 			TurnEntity cc_piv,(1-util_minmax(EntityZ(cc_piv,0),-hud_mspace,0)/-Float(hud_mspace))*-35.0,0,0
 			If MouseDown(3)

@@ -326,9 +326,9 @@ Function Map_ParseAmbient(stream)
 			Case "cammode"
 				CameraClsMode cam_cam,paras[1],1
 			Case "camrangemin"
-				crmin	= paras[1]
+				crmin#	= paras[1]
 			Case "camrangemax"
-				crmax	= paras[1]
+				crmax#	= paras[1]
 			Case "camcr"
 				camr	= paras[1]
 			Case "camcg"

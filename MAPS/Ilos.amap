@@ -5,7 +5,7 @@
 
 mapicon = MAPS/ilos.png
 	
-posx	= 00
+posx	= 0
 posy	= -10
 posz	= 150
 
@@ -61,7 +61,7 @@ moon. They will win immediately if they take all points and destroy every ship.
 		fogmode = 0
   
 		camclsmode = 1
-		camrangemin = 1
+		camrangemin = .5
 		camrangemax = 6220
 		fogmode = 1
 		fogr = 5

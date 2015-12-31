@@ -127,6 +127,10 @@ Function Race_Equip(sh.ship,team,classi,typ=1)
 			Shi_SetWeapon(sh,i,0,0)
 		EndIf
 	Next
+	
+	For i = 0 to 10
+		sh\weapreload[i] = 0 
+	Next
 End Function
 
 Function Race_Clear()

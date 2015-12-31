@@ -86,7 +86,8 @@ Global hud_lastglwarning#
 
 Global hud_continue.gadget
 
-Global hud_targetlock
+Global hud_targetlock, hud_locked
+Global hud_lasttargetprogress
 
 Global hud_cube
 
@@ -446,16 +447,17 @@ Function HUD_Init()
 	
 	;sounds
 	hud_warning = LoadSound("SFX/GUI/WARNING2.wav")
+	SoundVolume hud_warning, .8
 	hud_button	= LoadSound("SFX/GUI/button.wav")
 	hud_radio	= LoadSound("SFX/GUI/radio.ogg")
-	
-	hud_end = CreatePivot()
+	hud_locked	= LoadSound("SFX/GUI/locked.mp3")
 	
 	hud_continue = GUI_AddGadget(2, -20,-50,40,10,0,2)
 	EntityParent hud_continue\mesh, hud_start
-	
 	GUI_GadTexture(Handle(hud_continue),hud_buttontex)
 	GUI_SetCaption(Handle(hud_continue), lang_continue)
+	
+	hud_end = CreatePivot()
 	
 	HUD_InitPlayers()
 End Function
@@ -478,7 +480,7 @@ Function HUD_Clear()
 	hud_estatepic	= 0
 	hud_esstatepic	= 0
 	hud_psstatepic	= 0
-	main_pl\target.ship = Null
+	If main_pl <> Null Then main_pl\target.ship = Null
 End Function
 
 Function HUD_SetColor(r,g,b)
@@ -1179,9 +1181,11 @@ Function HUD_Update()
 						RotateSprite hud_targetlock,lockfact*420.0
 						EntityAlpha hud_targetlock,1
 					Else
+						If hud_lasttargetprogress < 100 Then PlaySound hud_locked
 						RotateSprite hud_targetlock,0
 						If (MilliSecs()/500) Mod 2 = 1 Then EntityAlpha hud_targetlock,0.4 Else EntityAlpha hud_targetlock,1
 					EndIf
+					hud_lasttargetprogress = main_pl\targeting
 					MoveEntity hud_targetlock, 0,0,EntityDistance(main_pl\targetlock, main_pl\target\piv)*(1.0-lockfact)
 					Local si# = 6+EntityDistance(hud_targetlock, hud_cam_piv)/60
 					ScaleSprite hud_targetlock,si, si
@@ -1200,7 +1204,7 @@ Function HUD_Update()
 		EndIf
 	Case 1
 		Hud_UpdateBigMap()
-		If main_pl = teamid[main_pl\team]\commander And cc_mode<>4 Then
+		If main_pl = teamid[main_pl\team]\commander And cc_mode<>4 And hud_showcselect = 0 Then
 			Hud_UpdateCommander()
 		Else
 			HideEntity hud_compiv
@@ -1227,7 +1231,7 @@ Function HUD_Update()
 			If Game_RestartTimer < MilliSecs() Then
 				If hud_continue\active <> 1 Then GUI_SetGadgetActivity(hud_continue,1)
 				gui_event = 0
-				GUI_UpdateGadget(hud_continue, 100*cc_cam_realzoom)
+				GUI_UpdateGadget(hud_continue, 100)
 			EndIf
 		EndIf
 	Case 5

@@ -170,11 +170,11 @@ Function Util_PytHyp#(kath1#,kath2#)
 End Function
 
 Function Util_CoordinateDistance#(x1#,y1#,z1#,x2#,y2#,z2#) 
-	Local abstand# 
-	
-	abstand = Sqr(((x1-x2)^2)+((y1-y2)^2)+((z1-z2)^2)) 
-    
-	Return abstand 
+	Return Sqr(((x1-x2)^2)+((y1-y2)^2)+((z1-z2)^2))
+End Function
+
+Function Util_VectorLength#(x1#,y1#,z1#)
+	Return Sqr(x1*x1+y1*y1+z1*z1)
 End Function
 
 Function util_minmax#(value#,min#,max#)
