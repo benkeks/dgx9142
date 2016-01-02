@@ -109,7 +109,7 @@ Function MGui_Init() ; GUI zusammenbasteln :)
 	
 	MGui_Font = Txt_LoadFont(gfxd$+"GUI/Font.png",1+2+8,4,10,gfxd$+"GUI/Font.inf")
 	
-	MGui_Hint = MGUI_CreateHoverInfo.MGUI_hoverinfo(0,0,"")
+	MGui_Hint = MGUI_CreateHoverInfo.MGUI_hoverinfo(1000,100,"")
 End Function
 
 

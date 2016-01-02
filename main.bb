@@ -468,6 +468,7 @@ Function Main_EvaluateCommandLine()
 	If Instr(lin,"-quickstart") <> 0 Then
 		menu_gamemode = 4
 		menu_startgame = 1
+		firststart = 0
 	EndIf
 	
 	If Instr(CurrentDate(), "01 Apr") <> 0 Then

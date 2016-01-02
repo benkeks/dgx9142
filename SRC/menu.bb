@@ -43,43 +43,56 @@ Global menu_gamemode=1
 
 Global menu_failure$, menu_fmesh
 Global menu_creditTimer, Menu_CreditString$, Menu_CPointer, Menu_CreditY
-Global firststart = 0
+Global firststart = 1
 
 Global menu_tcpstream, menu_udpstream
 
 Function Menu_Start()
+	HidePointer
 	menu_cam = CreateCamera()
 	CameraRange menu_cam, 1,5000
 	
 	MGui_Init()
 	
 	If firststart = 1
-		menu_keks = LoadSprite("GFX/MENU/cookie.png",1,menu_cam)
+		HideEntity MGui_Hint\bg
+		menu_keks = LoadSprite("GFX/MENU/cookie.png",1+2,menu_cam)
+		menu_mrkeks = LoadSprite("GFX/MENU/mrkeks.png",1+2,menu_cam)
+		PositionEntity menu_cam,1000,1000,1000
 		EntityBlend menu_keks,1
 		EntityAlpha menu_keks,0
-		PositionEntity menu_keks,0,0,2
+		EntityBlend menu_mrkeks,1
+		EntityAlpha menu_mrkeks,0
+		PositionEntity menu_keks,0,0,4
+		PositionEntity menu_mrkeks,0,0,6
+		EntityOrder menu_mrkeks,10
 		For i = 0 To 255 Step 10
-			Cls
 			CameraClsColor menu_cam,i,i,i
 			RenderWorld
 			Flip
 		Next
 		For i = 0 To 255 Step 1
-			Cls
 			EntityAlpha menu_keks,Float(i)/255.0
+			EntityAlpha menu_mrkeks,Float(i)/255.0
+			RotateSprite menu_keks,-Float(i)/12.0+30
+			PositionEntity menu_keks,-1,.5,5-Sin(i/2.0)
+			PositionEntity menu_mrkeks,0,-.1,4.2-Float(i)/140.0
 			RenderWorld
 			Flip
 		Next
-		Delay 500
+		Delay 1000
 		For i = 255 To 0 Step -10
-			Cls
 			EntityColor menu_keks,i,i,i
+			EntityColor menu_mrkeks,i,i,i
 			CameraClsColor menu_cam,i,i,i
 			RenderWorld
 			Flip
 		Next
-		firststart = 1
+		firststart = 0
 		FreeEntity menu_keks
+		FreeEntity menu_mrkeks
+		PositionEntity menu_cam,0,0,0
+		ShowEntity MGui_Hint\bg
 	EndIf
 	
 	Music_SpecialTrack("menu_start")

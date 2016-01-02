@@ -1004,8 +1004,8 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 				If s\zzs > s\shc\topspeed Then s\zzs = s\shc\topspeed
 				If s\zzs < s\shc\lowspeed Then s\zzs = s\shc\lowspeed
 				
-				s\tsyaw		= s\tsyaw * .98^main_gspe
-				s\tspitch	= s\tspitch * .98^main_gspe
+				s\tsyaw		= Util_MinMax(s\tsyaw * .98^main_gspe, -s\shc\turnspeed,s\shc\turnspeed)
+				s\tspitch	= Util_MinMax(s\tspitch * .98^main_gspe, -s\shc\turnspeed,s\shc\turnspeed)
 				s\xs		= s\xs * .99^main_gspe
 				s\zs		= s\zs - (s\zs-s\zzs)
 				s\roll		= s\roll * s\shc\rollinertia^main_gspe

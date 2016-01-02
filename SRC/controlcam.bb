@@ -2,8 +2,6 @@ Global cc_camtarget
 Global cc_piv
 Global cc_cam,cam_cam
 Global cc_cam_realzoom# = 1
-Global cc_camzoom# = 1
-Global cc_camzoom2#= cc_camzoom
 Global cc_mxs#
 Global cc_camlight
 Global cc_spectating
@@ -26,7 +24,7 @@ Global cc_overviewzoom# = 1.0
 
 Global cc_mode
 Global cc_target
-Global cc_tzoom
+Global cc_tzoom#
 Global cc_closeup# = 1
 
 Global cc_grid = 0, cc_gridmode = 1
@@ -36,7 +34,6 @@ Global cc_firstperson = 0
 Global cc_quake# = 0
 Global cc_wmode = 0
 
-Const cc_maxheight = 10
 Global cc_outofspace
 
 Const scroll_range = 20
@@ -333,10 +330,6 @@ Function CC_Update()
 	cc_grida = (cc_grida * 4 + cc_grid) / 5.0
 	If EntityY(cc_cam,1) < EntityY(cc_gridplane) Then RotateEntity cc_gridplane2,180,0,0 Else RotateEntity cc_gridplane2,0,0,0
 	
-	mz = MouseZSpeed()
-	cc_camzoom	 = cc_camzoom - mz
-	If cc_camzoom > cc_maxheight Then cc_camzoom = cc_maxheight ElseIf cc_camzoom < 0 Then cc_camzoom = 0
-	
 	cc_pivx = EntityX(cc_piv)
 	cc_pivz = EntityZ(cc_piv)
 	cc_pivy# = EntityY(cc_piv)
@@ -478,8 +471,6 @@ Function CC_CamUpdate()
 
 	EndIf
 	
-	If cc_camzoom > cc_maxheight Then cc_camzoom = cc_maxheight ElseIf cc_camzoom < 0 Then cc_camzoom = 0
-	
 	cc_pivx = EntityX(cc_piv)
 	cc_pivz = EntityZ(cc_piv)
 	cc_pivy# = EntityY(cc_piv)
@@ -585,24 +576,26 @@ Function CC_Control()
 		CC_LoadControls(datad$+"controls_"+cc_profile+".ini")
 	EndIf
 	
-	spe# = main_gspe
-	If spe>3/main_pl\shc\Turnspeed Then spe = 3
-	
-	x# = (MouseX()-main_hwidth)*-1.301/main_hwidth
-	y# = (MouseY()-main_hheight)*1.301/main_hheight
+	x# = (MouseX()-main_hwidth)*-1.0/main_hwidth
+	y# = (MouseY()-main_hheight)*1.0/main_hheight
 	
 	If cc_joystick Then
-		x# = JoyX()*-1.301
-		y# = JoyY()*-1.301
+		x# = -JoyX()
+		y# = -JoyY()
 		MoveMouse main_width/2, main_height/2
 	EndIf
 	
 	If Inp_KeyDown(cc_camerachangetarget)
 		RotateEntity cc_piv,util_minmax(EntityPitch(cc_piv)+y,-80,80),EntityYaw(cc_piv)+x,0
+		cc_tzoom = Util_MinMax(cc_tzoom + MouseZSpeed()*.1, main_pl\shc\CZoom,  1+main_pl\shc\CZoom*2)
 	Else
-		RotateEntity cc_piv,0,0,0
-		main_pl\tsyaw = main_pl\tsyaw-(main_pl\tsyaw-x#)*.3*spe*main_pl\shc\Turnspeed
-		main_pl\tspitch = main_pl\tspitch-(main_pl\tspitch-y)*.3*spe*main_pl\shc\Turnspeed
+		Local alignSpe# = .7^main_gspe
+		cc_tzoom = cc_tzoom * alignSpe# + main_pl\shc\CZoom * (1-alignSpe#)
+		RotateEntity cc_piv,EntityPitch(cc_piv)*alignSpe,EntityYaw(cc_piv)*alignSpe,0
+		;main_pl\tsyaw = main_pl\tsyaw-(main_pl\tsyaw-x#)*.3*spe*main_pl\shc\Turnspeed
+		;main_pl\tspitch = main_pl\tspitch-(main_pl\tspitch-y)*.3*spe*main_pl\shc\Turnspeed
+		main_pl\tsyaw	= Util_MinMax( main_pl\tsyaw*alignSpe#		+ (1.0-alignSpe#) * x*main_pl\shc\turnspeed,	-main_pl\shc\turnspeed,main_pl\shc\turnspeed)
+		main_pl\tspitch	= Util_MinMax( main_pl\tspitch*alignSpe#	+ (1.0-alignSpe#) * y*main_pl\shc\turnspeed,	-main_pl\shc\turnspeed,main_pl\shc\turnspeed)
 	EndIf
 	
 	
