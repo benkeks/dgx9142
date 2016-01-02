@@ -7,6 +7,7 @@ Type kiplayer
 	Field tars.ship ; Zieltype, falls auf Schiff gerichtet
 	Field sh.ship ; schiff, zu dem die KI gehört :)
 	Field attacktime
+	Field turnp#, turny#
 End Type
 
 Global ki_tpiv
@@ -17,6 +18,21 @@ Function KI_AddKIPlayer.kiplayer(s.ship)
 	Return ki
 End Function
 
+Function KI_TurnShip(ki.kiplayer, dp#, dy#)
+	Local alignSpe# = .7^main_gspe
+	
+	If Abs(dp) < 1 Then dp = 0
+	If Abs(dy) < 1 Then dy = 0
+	
+	ki\turnp	= Util_MinMax( ki\turnp*alignSpe + Sgn(dp) * .2 * (alignSpe-1)/.3, -1,1 ) 
+	ki\turny	= Util_MinMax( ki\turny*alignSpe + Sgn(dy) * .2 * (alignSpe-1)/.3, -1,1 ) 
+	
+	If Abs(ki\turnp) + Abs(dp)/10.0 < 0.2 Then ki\turnp = ki\turnp * .5^main_gspe
+	If Abs(ki\turny) + Abs(dy)/10.0 < 0.2 Then ki\turny = ki\turny * .5^main_gspe
+	
+	ki\sh\tspitch	= Util_MinMax( ki\sh\tspitch*alignSpe#		+ (1.0-alignSpe#) * ki\turnp*ki\sh\shc\turnspeed,	-ki\sh\shc\turnspeed,ki\sh\shc\turnspeed)
+	ki\sh\tsyaw	= Util_MinMax( ki\sh\tsyaw*alignSpe#		+ (1.0-alignSpe#) * ki\turny*ki\sh\shc\turnspeed,	-ki\sh\shc\turnspeed,ki\sh\shc\turnspeed)
+End Function
 
 Function KI_Update()
 	For ki.kiplayer = Each kiplayer
@@ -40,11 +56,7 @@ Function KI_Update()
 					EndIf
 				EndIf
 				
-				spe# = main_gspe
-				If spe>3/ki\sh\shc\turnspeed Then spe = 3
-				ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.2)*.4*spe*ki\sh\shc\turnspeed
-				
-				ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.2)*.4*spe*ki\sh\shc\turnspeed
+				KI_TurnShip(ki, dp, dy)
 				
 				ki\dodgetime = ki\dodgetime + main_mscleft	
 				
@@ -323,18 +335,20 @@ Function KI_Ship(ki.kiplayer)
 			If ki\sh\zzs>ki\sh\shc\lowspeed And map_atmo = 0 Then ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tsyaw = dy*.1
-		EndIf
-		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tspitch = dp*.1
-		EndIf
+; 		spe# = main_gspe
+; 		If spe>3/ki\sh\shc\turnspeed Then spe = 3
+; 		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
+; 			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
+; 		Else
+; 			ki\sh\tsyaw = dy*.1
+; 		EndIf
+; 		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
+; 			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
+; 		Else
+; 			ki\sh\tspitch = dp*.1
+; 		EndIf
+		
+		KI_TurnShip(ki, dp, dy)
 		
 		If Abs(dy)+Abs(dp)<10 And Rand(7)=4
 			Shi_Fire(ki\sh,1,ki\tars)
@@ -386,18 +400,7 @@ Function KI_Ship(ki.kiplayer)
 			EndIf
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tsyaw = dy*.1
-		EndIf
-		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tspitch = dp*.1
-		EndIf
+		KI_TurnShip(ki, dp, dy)
 		
 		If Rand(0,10) = 5 And ki\sh\order <> ORDER_MOVETO 
 			tdist# = 901
@@ -445,18 +448,7 @@ Function KI_Ship(ki.kiplayer)
 			EndIf
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tsyaw = dy*.1
-		EndIf
-		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tspitch = dp*.1
-		EndIf
+		KI_TurnShip(ki, dp, dy)
 	End Select
 End Function
 
@@ -556,10 +548,7 @@ Function KI_Bomber(ki.kiplayer)
 				If ki\sh\zzs>ki\sh\shc\lowspeed And map_atmo = 0 Then ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 			EndIf
 			
-			spe# = main_gspe
-			If spe>3/ki\sh\shc\turnspeed Then spe = 3
-			ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-			ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+			KI_TurnShip(ki, dp, dy)
 			
 			If Abs(dy)+Abs(dp)<10 And dist < ki\sh\shc\attackrange*2 And Rand(7)=4
 				Shi_Fire(ki\sh,1,ki\tars)
@@ -586,10 +575,7 @@ Function KI_Bomber(ki.kiplayer)
 					ki\sh\burnafter = 0
 				EndIf
 			EndIf
-			spe# = main_gspe
-			If spe>3/ki\sh\shc\turnspeed Then spe = 3
-			ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-			ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+			KI_TurnShip(ki, dp, dy)
 		EndIf
 		If ki\sh\shc\typ = 3
 			Shi_Fire(ki\sh,3,ki\tars)
@@ -634,10 +620,7 @@ Function KI_Bomber(ki.kiplayer)
 			ki\globaction = 0
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+		KI_TurnShip(ki, dp, dy)
 		
 		If Rand(0,10) = 5 And ki\sh\order <> ORDER_MOVETO
 			tdist# = 301
@@ -752,18 +735,7 @@ Function KI_Scout(ki.kiplayer)
 		;	If ki\sh\zzs>ki\sh\shc\lowspeed Then ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tsyaw = dy*.1
-		EndIf
-		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tspitch = dp*.1
-		EndIf
+		KI_TurnShip(ki, dp, dy)
 		
 		If Abs(dy)+Abs(dp)<10 And Rand(7)=4
 			Shi_Fire(ki\sh,1,ki\tars)
@@ -822,18 +794,7 @@ Function KI_Scout(ki.kiplayer)
 			EndIf
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tsyaw = dy*.1
-		EndIf
-		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tspitch = dp*.1
-		EndIf
+		KI_TurnShip(ki, dp, dy)
 		
 		If Rand(0,10) = 5 And ki\sh\order <> ORDER_MOVETO
 			tdist# = 401
@@ -881,18 +842,7 @@ Function KI_Scout(ki.kiplayer)
 			EndIf
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		If Abs(dy) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tsyaw = ki\sh\tsyaw-Sgn(ki\sh\tsyaw-dy*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tsyaw = dy*.1
-		EndIf
-		If Abs(dp) > ki\sh\shc\turnspeed*spe*.3
-			ki\sh\tspitch = ki\sh\tspitch-Sgn(ki\sh\tspitch-dp*.1)*.1*spe*ki\sh\shc\turnspeed
-		Else
-			ki\sh\tspitch = dp*.1
-		EndIf
+		KI_TurnShip(ki, dp, dy)
 	End Select
 End Function
 
@@ -915,10 +865,7 @@ Function KI_Cargo(ki.kiplayer)
 			ki\globaction = 0
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+		KI_TurnShip(ki, dp, dy)
 		
 		Shi_Fire(ki\sh,3,Null)
 	End Select
@@ -995,10 +942,7 @@ Function KI_BigShip(ki.kiplayer)
 		;	If ki\sh\zzs>ki\sh\shc\lowspeed Then ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 		;EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+		KI_TurnShip(ki, dp, dy)
 		
 		If Abs(dy)+Abs(dp)<5 And Rand(7)=4
 			Shi_Fire(ki\sh,1,ki\tars)
@@ -1023,10 +967,7 @@ Function KI_BigShip(ki.kiplayer)
 			EndIf
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+		KI_TurnShip(ki, dp, dy)
 		
 		Shi_Fire(ki\sh,3,Null)
 		
@@ -1106,10 +1047,7 @@ Function KI_Cannon(ki.kiplayer)
 			ki\globaction = 0
 		EndIf
 		
-		spe# = main_gspe
-		If spe>3/ki\sh\shc\turnspeed Then spe = 3
-		ki\sh\tsyaw = ki\sh\tsyaw-(ki\sh\tsyaw-dy*.01)*.3*spe*ki\sh\shc\turnspeed
-		ki\sh\tspitch = ki\sh\tspitch-(ki\sh\tspitch-dp*.01)*.3*spe*ki\sh\shc\turnspeed
+		KI_TurnShip(ki, dp, dy)
 		
 		If Abs(dy)+Abs(dp)<10 And Rand(7)=4
 			Shi_Fire(ki\sh,1,ki\tars)

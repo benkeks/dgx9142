@@ -12,6 +12,9 @@ runquick: $(MAINFILE)
 	$(CC) $(CFLAGS) $(MAINFILE) -quickstart
 
 debugrun: $(MAINFILE)
+	$(CC) $(CFLAGS) $(MAINFILE) -debug
+
+debugfullrun: $(MAINFILE)
 	$(CC) $(CFLAGS) -d $(MAINFILE) -debug
 
 build: $(MAINFILE)

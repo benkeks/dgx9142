@@ -1019,7 +1019,7 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 				s\xs		= s\xs * .99^main_gspe
 				s\zs		= s\zs - (s\zs-s\zzs)
 				s\roll		= s\roll * s\shc\rollinertia^main_gspe
-				TurnEntity s\piv, s\tspitch*main_gspe*2,s\tsyaw*main_gspe*2,s\roll*main_gspe
+				TurnEntity s\piv, s\tspitch*main_gspe,s\tsyaw*main_gspe,s\roll*main_gspe
 				RotateEntity s\mesh, s\tspitch*30,0,s\tsyaw#*40-s\xs*130 + s\roll*20
 				
 				If s\shc\fixed = 0
