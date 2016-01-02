@@ -289,11 +289,14 @@ Function Main_Play(map$,players,mode=1,server$="")
 				;HUD_Hide
 				If main_bloom>0 Then RenderGlow Else bloom_effect2 = (bloom_effect2*.9 + bloom_mb*.1)
 				;HUD_Show
-				Cls
 				If main_shadows Then
 					;render(1)
 				Else
-					If Main_Dedicate = 0 Then RenderWorld()
+					If Main_Dedicate = 0 Then 
+						RenderWorld()
+					Else
+						Cls
+					EndIf
 				EndIf
 				renderedtris = TrisRendered()
 				time2 = MilliSecs()
@@ -373,7 +376,7 @@ Function Main_Play(map$,players,mode=1,server$="")
 				If Main_Debug Then
 					Text 0,150,"Sonstiges" + (time2-time1)
 					Text 0,0,1000/(MilliSecs()-time3)
-					Text 0,15,renderedtris + "    " + AvailVidMem()+" / "+TotalVidMem()
+					Text 0,15,renderedtris + "    " + AvailVidMem()/1024/1024+" / "+TotalVidMem()/1024/1024 + " MB"
 					Text 0,30,main_gspe
 					Text 100,50,"Totaltime: " + (MilliSecs()-time3)
 					totms = totms + (MilliSecs()-time3)
@@ -390,9 +393,9 @@ Function Main_Play(map$,players,mode=1,server$="")
 					Main_CriticalFPS = 0
 				EndIf 
 				
-				time3 = MilliSecs()
-				
 				Flip main_vsync
+				
+				time3 = MilliSecs()
 				
 				If KeyHit(cc_screenshot)
 					Util_Screenshot("SCREENS/Screen")

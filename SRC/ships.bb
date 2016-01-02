@@ -74,6 +74,7 @@ Type shipclass	; Die Schiffsklassen
 	
 	Field mesh
 	Field mminx#,mmaxx#, mminy#,mmaxy#, mminz#,mmaxz#
+	Field sparks_mesh[10], sparks_sx#[10], sparks_sy[10]
 	
 	Field mini, minitex
 	Field mmap,mmapsize#
@@ -382,6 +383,10 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 	sh\mminz = Mesh_MinZ*EntityScaleZ(sh\mesh,1)
 	sh\mmaxz = Mesh_MaxZ*EntityScaleZ(sh\mesh,1)
 	
+	If sh\fxsig <> "" Then
+		FX_LoadFXSigShipClass(sh\fxsig, sh)
+	EndIf
+	
 	Return sh\classid
 End Function
 
@@ -570,7 +575,7 @@ Function Shi_SelectClass(s.ship,class,typ=1)
 	ScaleEntity s\shield,swidth*.8,sheight*.8,sdepth*.8
 	PositionEntity s\shield,(s\shc\mminx+s\shc\mmaxx)*.5,(s\shc\mminy+s\shc\mmaxy)*.5,(s\shc\mminz+s\shc\mmaxz)*.5
 	
-	If s\shc\fxsig<>"" Then s\fxs = FX_LoadFXSig(s\shc\fxsig,s\mesh,s)
+	If s\shc\fxsig<>"" Then FX_InstantiateFXSigShip(s)
 	
 	PositionEntity s\piv,s\x,s\y,s\z
 	If t = 1 Then EntityParent cc_piv,s\piv
@@ -752,6 +757,7 @@ End Function
 
 Function Shi_ClearClasses()
 	For sh.shipclass = Each shipclass
+		FX_ClearFXSigShipClass(sh)
 		FreeEntity sh\mesh
 		FreeEntity sh\mini
 		FreeTexture sh\minitex

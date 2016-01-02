@@ -574,3 +574,88 @@ Function FX_ParseFXSigEntity(stream,par,s.ship)
 		Trail_Assign(sp\mesh,sp\mesh,5+sp\sx,255,255,255,sp\sx*.4,1+25*(main_pl<>s))
 	EndIf
 End Function
+
+Function FX_LoadFXSigShipClass(path$,shc.shipclass)
+	Util_CheckFile(path$)
+	stream = ReadFile(path)
+	Repeat
+		lin$ = ReadLine(stream)
+		Select lin
+		Case "sprite{"
+			FX_ParseFXSigShipClass(stream,shc.shipclass)
+		End Select
+	Until Eof(stream)
+	CloseFile stream
+End Function
+
+Function FX_ParseFXSigShipClass(stream,shc.shipclass)
+	Local i
+	For i = 0 To 9
+		If shc\sparks_mesh[i] = 0 Then Exit
+	Next
+	Repeat
+		lin$ = ReadLine(stream)
+		If Util_GetParas(lin$)
+			Select paras[0]
+			Case "x"
+				x# 		= paras[1]
+			Case "y"
+				y# 		= paras[1]
+			Case "z"
+				z# 		= paras[1]
+			Case "sx"
+				sx#		= paras[1]
+			Case "sy"
+				sy#		= paras[1]
+			Case "type"
+				Typ		= paras[1]
+			Case "blend"
+				blend	= paras[1]
+			Case "alpha"
+				alpha#	= paras[1]
+			Case "r"
+				r#		= paras[1]
+			Case "g"
+				g#		= paras[1]
+			Case "b"
+				b#		= paras[1]
+			Case "Trail"
+				trail	= paras[1]
+			End Select
+		EndIf
+	Until lin="}"
+	ent = CopyEntity(fx_ents[typ])
+	HideEntity ent
+	PositionEntity ent,x,y,z
+	ScaleSprite ent,sx,sy
+	EntityBlend ent,blend
+	EntityAlpha ent,alpha
+	EntityColor ent,r,g,b
+	
+	shc\sparks_mesh[i]	= ent
+	shc\sparks_sx[i]	= sx
+	shc\sparks_sy[i]	= sy
+End Function
+
+Function FX_InstantiateFXSigShip(s.ship)
+	For i = 0 To 9
+		If s\shc\sparks_mesh[i] <> 0 Then
+			sp.spark = New spark
+			sp\s	 = s
+			sp\mesh	 = CopyEntity(s\shc\sparks_mesh[i], s\mesh)
+			ShowEntity sp\mesh 
+			PositionEntity sp\mesh, EntityX(s\shc\sparks_mesh[i]), EntityY(s\shc\sparks_mesh[i]), EntityZ(s\shc\sparks_mesh[i])
+			sp\sx	 = s\shc\sparks_sx[i]
+			sp\sy	 = s\shc\sparks_sy[i]
+			
+			Trail_Assign(sp\mesh,sp\mesh,5+sp\sx,255,255,255,sp\sx*.4,1+25*(main_pl<>s))
+		EndIf
+	Next
+End Function
+
+Function FX_ClearFXSigShipClass(shc.shipclass)
+	Local i
+	For i = 0 To 9
+		If shc\sparks_mesh[i] <> 0 Then FreeEntity shc\sparks_mesh[i]
+	Next
+End Function
