@@ -167,11 +167,15 @@ Function MGui_Update()
 			HideEntity b\mcaption
 			If g\anim = 0
 				ShowEntity b\mcaption
-				If mouse_X>g\rx And mouse_x<g\rx+g\width And mouse_y<g\ry And mouse_y>g\ry-g\height Then
+				If mh = False And b\hotkey > 0 And KeyHit(b\hotkey) = True Then
+					EntityColor g\mesh,225,225,225
+					PlaySound MGui_Click
+					MGui_Event(Handle(b),b\OnClick)
+				ElseIf mouse_X>g\rx And mouse_x<g\rx+g\width And mouse_y<g\ry And mouse_y>g\ry-g\height Then
 					EntityColor g\mesh,225,225,225
 					If Not MouseDown(1) Then PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),-1
 					If mh Then PlaySound MGui_Click PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),1 : MGui_Event(Handle(b),b\OnClick) : mh=0
-				Else				
+				Else		
 					EntityColor b\mesh,b\r,b\g,b\b
 					PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),0
 					;Color b\r/2,b\g/2,b\b/2
@@ -642,6 +646,19 @@ Function MGui_RemoveItems(g.TGadget)
 			mesh = GetChild(l\tmesh,i)
 			FreeEntity mesh
 		Next
+	End Select
+End Function
+
+Function MGui_SetActive(g.TGadget,state)
+	Select g\typ
+	Case gtInput
+		in.TInput	= Object.TInput(g\handl)
+		in\active	= state
+		If state Then
+			EntityColor in\mesh,225,225,225
+		Else
+			EntityColor in\mesh,100,100,100
+		End If
 	End Select
 End Function
 

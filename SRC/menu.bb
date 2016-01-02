@@ -425,9 +425,9 @@ Function Menu_Start()
 					
 			pname.TGadget = MGui_CreateInput.TGadget(1,13,80,6, "please enter your name!", "", g ,"op_setname")
 				pname\anim = 100
+				MGui_SetActive(pname, True)
 			
-			
-			oback.Tgadget = MGui_CreateButton.TGadget(54,21,25,6, "continue", 100,200,255, g ,"op_restart")
+			oback.Tgadget = MGui_CreateButton.TGadget(54,21,25,6, "continue", 100,200,255, g ,"op_restart", 28)
 				oback\anim = 100
 		menu_win10.TGadget = g
 		menu_foptions = 1

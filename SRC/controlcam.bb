@@ -6,6 +6,7 @@ Global cc_mxs#
 Global cc_camlight
 Global cc_spectating
 Global cc_range1#, cc_range2#
+Global cc_camfollowcooldown#
 
 Global cc_pivx#
 Global cc_pivy#
@@ -220,7 +221,7 @@ Function CC_Init()
 	cc_cam		= CreateCamera(cc_piv)
 	
 	cc_superpiv	= CreatePivot()
-	PositionEntity cc_superpiv,-100,0,-100; set overview map camera position to be a little left of the map center
+	PositionEntity cc_superpiv,0,0,0
 	
 	;cc_camlight	= CreateLight()
 	;LightColor cc_camlight,255,250,240
@@ -272,36 +273,34 @@ Function CC_SetTarget(entity,mode=1,zoom#=1) ; mode   1: folgen  2: firstperson 
 	CameraRange cc_cam,cc_range1,cc_range2
 	cc_mode		= mode
 	cc_target	= entity
-	If mode = 4
-		EntityParent cc_piv,0
-		Return
-	EndIf
-	If mode = 5
-		cc_target = CreatePivot(cc_target)
-		EntityParent cc_target,0
-	EndIf
 	
 	cc_tzoom	= zoom#
 	
-	If mode < 5
+	Select mode
+	Case 1,2
 		EntityParent cc_piv,cc_target
 		PositionEntity cc_piv,0,0,0
 		RotateEntity cc_piv,0,0,0
-	Else
+	Case 2
+		EntityParent cc_piv,cc_target
+		PositionEntity cc_piv,0,0,0
+		RotateEntity cc_piv,0,0,0
+		EntityPickMode main_pl\mesh,0,0
+	Case 3
 		EntityParent cc_piv,0
-	EndIf
-	If mode = 6 Then
+	Case 4
+		EntityParent cc_piv,0
+	Case 5
+		cc_target = CreatePivot(cc_target)
+		EntityParent cc_target,0
+		EntityParent cc_piv,0
+	Case 6
 		RotateEntity cc_piv,0,0,0
 		CameraFogMode cc_cam,0
 		CameraRange cc_cam,1,hud_mspace*1.8
 		EntityParent cc_piv,cc_superpiv
-	EndIf
-	If mode = 2 Then EntityPickMode main_pl\mesh,0,0
-	If mode = 3 Then
-		PositionEntity cc_piv,Rnd(-20,20),Rnd(20),Rnd(-20,20)
-		EntityParent cc_piv,0
-		PointEntity cc_piv,cc_target
-	EndIf
+	End Select
+	
 	dust_camerajump = 1
 	cc_quake = 0
 End Function
@@ -364,8 +363,7 @@ Function CC_Update()
 			cc_pivz# = cc_pivz - (cc_pivz-7)*.1
 			EntityAlpha main_pl\mesh,0
 		Case 3
-			EntityParent cc_piv,0
-			AlignToVector cc_piv,EntityX(cc_target)-cc_pivx,EntityY(cc_target)-cc_pivy,EntityZ(cc_target)-cc_pivz,2,.9
+			AlignToVector cc_piv,EntityX(cc_target)-cc_pivx,EntityY(cc_target)-cc_pivy,EntityZ(cc_target)-cc_pivz,2,.6^main_gspe
 		End Select
 	EndIf
 	
@@ -403,7 +401,7 @@ End Function
 Function CC_CamSpecChange()
 	bloom_mb = 0 
 	For s.ship = Each ship
-		If s\team = main_pl\team And main_pl <> s And s\spawntimer <= 0 And s\shc\size < 8
+		If s\team = main_pl\team And main_pl <> s And s\spawntimer <= 0 And s\shc\size < 8 And s\shc\fixed = 0
 			i = i + 1
 		EndIf
 	Next
@@ -414,10 +412,11 @@ Function CC_CamSpecChange()
 		num2 = Rand(1,i)
 		
 		For s.ship = Each ship
-			If main_pl <> s And s\spawntimer <= 0 And s\shc\size < 8
+			If s\team = main_pl\team And main_pl <> s And s\spawntimer <= 0 And s\shc\size < 8 And s\shc\fixed = 0
 				num = num + 1
 				If num = num2
-					CC_SetTarget(s\piv,3,s\shc\size/2+1)
+					CC_SetTarget(s\piv,3,s\shc\size/2.0+1)
+					cc_camfollowcooldown# = 100.0
 				EndIf
 			EndIf
 		Next
@@ -494,24 +493,34 @@ Function CC_CamUpdate()
 			cc_pivy# = cc_pivy - (cc_pivy)*.1
 			cc_pivz# = cc_pivz - (cc_pivz-7)*.1
 			EntityAlpha main_pl\mesh,0
-		Case 3
-			dist# = EntityDistance(cc_piv,cc_target)
-			EntityParent cc_piv,0
-			If EntityPitch(cc_piv)<89 And EntityPitch(cc_piv)>-89 Then RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),0
-			TurnEntity cc_piv,Sin(MilliSecs()/100)*3,Sin(MilliSecs()/15+20)*4,0
-			TurnEntity cc_piv,DeltaPitch(cc_piv,cc_target)/4,DeltaYaw(cc_piv,cc_target)/4,0
-			TurnEntity cc_piv,-Sin(MilliSecs()/10)*3,-Sin(MilliSecs()/15+20)*4,0
-			If EntityPitch(cc_piv)<89 And EntityPitch(cc_piv)>-89 Then RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),0
-			
-			MoveEntity cc_piv,0,0,dist*.05
-			
-			If dist > 200
-				PositionEntity cc_piv,0,0,0
-				RotateEntity cc_piv,0,0,0
-				EntityParent cc_piv,cc_target
-				PositionEntity cc_piv,Rnd(-20,20),Rnd(20),Rnd(-20,20)
-				EntityParent cc_piv,0
-				PointEntity cc_piv,cc_target
+		Case 3; follow
+			If cc_camfollowcooldown# > 0 Then
+				cc_camfollowcooldown = cc_camfollowcooldown - main_gspe
+			Else
+				dist# = EntityDistance(cc_piv,cc_target)
+				If EntityPitch(cc_piv)<87 And EntityPitch(cc_piv)>-87 Then
+					RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),0
+				Else
+					MoveEntity cc_piv,0, Sgn(EntityPitch(cc_piv))*-10.0*main_gspe,0
+				EndIf
+				;TurnEntity cc_piv,Sin(MilliSecs()/100),Sin(MilliSecs()/15+20)*1.2,0
+				Local dyaw# = DeltaYaw(cc_piv,cc_target)
+				If dyaw < 10*main_gspe Then
+					TurnEntity cc_piv,0,dyaw,0
+				Else
+					TurnEntity cc_piv,0,Sgn(dyaw) * 10.0 * main_gspe,0
+				EndIf
+				Local dpitch# = DeltaPitch(cc_piv,cc_target)
+				If dpitch# < 10*main_gspe Then
+					TurnEntity cc_piv,dpitch#,0,0
+				Else
+					TurnEntity cc_piv,Sgn(dpitch#) * 10.0 * main_gspe,0,0
+				EndIf
+				;TurnEntity cc_piv,dpitch#*.25^main_gspe,dyaw#*.25^main_gspe,0
+				;TurnEntity cc_piv,-Sin(MilliSecs()/10),-Sin(MilliSecs()/15+20)*1.2,0
+				If EntityPitch(cc_piv)<87 And EntityPitch(cc_piv)>-87 Then RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),0
+				
+				MoveEntity cc_piv,0,0,(dist-100)*.500*main_gspe/(1.0+Abs(dpitch#)+Abs(dyaw#))
 			EndIf
 		Case 4 ; zoomout
 			MoveEntity cc_piv,0,0,-.5*main_gspe
@@ -525,7 +534,7 @@ Function CC_CamUpdate()
 			Util_Approach(cc_piv,EntityX(cc_target)-dx*200.0/dist,EntityY(cc_target)-dy*200.0/dist,EntityZ(cc_target)-dz*200.0/dist,.25)
 		Case 6 ; überblick
 			Util_Approach(cc_piv,0,0,-hud_mspace*cc_overviewzoom,.15)
-			If cc_overviewinput=0 Then Util_Approach(cc_superpiv, -500,0,-500 ,.15)
+			If cc_overviewinput=0 Then Util_Approach(cc_superpiv, 0,0,0 ,.15)
 			PointEntity cc_piv,cc_superpiv
 			TurnEntity cc_piv,(1-util_minmax(EntityZ(cc_piv,0),-hud_mspace,0)/-Float(hud_mspace))*-35.0,0,0
 			If MouseDown(3)

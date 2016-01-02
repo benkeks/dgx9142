@@ -73,6 +73,8 @@ Type shipclass	; Die Schiffsklassen
 	Field race$
 	
 	Field mesh
+	Field mminx#,mmaxx#, mminy#,mmaxy#, mminz#,mmaxz#
+	
 	Field mini, minitex
 	Field mmap,mmapsize#
 	Field Size#
@@ -372,6 +374,14 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 	ScaleMesh sh\mini,14,14,1
 	EntityFX sh\mini, 1+8
 	
+	GetMeshExtents(sh\mesh)
+	sh\mminx = Mesh_MinX*EntityScaleX(sh\mesh,1)
+	sh\mmaxx = Mesh_MaxX*EntityScaleX(sh\mesh,1)
+	sh\mminy = Mesh_MinY*EntityScaleY(sh\mesh,1)
+	sh\mmaxy = Mesh_MaxY*EntityScaleY(sh\mesh,1)
+	sh\mminz = Mesh_MinZ*EntityScaleZ(sh\mesh,1)
+	sh\mmaxz = Mesh_MaxZ*EntityScaleZ(sh\mesh,1)
+	
 	Return sh\classid
 End Function
 
@@ -420,10 +430,6 @@ Function Shi_CreateShip.ship(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoi
 	;If s.ship = hud_t.ship Then hud_t.ship = Null : HUD_ReTarget
 	s\shields	= s\shc\shields
 	s\hitpoints	= s\shc\hitpoints
-	
-	If cc_spectating And cc_target = s\piv
-		CC_CamSpecChange()
-	EndIf
 	
 	c.class = Race_GetShipsClass(s\shc\classid,s\team,s\typ)
 	If c\tickets >= 7 Then HUD_AddIShip(s)
@@ -556,20 +562,18 @@ Function Shi_SelectClass(s.ship,class,typ=1)
 	
 	EntityRadius s\piv,MeshDepth(s\mesh)*.75
 	
-	swidth#	= MeshWidth(s\mesh)
-	sheight#= MeshHeight(s\mesh)
-	sdepth#	= MeshDepth(s\mesh)
-	GetMeshExtents(s\mesh)
-	EntityBox s\piv, -swidth/2, -sheight/2,-sdepth/2, swidth, sheight, sdepth
+	swidth#	= s\shc\mmaxx-s\shc\mminx
+	sheight#= s\shc\mmaxy-s\shc\mminy
+	sdepth#	= s\shc\mmaxz-s\shc\mminz
+	EntityBox s\piv, s\shc\mminx, s\shc\mminy, s\shc\mminz, swidth, sheight, sdepth
+	EntityBox s\mesh, s\shc\mminx, s\shc\mminy, s\shc\mminz, swidth, sheight, sdepth
 	ScaleEntity s\shield,swidth*.8,sheight*.8,sdepth*.8
-	PositionEntity s\shield,(Mesh_MaxX+Mesh_MinX)*.5,(Mesh_MaxY+Mesh_MinY)*.5,(Mesh_MaxZ+Mesh_MinZ)*.5
+	PositionEntity s\shield,(s\shc\mminx+s\shc\mmaxx)*.5,(s\shc\mminy+s\shc\mmaxy)*.5,(s\shc\mminz+s\shc\mmaxz)*.5
 	
 	If s\shc\fxsig<>"" Then s\fxs = FX_LoadFXSig(s\shc\fxsig,s\mesh,s)
 	
 	PositionEntity s\piv,s\x,s\y,s\z
 	If t = 1 Then EntityParent cc_piv,s\piv
-	
-	makecollbox(s\mesh)
 	
 	If s\shc\size < 6 And s\shc\fixed=0 Then
 		EntityType s\piv, shi_colli
