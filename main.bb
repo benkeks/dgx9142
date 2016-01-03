@@ -307,35 +307,16 @@ Function Main_Play(map$,players,mode=1,server$="")
 				EndIf
 				Util_Timer()
 				
-				If hud_mode = 0 And Game_Pause=0 Then
-					CC_Update()
-				Else		
-					CC_CamUpdate()
-				EndIf											
-				
-				HUD_Update() 
-				HUD_UpdateLog()
-				HUD_UpdateInput()
-				Hud_UpdateHoverInfo()
-				
-				Aud_Update()
-				
-				time1 = MilliSecs()
-				If Main_Debug Then Text 0,75,"HUD-Zeit: " + (time1-time2)		
-				
-				Prs_Update()
-				
 				If Game_Pause = 0 Or net = 1
 				
 					Shi_UpdateShips()
 					Tur_Update()
-					FX_Update()
 					Wreck_Update()
 					Obj_Update()
 					Gate_Update()
 					
 					time2 = MilliSecs()
-					If Main_Debug Then Text 0,90,"Schiffe und Effekte " + (time2-time1)
+					If Main_Debug Then Text 0,90,"Schiffe etc" + (time2-time1)
 					
 					UpdateWorld()
 					
@@ -362,6 +343,31 @@ Function Main_Play(map$,players,mode=1,server$="")
 				Else 
 					FX_UpdatePause()
 				EndIf
+				
+				If hud_mode = 0 And Game_Pause=0 Then
+					CC_Update()
+				Else		
+					CC_CamUpdate()
+				EndIf				
+				
+				If Game_Pause = 0 Or net = 1
+					FX_Update()
+				EndIf
+				time1 = MilliSecs()
+				If Main_Debug Then Text 0,150,"Cam & FX" + (time1-time2)
+				time2 = MilliSecs()
+				
+				HUD_Update() 
+				HUD_UpdateLog()
+				HUD_UpdateInput()
+				Hud_UpdateHoverInfo()
+				
+				Aud_Update()
+				
+				time1 = MilliSecs()
+				If Main_Debug Then Text 0,75,"HUD-Zeit: " + (time1-time2)		
+				
+				Prs_Update()
 				
 				Hud_UpdateMinimap()
 				Env_Update()

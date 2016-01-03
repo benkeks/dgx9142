@@ -19,16 +19,16 @@ Function KI_AddKIPlayer.kiplayer(s.ship)
 End Function
 
 Function KI_TurnShip(ki.kiplayer, dp#, dy#)
-	Local alignSpe# = .7^main_gspe
+	Local alignSpe# = .9^main_gspe
 	
 	If Abs(dp) < 1 Then dp = 0
 	If Abs(dy) < 1 Then dy = 0
 	
-	ki\turnp	= Util_MinMax( ki\turnp*alignSpe + Sgn(dp) * .2 * (alignSpe-1)/.3, -1,1 ) 
-	ki\turny	= Util_MinMax( ki\turny*alignSpe + Sgn(dy) * .2 * (alignSpe-1)/.3, -1,1 ) 
+	ki\turnp	= Util_MinMax( ki\turnp*alignSpe - Float(Sgn(dp-ki\turnp*ki\sh\shc\turnspeed*30.0)) * .5 * (alignSpe-1.0), -1,1 ) 
+	ki\turny	= Util_MinMax( ki\turny*alignSpe - Float(Sgn(dy-ki\turny*ki\sh\shc\turnspeed*30.0)) * .5 * (alignSpe-1.0), -1,1 ) 
 	
-	If Abs(ki\turnp) + Abs(dp)/10.0 < 0.2 Then ki\turnp = ki\turnp * .5^main_gspe
-	If Abs(ki\turny) + Abs(dy)/10.0 < 0.2 Then ki\turny = ki\turny * .5^main_gspe
+	If Abs(dp) < 20 Then ki\turnp = ki\turnp * (.85+Abs(dp)*.05)^main_gspe
+	If Abs(dy) < 20 Then ki\turny = ki\turny * (.85+Abs(dy)*.05)^main_gspe
 	
 	ki\sh\tspitch	= Util_MinMax( ki\sh\tspitch*alignSpe#		+ (1.0-alignSpe#) * ki\turnp*ki\sh\shc\turnspeed,	-ki\sh\shc\turnspeed,ki\sh\shc\turnspeed)
 	ki\sh\tsyaw	= Util_MinMax( ki\sh\tsyaw*alignSpe#		+ (1.0-alignSpe#) * ki\turny*ki\sh\shc\turnspeed,	-ki\sh\shc\turnspeed,ki\sh\shc\turnspeed)
@@ -304,6 +304,7 @@ Function KI_Ship(ki.kiplayer)
 				Shi_Fire(ki\sh,3, Null)
 			EndIf
 		EndIf
+		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
 		dist# = EntityDistance(ki\sh\piv,ki\target)
 		distt#	= dist# / (weaponid[ki\sh\weapgroup[1]]\speed#+ki\sh\frontspeed*1.1)
@@ -504,6 +505,7 @@ Function KI_Bomber(ki.kiplayer)
 				Shi_Fire(ki\sh,3,Null)
 			EndIf
 		EndIf
+		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
 		ki\ttarget = ki\target
 		
@@ -704,6 +706,7 @@ Function KI_Scout(ki.kiplayer)
 				Shi_Fire(ki\sh,3, Null)
 			EndIf
 		EndIf
+		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
 		dist# = EntityDistance(ki\sh\piv,ki\target)
 		distt#	= dist# / (weaponid[ki\sh\weapgroup[1]]\speed#+ki\sh\frontspeed*1.1)
@@ -851,9 +854,9 @@ End Function
 Function KI_Cargo(ki.kiplayer)
 	Select ki\globaction
 	Case 0 ; wait / find
-		
+		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
-
+		KI_TurnShip(ki, 0,0)
 	Case 2 ; fly to
 		dist# = EntityDistance(ki\sh\piv,ki\target)
 		dy# = DeltaYaw(ki\sh\piv,ki\target)
@@ -910,17 +913,18 @@ Function KI_BigShip(ki.kiplayer)
 				For f.flag = Each flag
 					dist = EntityDistanceB(ki\sh\piv,f\mesh,tdist)
 					If (f\team <> ki\sh\team Or f\takeper<90) And tdist > dist And Rand(0,1)
-						tdist = EntityDistance(ki\sh\piv,f\mesh)
+						tdist = dist
 						thandle = f\mesh
 					EndIf
 				Next
 				If tdist <= 30000 And thandle <> -1
-					ki\target		= CreatePivot(thandle)
+					ki\target		= thandle
 					ki\globaction	= 2 ; flyto
 				EndIf
 			EndIf
 			Shi_Fire(ki\sh,3,Null)	
 		EndIf
+		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
 		dist# = EntityDistance(ki\sh\piv,ki\target)
 		dy# = DeltaYaw(ki\sh\piv,ki\target)
@@ -934,7 +938,7 @@ Function KI_BigShip(ki.kiplayer)
 			ki\globaction = 0
 		Else
 			If ki\sh\zzs<ki\sh\shc\topspeed Then ki\sh\zzs = ki\sh\zzs+ki\sh\shc\speedup*main_gspe
-			If dist < 150+5*(ki\sh\shc\size+ki\tars\shc\size) Then dy = -Sgn(dy)*(180-Abs(dy)) : dp = -Sgn(dp)*(90-Abs(dp))
+			If dist < 170+9*(ki\sh\shc\size+ki\tars\shc\size) Then dy = -Sgn(dy)*(180-Abs(dy)) : dp = -Sgn(dp)*(90-Abs(dp))
 		EndIf
 		;ElseIf dist>15*(ki\sh\shc\size+ki\tars\shc\size) And Abs(dy)+Abs(dp)<70
 		;	If ki\sh\zzs<ki\sh\shc\topspeed Then ki\sh\zzs = ki\sh\zzs+ki\sh\shc\speedup*main_gspe
@@ -1031,6 +1035,7 @@ Function KI_Cannon(ki.kiplayer)
 			EndIf
 			Shi_Fire(ki\sh,3,Null)	
 		EndIf
+		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
 		dist# = EntityDistance(ki\sh\piv,ki\target)
 		distt#	= dist# / (weaponid[ki\sh\weapgroup[1]]\speed#+ki\sh\frontspeed*1.1)
