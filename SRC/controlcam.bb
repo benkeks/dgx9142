@@ -498,27 +498,28 @@ Function CC_CamUpdate()
 				cc_camfollowcooldown = cc_camfollowcooldown - main_gspe
 			Else
 				dist# = EntityDistance(cc_piv,cc_target)
-				If EntityPitch(cc_piv)<87 And EntityPitch(cc_piv)>-87 Then
-					RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),0
+				If -87 < EntityPitch(cc_piv) And EntityPitch(cc_piv) < 87 Then
+					RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),EntityRoll(cc_piv)*.9^main_gspe
+					
+					;TurnEntity cc_piv,Sin(MilliSecs()/100),Sin(MilliSecs()/15+20)*1.2,0
+					Local dyaw# = DeltaYaw(cc_piv,cc_target)
+					If Abs(dyaw) < 10*main_gspe Then
+						TurnEntity cc_piv,0,dyaw,0
+					Else
+						TurnEntity cc_piv,0,Sgn(dyaw) * 10.0 * main_gspe,0
+					EndIf
+					Local dpitch# = DeltaPitch(cc_piv,cc_target)
+					If Abs(dpitch#) < 10*main_gspe Then
+						TurnEntity cc_piv,dpitch#,0,0
+					Else
+						TurnEntity cc_piv,Sgn(dpitch#) * 10.0 * main_gspe,0,0
+					EndIf
+					;TurnEntity cc_piv,dpitch#*.25^main_gspe,dyaw#*.25^main_gspe,0
+					;TurnEntity cc_piv,-Sin(MilliSecs()/10),-Sin(MilliSecs()/15+20)*1.2,0
 				Else
-					MoveEntity cc_piv,0, Sgn(EntityPitch(cc_piv))*-10.0*main_gspe,0
+					;MoveEntity cc_piv,0, Sgn(EntityPitch(cc_piv))*-10.0*main_gspe,0
 				EndIf
-				;TurnEntity cc_piv,Sin(MilliSecs()/100),Sin(MilliSecs()/15+20)*1.2,0
-				Local dyaw# = DeltaYaw(cc_piv,cc_target)
-				If dyaw < 10*main_gspe Then
-					TurnEntity cc_piv,0,dyaw,0
-				Else
-					TurnEntity cc_piv,0,Sgn(dyaw) * 10.0 * main_gspe,0
-				EndIf
-				Local dpitch# = DeltaPitch(cc_piv,cc_target)
-				If dpitch# < 10*main_gspe Then
-					TurnEntity cc_piv,dpitch#,0,0
-				Else
-					TurnEntity cc_piv,Sgn(dpitch#) * 10.0 * main_gspe,0,0
-				EndIf
-				;TurnEntity cc_piv,dpitch#*.25^main_gspe,dyaw#*.25^main_gspe,0
-				;TurnEntity cc_piv,-Sin(MilliSecs()/10),-Sin(MilliSecs()/15+20)*1.2,0
-				If EntityPitch(cc_piv)<87 And EntityPitch(cc_piv)>-87 Then RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),0
+				
 				
 				MoveEntity cc_piv,0,0,(dist-100)*.500*main_gspe/(1.0+Abs(dpitch#)+Abs(dyaw#))
 			EndIf

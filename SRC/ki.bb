@@ -377,7 +377,7 @@ Function KI_Ship(ki.kiplayer)
 		dy# = DeltaYaw(ki\sh\piv,ki\ttarget)
 		dp# = DeltaPitch(ki\sh\piv,ki\ttarget)
 		
-		If dist>100 And Abs(dy)+Abs(dp)<60
+		If dist>100 And Abs(dy)+Abs(dp)<45
 			If ki\sh\zzs<ki\sh\shc\topspeed Then ki\sh\zzs = ki\sh\zzs+ki\sh\shc\speedup*main_gspe
 			
 			If dist > 120 And Abs(dy)+Abs(dp)<10.0
@@ -387,8 +387,7 @@ Function KI_Ship(ki.kiplayer)
 			Else
 				ki\sh\burnafter = 0
 			EndIf
-			
-		ElseIf dist<80 And ki\target = ki\ttarget
+		ElseIf (dist<80 And ki\target = ki\ttarget)
 			If map_atmo = 0 
 				ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 			EndIf
@@ -398,6 +397,10 @@ Function KI_Ship(ki.kiplayer)
 				ki\target = 0
 				FreeEntity ki\sh\opiv
 				ki\sh\opiv = 0
+			EndIf
+		ElseIf Abs(dy)+Abs(dp)>70
+			If map_atmo = 0 
+				ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 			EndIf
 		EndIf
 		
@@ -567,7 +570,7 @@ Function KI_Bomber(ki.kiplayer)
 			
 			If ki\tars\spawntimer>0
 				ki\globaction = 0
-			ElseIf  Abs(dy)+Abs(dp)<30
+			ElseIf  Abs(dy)+Abs(dp)<25
 				If ki\sh\zzs<ki\sh\shc\topspeed Then ki\sh\zzs = ki\sh\zzs+ki\sh\shc\speedup*main_gspe
 				If dist > 90 And Abs(dy)+Abs(dp)<10.0
 					If ki\sh\burnafter = 0 And ki\sh\afterburner > ki\sh\shc\afterburnertime / 2
@@ -575,6 +578,10 @@ Function KI_Bomber(ki.kiplayer)
 					EndIf
 				Else
 					ki\sh\burnafter = 0
+				EndIf
+			ElseIf Abs(dy)+Abs(dp)>50
+				If map_atmo = 0 
+					ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 				EndIf
 			EndIf
 			KI_TurnShip(ki, dp, dy)
@@ -602,7 +609,7 @@ Function KI_Bomber(ki.kiplayer)
 		dy# = DeltaYaw(ki\sh\piv,ki\target)
 		dp# = DeltaPitch(ki\sh\piv,ki\target)
 		
-		If dist>50 And Abs(dy)+Abs(dp)<60
+		If dist>50 And Abs(dy)+Abs(dp)<45
 			If ki\sh\zzs<ki\sh\shc\topspeed Then ki\sh\zzs = ki\sh\zzs+ki\sh\shc\speedup*main_gspe
 			If dist > 100 And Abs(dy)+Abs(dp)<10.0
 				If ki\sh\burnafter = 0 And ki\sh\afterburner > ki\sh\shc\afterburnertime / 2
@@ -620,6 +627,10 @@ Function KI_Bomber(ki.kiplayer)
 				ki\sh\opiv = 0
 			EndIf
 			ki\globaction = 0
+		ElseIf Abs(dy)+Abs(dp)>70
+			If map_atmo = 0 
+				ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
+			EndIf
 		EndIf
 		
 		KI_TurnShip(ki, dp, dy)
@@ -770,7 +781,7 @@ Function KI_Scout(ki.kiplayer)
 		dy# = DeltaYaw(ki\sh\piv,ki\target)
 		dp# = DeltaPitch(ki\sh\piv,ki\target)
 		
-		If dist>80 And Abs(dy)+Abs(dp)<60
+		If dist>80 And Abs(dy)+Abs(dp)<45
 			If ki\sh\zzs<ki\sh\shc\topspeed Then ki\sh\zzs = ki\sh\zzs+ki\sh\shc\speedup*main_gspe
 			
 			If dist > 80 And Abs(dy)+Abs(dp)<10.0
@@ -794,6 +805,10 @@ Function KI_Scout(ki.kiplayer)
 				ki\target = 0
 				FreeEntity ki\sh\opiv
 				ki\sh\opiv = 0
+			EndIf
+		ElseIf Abs(dy)+Abs(dp)>70
+			If map_atmo = 0 
+				ki\sh\zzs = ki\sh\zzs-ki\sh\shc\speeddown*main_gspe
 			EndIf
 		EndIf
 		

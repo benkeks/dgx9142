@@ -529,7 +529,7 @@ Function Wea_UpdateShoots()
 						EndIf
 						If s\shields < 0 Then s\shields = 0
 						ts#			= s\shields
-						If ts# < 51 Then
+						If ts# < 51 Or sho\swc\hdamage > 1000 Then
 							If ts# < 1 Then ts# = 1
 							
 							If s\shc\size > 7 And Rand(4000)<sho\swc\hdamage Then
