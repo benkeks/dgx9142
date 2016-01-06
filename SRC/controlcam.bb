@@ -417,6 +417,7 @@ Function CC_CamSpecChange()
 				If num = num2
 					CC_SetTarget(s\piv,3,s\shc\size/2.0+1)
 					cc_camfollowcooldown# = 100.0
+					dust_camerajump = 0; don't change the dust rendering!
 				EndIf
 			EndIf
 		Next
@@ -498,7 +499,7 @@ Function CC_CamUpdate()
 				cc_camfollowcooldown = cc_camfollowcooldown - main_gspe
 			Else
 				dist# = EntityDistance(cc_piv,cc_target)
-				If -87 < EntityPitch(cc_piv) And EntityPitch(cc_piv) < 87 Then
+				If -80 < EntityPitch(cc_piv) And EntityPitch(cc_piv) < 80 Then
 					RotateEntity cc_piv,EntityPitch(cc_piv),EntityYaw(cc_piv),EntityRoll(cc_piv)*.9^main_gspe
 					
 					;TurnEntity cc_piv,Sin(MilliSecs()/100),Sin(MilliSecs()/15+20)*1.2,0
@@ -590,8 +591,8 @@ Function CC_Control()
 	y# = (MouseY()-main_hheight)*1.0/main_hheight
 	
 	If cc_joystick Then
-		x# = -JoyX()
-		y# = -JoyY()
+		x# = JoyX()
+		y# = JoyY()
 		MoveMouse main_width/2, main_height/2
 	EndIf
 	
