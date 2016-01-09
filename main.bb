@@ -1,7 +1,7 @@
 ;DGX BattleSpace 9142
 ;von Mr.Keks - www.mrkeks.net
 
-;Entwicklungsstart 25.März.2004
+;Entwicklungsstart 25.MÃ¤rz.2004
 
 ; ______ A B A N D O N E D _______
 
@@ -116,7 +116,7 @@ Include "SRC/network.bb"
 
 Include "SRC/key_routine.bb";Key_
 
-; Menü
+; MenÃ¼
 
 Include "SRC/menu.bb"		;Menu_
 Include "SRC/menugui.bb"
@@ -367,7 +367,7 @@ Function Main_Play(map$,players,mode=1,server$="")
 				time1 = MilliSecs()
 				If Main_Debug Then Text 0,75,"HUD-Zeit: " + (time1-time2)		
 				
-				Prs_Update()
+				;Prs_Update();
 				
 				Hud_UpdateMinimap()
 				Env_Update()
@@ -481,9 +481,9 @@ Function Main_EvaluateCommandLine()
 	EndIf
 	
 	If Instr(CurrentDate(), "01 Apr") <> 0 Then
-		menu_failure = "Die Y'thear und die Evianer haben Frieden geschlossen. Es gibt nichts mehr zu kämpfen. Beende das Spiel und such dir ein anderes Schlachtfeld!"
+		menu_failure = "Die Y'thear und die Evianer haben Frieden geschlossen. Es gibt nichts mehr zu kÃ¤mpfen. Beende das Spiel und such dir ein anderes Schlachtfeld!"
 	ElseIf Instr(CurrentDate(), "01 May") <> 0 
-		menu_failure = "Für den ersten Mai empfehlen wir: Unerwarteter Widerstand!"
+		menu_failure = "FÃ¼r den ersten Mai empfehlen wir: Unerwarteter Widerstand!"
 	EndIf
 End Function
 ;~IDEal Editor Parameters:
