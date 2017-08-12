@@ -641,12 +641,12 @@ Function Shi_DeleteShip(s.ship,fin=0)	; Löscht ein Schiff bzw. eine Station
 		If k\sh = s Then Delete k
 	Next
 	
-	For sho.shoot = Each shoot
+	For sho.shot = Each shot
 		If sho\par = s Then
 			sho\par = Null
 			If sho\swc\typ = 5
 				Trail_Remove(sho\mesh)
-				Delete sho.shoot
+				Delete sho.shot
 			EndIf
 		EndIf
 	Next
@@ -1912,7 +1912,7 @@ Function Shi_Fire(s.ship,typ,ts.ship)
 						ya#	= EntityYaw(tpiv,1)
 						r#	= EntityRoll(tpiv,1)
 						c = wea_count
-						Wea_CreateShoot(  x, y, z, p, ya, r, s\weapgroup[ weapsigi(id,i,1) ],targetd,s,dist2, -1,1 )
+						Wea_CreateShot(  x, y, z, p, ya, r, s\weapgroup[ weapsigi(id,i,1) ],targetd,s,dist2, -1,1 )
 						s\power = s\power - weaponid[s\weapgroup[twg]]\NePower
 						s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 						s\weapammo[twg] = s\weapammo[twg] - weaponid[s\weapgroup[twg]]\neAmmo
@@ -1964,7 +1964,7 @@ Function Shi_Fire(s.ship,typ,ts.ship)
 					r#	= EntityRoll(tpiv)
 					
 					c = wea_count
-					Wea_CreateShoot(  x, y, z, p, ya, 0, s\weapgroup[ weapsigi(id,i,1) ],ts,s  )
+					Wea_CreateShot(  x, y, z, p, ya, 0, s\weapgroup[ weapsigi(id,i,1) ],ts,s  )
 					s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 					s\weapammo[twg] = s\weapammo[twg] - weaponid[s\weapgroup[twg]]\neAmmo
 					s\power = s\power - weaponid[s\weapgroup[twg]]\NePower
@@ -2040,7 +2040,7 @@ Function Shi_GetFire()
 					ya#	= EntityYaw(tpiv,1)
 					r#	= EntityRoll(tpiv,1)
 					
-					Wea_CreateShoot(  x, y, z, p, ya, r, s\weapgroup[ weapsigi(id,i,1) ],targetd,s,dist2,wid,1  )
+					Wea_CreateShot(  x, y, z, p, ya, r, s\weapgroup[ weapsigi(id,i,1) ],targetd,s,dist2,wid,1  )
 					s\power = s\power - weaponid[s\weapgroup[twg]]\NePower
 					s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 					s\weapammo[twg] = s\weapammo[twg] - weaponid[s\weapgroup[twg]]\neAmmo
@@ -2066,7 +2066,7 @@ Function Shi_GetFire()
 					ya#	= EntityYaw(tpiv)
 					r#	= EntityRoll(tpiv)
 					
-					Wea_CreateShoot(  x, y, z, p, ya, 0, s\weapgroup[ weapsigi(id,i,1) ],target,s,0,wid  )
+					Wea_CreateShot(  x, y, z, p, ya, 0, s\weapgroup[ weapsigi(id,i,1) ],target,s,0,wid  )
 					s\weapreload[i] = weaponid[s\weapgroup[twg]]\reload
 					s\weapammo[twg] = s\weapammo[twg] - weaponid[s\weapgroup[twg]]\neAmmo
 					s\power = s\power - weaponid[s\weapgroup[twg]]\NePower

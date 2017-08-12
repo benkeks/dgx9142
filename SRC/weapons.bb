@@ -46,7 +46,7 @@ Global wea_sigcount = 0
 Dim weapsigf#(2,2,4)
 Dim weapsigi(2,2,2)
 
-Type shoot
+Type shot
 	Field id
 	Field x#,y#,z#
 	Field pis#, yas#
@@ -286,9 +286,9 @@ Function Wea_LoadWeaponSigForShip(stream)
 	Return id
 End Function
 
-Function Wea_CreateShoot.shoot(x#,y#,z#,p#,ya#,r#,class,target.ship,par.ship,dist# = 0,id=-1,turret=0)
+Function Wea_CreateShot.shot(x#,y#,z#,p#,ya#,r#,class,target.ship,par.ship,dist# = 0,id=-1,turret=0)
 	For i = 1 To weaponid[class]\swarm
-		sho.shoot	= New shoot
+		sho.shot	= New shot
 		If id = -1 Then
 			id = wea_count
 			wea_count = (wea_count + 1) Mod 65000
@@ -360,9 +360,9 @@ Function Wea_CreateShoot.shoot(x#,y#,z#,p#,ya#,r#,class,target.ship,par.ship,dis
 	Return sho
 End Function
 
-Function Wea_UpdateShoots()
+Function Wea_UpdateShots()
 	tr# = .8 ^ main_gspe
-	For sho.shoot = Each shoot
+	For sho.shot = Each shot
 		sho\crtime# = sho\crtime# - 1*main_gspe
 		;EntityAlpha sho\mesh,0
 		Select sho\swc\typ
@@ -388,7 +388,7 @@ Function Wea_UpdateShoots()
 						If s\team <> sho\par\team Then s\shields	= s\shields - sho\swc\sdamage * main_gspe
 					EndIf
 					
-					dist = EntityDistance(s\piv,sho\mesh)
+					dist# = EntityDistance(s\piv,sho\mesh)
 										
 					If s\shc\fixed = 0
 						s\dx = s\dx - ((s\x-EntityX(sho\mesh))/dist) / 15.0 / s\shc\size^2 * main_gspe
@@ -468,7 +468,7 @@ Function Wea_UpdateShoots()
 			If sho\crtime<=0 Then
 				EntityType sho\mesh,0
 				FreeEntity sho\mesh
-				Delete sho.shoot
+				Delete sho.shot
 			EndIf
 		Default
 			MoveEntity sho\mesh,0,0,sho\speed#*main_gspe
@@ -482,8 +482,11 @@ Function Wea_UpdateShoots()
 				EndIf
 			EndIf
 			
+			tarspeedup# = 0.1
+			
 			If sho\tar <> Null And sho\swc\tturnspeed<>0 Then
-				distt#	= EntityDistance(sho\tar\piv, sho\mesh) / sho\speed
+				dist# = EntityDistance(sho\mesh,sho\tar\piv)
+				distt#	= dist# / sho\speed
 				PositionEntity ki_tpiv,sho\tar\x,sho\tar\y,sho\tar\z
 				TranslateEntity ki_tpiv,sho\tar\dx*distt#,sho\tar\dy*distt#,sho\tar\dz*distt#,1
 				dy# = DeltaYaw(sho\mesh,ki_tpiv)
@@ -493,8 +496,9 @@ Function Wea_UpdateShoots()
 				sho\yas = sho\yas*tr + sho\swc\tturnspeed*Sgn(dy)*main_gspe/4.0
 				
 				TurnEntity sho\mesh,sho\pis,sho\yas,0
-				dist = EntityDistance(sho\mesh,sho\tar\piv)
 				If dist < sho\tar\indanger Then sho\tar\indanger = dist
+				
+				If Abs(dy#) + Abs(dp#) + 5 > 5.0 * distt Then tarspeedup# = -0.05
 				
 				If sho\tar\spawntimer > 0 Then sho\tar = Null
 			ElseIf sho\swc\actrange <> 0 And sho\par <> Null Then
@@ -516,13 +520,22 @@ Function Wea_UpdateShoots()
 				EndIf
 			EndIf
 			
-			If sho\speed < sho\swc\speed And sho\tar <> Null Then sho\speed = sho\speed - (sho\speed-sho\swc\speed)/4
+			If sho\speed < sho\swc\speed And sho\tar <> Null Then
+				For i = 0 To Ceil(main_gspe)
+					If tarspeedup# >= 0 Then
+						sho\speed = sho\speed + (sho\swc\speed - sho\speed) * tarspeedup#
+					Else
+						sho\speed = sho\speed + (sho\swc\sspeed - sho\speed) * -tarspeedup#
+					EndIf
+				Next
+			EndIf
+			
 			
 			tcoll = EntityCollided(sho\mesh,shi_colli2)
 			If tcoll = 0 Then tcoll = EntityCollided(sho\mesh,shi_collibig)
 			If tcoll Then
 				s.ship = Shi_FindByMesh(tcoll)
-				If Not (sho\par = s And sho\crtime > sho\swc\livetime-4*main_gspe)
+				If Not (sho\par = s And sho\crtime > sho\swc\livetime-10*main_gspe)
 					If s <> Null And (net_isserver = 1 Or net = 0 ) Then
 						If sho\par <> Null
 							If s\team <> sho\par\team Then s\shields	= s\shields - sho\swc\sdamage
@@ -697,7 +710,7 @@ Function Wea_UpdateShoots()
 				EndIf
 				
 				If sho\swc\emp <> 0 Then
-					For sho2.shoot = Each shoot
+					For sho2.shot = Each shot
 						If sho2 <> sho Then
 							If EntityDistance(sho2\mesh, sho\mesh) < sho\swc\emp
 								sho2\crtime = 0
@@ -717,13 +730,13 @@ Function Wea_UpdateShoots()
 				EntityType sho\mesh,0
 				FreeEntity sho\mesh
 				Trail_Remove(sho\mesh)
-				Delete sho.shoot
+				Delete sho.shot
 			EndIf
 		End Select
 	Next
 End Function
 
-Function Wea_SendHit(sho.shoot,s.ship) ; 6 byte
+Function Wea_SendHit(sho.shot,s.ship) ; 6 byte
 	If net_isserver
 		AddUDPByte(C_Hit)
 		AddUDPShort(sho\id)
@@ -745,7 +758,7 @@ Function Wea_GetHit()
 	shields = ReadUDPByte()
 	hps		= ReadUDPByte()
 	
-	For sho.shoot = Each shoot
+	For sho.shot = Each shot
 		If sho\id = wid
 			If sid <> 255
 				s.ship	= ships.ship(sid)
@@ -811,7 +824,7 @@ Function Wea_GetHit()
 					EntityType sho\mesh,0
 					FreeEntity sho\mesh
 					Trail_Remove(sho\mesh)
-					Delete sho.shoot
+					Delete sho.shot
 				EndIf
 			EndIf
 
@@ -820,7 +833,7 @@ Function Wea_GetHit()
 	Next
 End Function
 
-Function Wea_SendTarget(sho.shoot)
+Function Wea_SendTarget(sho.shot)
 	If net_isserver=1 And sho\tar <> Null
 		AddUDPByte(C_ShotTarget)
 		AddUDPShort(sho\id)
@@ -831,7 +844,7 @@ End Function
 Function Wea_GetTarget()
 	wid = ReadUDPShort()
 	sid = ReadUDPByte()
-	For sho.shoot = Each shoot
+	For sho.shot = Each shot
 		If sho\id = wid
 			s.ship	= ships.ship(sid)
 			sho\tar = s
@@ -894,11 +907,11 @@ Function Wea_UpdateWaves()
 	Next
 End Function
 
-Function Wea_ClearShoots()
-	For sho.shoot = Each shoot
+Function Wea_ClearShots()
+	For sho.shot = Each shot
 		Trail_Remove(sho\mesh)
 		FreeEntity sho\mesh
-		Delete sho.shoot
+		Delete sho.shot
 	Next
 End Function	
 
@@ -911,7 +924,7 @@ Function Wea_Clear()
 		Delete w.weapon
 	Next
 	
-	Wea_ClearShoots()
+	Wea_ClearShots()
 	
 	Delete Each shockwave
 	

@@ -17,7 +17,7 @@ Function Game_StartRound()
 	Game_Winner = 0
 	FX_ResetExplosions()
 	Wreck_Clear()
-	Wea_ClearShoots()
+	Wea_ClearShots()
 	Trail_Clear()
 	Team_Reset()
 	Fla_Reset()

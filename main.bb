@@ -323,7 +323,7 @@ Function Main_Play(map$,players,mode=1,server$="")
 					time1 = MilliSecs()
 					If Main_Debug Then Text 0,105,"Collisions " + (time1-time2)
 					
-					Wea_UpdateShoots()
+					Wea_UpdateShots()
 					Wea_UpdateWaves()
 					
 					Trail_Update()

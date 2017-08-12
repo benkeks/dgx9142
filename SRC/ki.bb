@@ -153,7 +153,7 @@ Function KI_Update()
 								If i2 < 11 Then
 									If ki\sh\weapreload[i2] <= 0 Then
 										t = ki\sh\indanger
-										For sho.shoot = Each shoot
+										For sho.shot = Each shot
 											If sho\par <> Null
 												If sho\par\team <> ki\sh\team And sho\swc\hdamage+sho\swc\sdamage>700 Then
 													dist = EntityDistanceB(sho\mesh,ki\sh\piv,weaponid[weap]\emp-19)

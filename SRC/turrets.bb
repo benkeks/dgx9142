@@ -142,7 +142,7 @@ Function Tur_Update()
 							If t\s\weapreload[t\id]<=.1 And t\s\weapammo[t\group] >= t\w\neAmmo And t\s\power > t\w\NePower And (net=0 Or net_isserver=1) Then
 								TFormPoint 0,t\w\gunoffsety,t\w\gunoffsetz, t\gun, 0
 								c = wea_count
-								Wea_CreateShoot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],t\target,t\s,dist2, -1,1  )
+								Wea_CreateShot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],t\target,t\s,dist2, -1,1  )
 								t\s\weapreload[t\id] = t\w\reload
 								t\s\weapammo[t\group] = t\s\weapammo[t\group] - t\w\neAmmo
 								t\s\power = t\s\power - t\w\NePower
@@ -210,7 +210,7 @@ Function Tur_GetFire()
 		For t.turret = Each turret
 			If t\id = turret And t\s = s Then
 				TFormPoint 0,t\w\gunoffsety,t\w\gunoffsetz, t\gun, 0
-				Wea_CreateShoot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],t\target,t\s,dist2, wid,1  )
+				Wea_CreateShot(  TFormedX(), TFormedY(), TFormedZ(), EntityPitch(t\gun,1), EntityYaw(t\gun,1), 0, t\s\weapgroup[ t\group ],t\target,t\s,dist2, wid,1  )
 				Exit
 			EndIf
 		Next
