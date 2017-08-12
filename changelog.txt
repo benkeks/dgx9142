@@ -230,83 +230,8 @@ XX/XX/11 0.0.9 Alpha
 	[tweak] Spiel reagiert beim Start auf nicht unterstützte Grafikmodi
 	[fixed] nicht auftauchende Mündungsfeuer
 	
-
-todo:
-
-x joystick
-x ebene verschieben
-x schiffsantriebe
-x ruckeln
-- tutorial
-x HUD
-- editor
-x geschütze
-x skripts
-x fortfahrenbutton
-x pause
-x hover-infos
-x bessere steuerungsoptionen
-o sounds vielleicht mal aufbohren
-
-x scouts sollten sich auch selber tarnen
-x raketen-anvisieren verkomplizieren			net	o
-x flaggenübernahme aufbohren
-x hud-übersichtskarte
-x flugverhalten etwas komplizierter gestalten
-x beamwaffen rumgeschube abschwächen
-x manövrierende kreuzer
-- front/heck-schild?
-x schadensmodell
-x asteroiden						net	o
-? dronen/raketen-startgeschwindigkeit
-x mausscrollen auf der übersichtskarte
-x botnames
-x minen/sperrgeschütze					net?	
-x support-anzeige
-
-x fire&forget / minen					net!	o
-
-o performance
-
-o netcode
-	? Autoteambalance bei Join funzelt nich
-	? Absturz bei Spawndata?
-	x Absturz, wenn der Server kicken möchte
-	? Nicht verschwindender Siegesscreen bei Client
-	x Munitionsdaten
-	x Treffer mit Phasenkanone
-	x Gates
-
-x Befehle bleiben erhalten bei Team-Wechsel
-
-x die laserefekte spawnen bei schnellfeuernden lasern i-wann nicht mehr
-o manchmal wird die auswahl im comander mode dauernd nach 1-2 sek. zurückgestetzt
-x einstellmöglichkeit für den bloomfaktor
-
-########################
-
-!!!!!!
-o MULTIPLAYER
-
-bug
-x minen gehen nicht mehr
-? commander-schiffs-auswahl
-
-performance
-o lowpoly-kollision
-o kollisionserkennung allgemein
-
-feature
-x] cam-position für schiffstypen veränderbar machen
-! weniger als drei waffengruppen im hud
-o spawnen in kreuzern verhindern
-x gravitationsfaktor auf planis bestimmbar machen
-
-tweak
-x darstellung des anvisierens im hud kleiner machen
-o kreuzer-ki aufpolieren. (weniger crahes!)
-x verschiedenfarbige aufschlageffekte
-
-balance
-o anvisieren trotz tarnung verbessern
-x gewackel bei treffern abschwächen
+25/12/15 0.1.0 Beta
+        Publishing the (up to then unreleased) development progress of DGX9142 between 2008 and 2010.
+        
+12/08/17 0.1.1 Beta
+        [Tweaks ans balancing, see Github!]
