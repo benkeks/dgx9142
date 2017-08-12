@@ -1,24 +1,24 @@
-CC      = ~/Software/Blitz3d/blitzcc.sh
-CFLAGS  = 
+BCC      = ~/Software/Blitz3d/blitzcc.sh
+CFLAGS   = 
 MAINFILE = main.bb
-EXENAME = DGX9142.exe
-RELEASENAME = DGX9142
+EXENAME  = DGX9142.exe
+RELEASENAME = DGX9142_011
 RELEASEDIR = ../release/$(RELEASENAME)
 
 run: $(MAINFILE)
-	$(CC) $(CFLAGS) $(MAINFILE)
+	$(BCC) $(CFLAGS) $(MAINFILE)
 
 runquick: $(MAINFILE)
-	$(CC) $(CFLAGS) $(MAINFILE) -quickstart
+	$(BCC) $(CFLAGS) $(MAINFILE) -quickstart
 
 debugrun: $(MAINFILE)
-	$(CC) $(CFLAGS) $(MAINFILE) -debug
+	$(BCC) $(CFLAGS) $(MAINFILE) -debug
 
 debugfullrun: $(MAINFILE)
-	$(CC) $(CFLAGS) -d $(MAINFILE) -debug
+	$(BCC) $(CFLAGS) -d $(MAINFILE) -debug
 
 build: $(MAINFILE)
-	$(CC) $(CFLAGS) -o $(EXENAME) $(MAINFILE)
+	$(BCC) $(CFLAGS) -o $(EXENAME) $(MAINFILE)
 
 release:
 	make build

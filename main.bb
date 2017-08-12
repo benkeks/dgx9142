@@ -50,8 +50,8 @@ AppTitle "DGX 9142"
 Const datad$ = "DATA/"
 Const gfxd$ = "GFX/"
 
-Const main_version$ = "abandoned alpha 0.1.0"
-Const main_version_id$ = "010"
+Const main_version$ = "beta 0.1.1"
+Const main_version_id$ = "011"
 Const main_mrkeks = 0
 
 Global Main_QuitGame=0

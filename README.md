@@ -1,39 +1,16 @@
 DGX BattleSpace 9142
 ==========
 
-* Benjamin "Mr.Keks" Bisping - <http://mrkeks.net> - <ben@mrkeks.net>
+* Benjamin "Mr.Keks" Bisping - <https://mrkeks.net> - <ben@mrkeks.net>
 * Steffen "CdV" Altmeier
 * DerHase - <http://www.budapestfastfood.com>
 * Sebastian Schell - <http://sebastian-schell.de>
 
-![Ingame Screenshot](http://mrkeks.net/pics/dgx2/Screen31.jpg)
+![Ingame Screenshot](https://mrkeks.net/pics/dgx2/Screen31.jpg)
 
-## 0. PREFACE: TEN YEARS ####################
+## 1. INSTALLATION & SYSTEM REQUIREMENTS
 
-It's been more than ten years since I started working at DGX9142 on
-25 March 2004. Actually, I planned to make a little game over the
-Easter break of 2004. I was 15 years old at that time.
-
-Since then, lots of stuff has happened, but the completion of DGX9142 is
-not among it. Battlefied 1942, which inspired this game, has become some
-kind of a classic. DirectX 7, which is used for the graphics, has long
-reached the end of its life cycle. I and all the other people who have
-contributed to DGX9142 do quite different things by now. For my part,
-I am more into theoretical computer science, print design and political
-stuff today.
-
-Over the last six years, DGX9142 has hardly been developed any further.
-The last public alpha was released in March 2008. So I and Steff decided
-to abandon the project. We don't want it to rot on our hard drives.
-Thus we release it. This final release is ; in a way the most unfinished
-version of DGX9142 that has ever been published: Some textures are
-missing, the net code most likely won't work properly, there is no real
-balancing etc. etc.
-
-We hope you enjoy the game anyway. :)
-   -- 25 December 2015, Benjamin Bisping (aka Mr.Keks)
-
-## 1. SYSTEM REQUIREMENTS
+Just unzip the game archive and run `DGX9142.exe`!
 
 Minimum | Needed
 ------- | --------------------
@@ -42,7 +19,7 @@ RAM     |  1 GB
 Disk    |  100 MB
 GPU     |  128 MB GPU Memory, DirektX 7 Support
 
-On newer Windows versions there might be problems with DX7-games. I mostly
+On newer Windows versions, there might be problems with DX7-games. I mostly
 tested the game with Wine on Ubuntu, where it works fine.
 
 ## 2. MANUAL: HOW TO PLAY
@@ -90,20 +67,49 @@ If you are your teams *commander* (as the only human player in a team you will b
 
 Have fun playing!
 
+----------------------------------------------------------------
 
-## 3. REDISTRIBUTION?
+## 3. PROGRAMMER'S NOTE: TEN YEARS
+
+It's been more than ten years since I started working on DGX9142 on
+25 March 2004. Actually, I planned to make a little game over the
+Easter break of 2004. I was 15 years old at that time.
+
+Since then, lots of stuff has happened, but the completion of DGX9142 is
+not among it. Battlefied 1942, which inspired this game, has become some
+kind of a classic. DirectX 7, which is used for the graphics, has long
+reached the end of its life cycle. I and all the other people who have
+contributed to DGX9142 do quite different things by now. For my part,
+I am more into theoretical computer science, print design and politics
+today.
+
+Over the last six years, DGX9142 has hardly been developed any further.
+The last public alpha was released in March 2008. So I and Steff decided
+to abandon the project. We don't want it to rot on our hard drives.
+Thus we release it. This final release is in a way the most unfinished
+version of DGX9142 that has ever been published: Some textures are
+missing, the net code most likely won't work properly, and there is no
+tweaked balancing.
+
+We hope you enjoy the game anyway. :)
+   -- 25 December 2015, Benjamin Bisping (aka Mr.Keks)
+
+## 4. REDISTRIBUTION?
 
 The game is freeware. You may spread it as you wish.
 
-We also include the source with the game, even though it may not be easy to
-maintain by others. (No documentation, poor structure, some lazy hacks,
-redundancies, out-dated programing language etc.) Still: Feel free to use
-the source in any way you like, be it in other projects or in a more
-polished version of DGX.
+The source code can be found on <https://github.com/benkeks/dgx9142>, even
+though it may not be easy to maintain by others. (No documentation, poor
+structure, some lazy hacks, redundancies, out-dated programing language etc.)
+Still: Feel free to use the source in any way you like, be it in other
+projects or in a more polished version of DGX.
 
 To build the source, you will need Blitz3d. It can be obtained from
-<http://blitzbasic.com> for free. Its source code can also be found on
+<https://nitrologic.itch.io/blitz3d> for free. Its source code can also be found on
 [GitHub](https://github.com/blitz-research/blitz3d).
+
+If you're on Linux, you can use the Makefile. Just chage `BCC` to point to your
+`blitzcc.exe` and run `make run` to build and start the game.
 
 If you continue DGX and publish your work, please include the original credits
 with it. The third party parts within DGX are marked as such by comments.
