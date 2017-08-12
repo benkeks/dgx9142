@@ -228,7 +228,6 @@ or alternatively take all points and destroy all enemy ships.
 		type = 2
 		class = 3
 		spawntime = 5000
-		spawnonce = 1
 		range = 0
 		x = 10
 		y = -200
@@ -264,7 +263,6 @@ or alternatively take all points and destroy all enemy ships.
 		type = 2
 		class = 3
 		spawntime = 5000
-		spawnonce = 1
 		range = 0
 		x = -400
 		y = -200

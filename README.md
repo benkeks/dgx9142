@@ -42,7 +42,8 @@ RAM     |  1 GB
 Disk    |  100 MB
 GPU     |  128 MB GPU Memory, DirektX 7 Support
 
-On newer Windows versions there might be problems with DX7-games. I only tested the game with Wine on Ubuntu, where it works fine.
+On newer Windows versions there might be problems with DX7-games. I mostly
+tested the game with Wine on Ubuntu, where it works fine.
 
 ## 2. MANUAL: HOW TO PLAY
 
@@ -83,7 +84,7 @@ If you are your teams *commander* (as the only human player in a team you will b
 * `Right mouse button`: give command (move to or attack)
 * `X`: Cancel command
 
-`Enter` activates the chat. You can also control parts of the game from there, the commands are explained if you enter `\help`.
+`Enter` activates the chat. You can also control parts of the game from there, the commands are explained if you enter `/help`.
 
 `F1` shows a list of the active players and their score.
 
@@ -92,13 +93,13 @@ Have fun playing!
 
 ## 3. REDISTRIBUTION?
 
-The game is freeware. You may spread it as you whish.
+The game is freeware. You may spread it as you wish.
 
-We also include the source with the game. It's not really "open source"
-as the source is not "open" in the sense of: Easy to maintain by others.
-(No documentation, poor structure, some lazy hacks, redundancies, out-dated
-programing language etc.) Still: Feel free to use the source in any way you
-like, be it in other projects or in a more polished version of DGX.
+We also include the source with the game, even though it may not be easy to
+maintain by others. (No documentation, poor structure, some lazy hacks,
+redundancies, out-dated programing language etc.) Still: Feel free to use
+the source in any way you like, be it in other projects or in a more
+polished version of DGX.
 
 To build the source, you will need Blitz3d. It can be obtained from
 <http://blitzbasic.com> for free. Its source code can also be found on

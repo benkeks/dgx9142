@@ -33,7 +33,7 @@
 ; ...We also include the source with the game. It's not really open source
 ; as the source is not "open" in the sense of: Easy to maintain by others.
 ; (No documentation, poor structure, some lazy hacks, redundancies,
-; out-dated programing language etc.) Still: Feel free to use the source
+; out-dated programing language) Still: Feel free to use the source
 ; in any way you like, be it in other projects or in a more polished
 ; version of DGX. If you continue DGX and publish your work, please include
 ; the original credits with it. The third party parts within DGX are marked
@@ -302,8 +302,8 @@ Function Main_Play(map$,players,mode=1,server$="")
 				time2 = MilliSecs()
 				If Main_Debug Then
 					Color 255,255,255
-					Text 0,45,"update: " + (time1-time3)
-					Text 0,60,"Renderzeit: " + (time2-time1)
+					Text 0,45,"Update: " + (time1-time3)
+					Text 0,60,"Rendering: " + (time2-time1)
 				EndIf
 				Util_Timer()
 				
@@ -316,12 +316,12 @@ Function Main_Play(map$,players,mode=1,server$="")
 					Gate_Update()
 					
 					time2 = MilliSecs()
-					If Main_Debug Then Text 0,90,"Schiffe etc" + (time2-time1)
+					If Main_Debug Then Text 0,90,"Ship etc" + (time2-time1)
 					
 					UpdateWorld()
 					
 					time1 = MilliSecs()
-					If Main_Debug Then Text 0,105,"Kollisionen " + (time1-time2)
+					If Main_Debug Then Text 0,105,"Collisions " + (time1-time2)
 					
 					Wea_UpdateShoots()
 					Wea_UpdateWaves()
@@ -329,12 +329,12 @@ Function Main_Play(map$,players,mode=1,server$="")
 					Trail_Update()
 					
 					time2 = MilliSecs()
-					If Main_Debug Then Text 0,120,"Waffen & Trails " + (time2-time1)
+					If Main_Debug Then Text 0,120,"Weapons & Trails " + (time2-time1)
 					
 					KI_Update()
 						
 					time1 = MilliSecs()
-					If Main_Debug Then Text 0,135,"KI " + (time1-time2)
+					If Main_Debug Then Text 0,135,"AI " + (time1-time2)
 					
 					If Main_Dedicate = 0 Then Sha_Update()
 					Fla_Update()
@@ -365,7 +365,7 @@ Function Main_Play(map$,players,mode=1,server$="")
 				Aud_Update()
 				
 				time1 = MilliSecs()
-				If Main_Debug Then Text 0,75,"HUD-Zeit: " + (time1-time2)		
+				If Main_Debug Then Text 0,75,"HUD: " + (time1-time2)
 				
 				;Prs_Update();
 				
@@ -380,11 +380,11 @@ Function Main_Play(map$,players,mode=1,server$="")
 				
 				time2 = MilliSecs()
 				If Main_Debug Then
-					Text 0,150,"Sonstiges" + (time2-time1)
+					Text 0,150,"Misc" + (time2-time1)
 					Text 0,0,1000/(MilliSecs()-time3)
 					Text 0,15,renderedtris + "    " + AvailVidMem()/1024/1024+" / "+TotalVidMem()/1024/1024 + " MB"
 					Text 0,30,main_gspe
-					Text 100,50,"Totaltime: " + (MilliSecs()-time3)
+					Text 100,50,"Total time: " + (MilliSecs()-time3)
 					totms = totms + (MilliSecs()-time3)
 					totframes = totframes + 1
 					Text 100,70,"Average FPS: "+ Int(1000/Float((MilliSecs()-time5)/Float(totframes)))
