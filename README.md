@@ -36,7 +36,7 @@ Jump gates with a green arrow next to their name spawn NPC cruisers.
 Before joining the battle at a jump gate, you chose out of four *ship classes*.
 
 * *Fighter* for ordinary combat.
-* *Bomber* to takle big cruisers and stations.
+* *Bomber* to tackle big cruisers and stations.
 * *Scout* for quick strikes at unexpected positions. (Scouts jam the enemy radar to a certain degree, but also counter enemy jamming.)
 * *Support* which regenerate friendly ships or supply them with new ammunition.
 
@@ -47,6 +47,7 @@ The *fighting* is quite similar to FreeSpace, Freelancer and other space games.
 * `Tab`: enable the after burner
 * Middle mouse button: lock targets (highlighted by a rectangle)
 * Left/right mouse button: fire at the targeted ship
+* `Ctrl` trigger special ability. (E.g. anti-missile EMP, mines, sentry gun placement – not every ship class has one!)
 
 For *overview purposes* there are additional controls:
 
@@ -105,11 +106,11 @@ Still: Feel free to use the source in any way you like, be it in other
 projects or in a more polished version of DGX.
 
 To build the source, you will need Blitz3d. It can be obtained from
-<https://nitrologic.itch.io/blitz3d> for free. Its source code can also be found on
-[GitHub](https://github.com/blitz-research/blitz3d).
+<https://nitrologic.itch.io/blitz3d> for free. Its source code can also be found
+on [GitHub](https://github.com/blitz-research/blitz3d).
 
-If you're on Linux, you can use the Makefile. Just chage `BCC` to point to your
-`blitzcc.exe` and run `make run` to build and start the game.
+If you're on Linux, you can use the Makefile. Just chage `BCC` in `Makefile` to
+point to your `blitzcc.exe` and run `make run` to build and start the game.
 
 If you continue DGX and publish your work, please include the original credits
 with it. The third party parts within DGX are marked as such by comments.
