@@ -1,3 +1,4 @@
 *.bb_bak1
 *.bb_bak2
 SRC/NETWORK/config.php
+DATA/graphics.ini

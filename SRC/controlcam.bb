@@ -227,7 +227,7 @@ Function CC_Init()
 	;LightColor cc_camlight,255,250,240
 	cam_cam		= cc_cam
 	wat_gamecam = cam_cam
-	If main_bloom>0 Then InitGlow cc_cam, 0,0,main_width,main_height
+	If main_bloom>0 Then InitGlow cc_cam, cc_cam, 0,0,main_width,main_height
 	
 	;CameraViewport cc_cam,0,GraphicsHeight()/8,GraphicsWidth(),GraphicsHeight()*6/8
 	

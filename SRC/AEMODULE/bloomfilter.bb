@@ -167,8 +167,9 @@ Global GL_renderingtimer = MilliSecs()
 
 ;camera - your main scene camera
 ;NOTE - do not change camera rotation before calling this init function.
-Function InitGlow(camera, viewportx,viewporty,viewportW,viewportH)
+Function InitGlow(camera, campiv, viewportx,viewporty,viewportW,viewportH)
 	GL_scenecam = camera
+	GL_scenecam_piv = campiv
 	
 	;SET GLOW CAMERA
 	GL_cam = CreateCamera()
@@ -189,7 +190,7 @@ Function InitGlow(camera, viewportx,viewporty,viewportW,viewportH)
 	;PositionEntity GL_sprite,GL_offset,0,1
 	EntityOrder GL_sprite,-5.1
 	EntityFX GL_sprite,1
-	EntityParent GL_sprite,GL_scenecam
+	EntityParent GL_sprite,GL_scenecam_piv
 	
 	;SET GLOW SPRITE 1.5 (FOR DARKENING PASSES)
 	GL_sprited = CreateSprite()
@@ -204,7 +205,7 @@ Function InitGlow(camera, viewportx,viewporty,viewportW,viewportH)
 	EntityTexture GL_sprite_scene,GL_tex
 	ScaleSprite GL_sprite_scene,2*(1.0/GL_camzoom),2*(1.0/GL_camzoom)
 	PositionEntity GL_sprite_scene,EntityX(GL_scenecam),EntityY(GL_scenecam),EntityZ(GL_scenecam)+2
-	EntityParent GL_sprite_scene,GL_scenecam
+	EntityParent GL_sprite_scene,GL_scenecam_piv
 	EntityOrder GL_sprite_scene,-5
 	EntityFX GL_sprite_scene,1
 	
@@ -243,7 +244,7 @@ End Function
 Function RenderGlow(fade#=.2,dark_passes=2,glow_passes=3,glare_size#=4)
 	;RENDER THE SCENE WITH MAIN CAMERA AND COPY TO TEXTURE
 	;Also apply the fade filter
-	
+	GL_camzoom# = cc_cam_realzoom
 	If bloom_mbmode = 1 Then
 	;	TextureBlend GL_tex2,4
 		ScaleSprite GL_sprite,2*(1.0/GL_camzoom),2*(1.0/GL_camzoom)
@@ -266,6 +267,7 @@ Function RenderGlow(fade#=.2,dark_passes=2,glow_passes=3,glare_size#=4)
 		EntityAlpha GL_sprite,bloom_effect2
 	EndIf
 	
+	ScaleSprite GL_sprite_scene,2*(1.0/GL_camzoom),2*(1.0/GL_camzoom)
 	;If bloom_mbmode = 1 Then HideEntity gl_sprite
 
 	CameraViewport GL_scenecam,0,0,GL_texsize,GL_texsize
@@ -370,7 +372,7 @@ Function RenderBlur(fade#=0.15,dark_passes=2,glow_passes=3,glare_size#=4)
 	
 	;MULTIPLY BLEND WITH BACKBUFFER TO MAKE THE CONTRAST HIGHER
 	;(RESERVE THE LUMINATED AREAS)
-	EntityBlend GL_sprite,2		
+	EntityBlend GL_sprite,2
 	For i=1 To dark_passes
 	RenderWorld 
 	Next

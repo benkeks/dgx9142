@@ -66,12 +66,17 @@ Function Menu_Start()
 		PositionEntity menu_keks,0,0,4
 		PositionEntity menu_mrkeks,0,0,6
 		EntityOrder menu_mrkeks,10
-		For i = 0 To 255 Step 10
+		Util_Timer()
+		i = 0
+		While i < 255
 			CameraClsColor menu_cam,i,i,i
 			RenderWorld
 			Flip
-		Next
-		For i = 0 To 255 Step 1
+			Util_Timer()
+			i = i + Ceil(10.0 * main_gspe)
+		Wend
+		i = 0
+		While i < 255
 			EntityAlpha menu_keks,Float(i)/255.0
 			EntityAlpha menu_mrkeks,Float(i)/255.0
 			RotateSprite menu_keks,-Float(i)/12.0+30
@@ -79,15 +84,20 @@ Function Menu_Start()
 			PositionEntity menu_mrkeks,0,-.1,4.2-Float(i)/140.0
 			RenderWorld
 			Flip
-		Next
+			Util_Timer()
+			i = i + Ceil(2.0 * main_gspe)
+		Wend
 		Delay 1000
-		For i = 255 To 0 Step -10
+		i = 255
+		While i > 0
 			EntityColor menu_keks,i,i,i
 			EntityColor menu_mrkeks,i,i,i
 			CameraClsColor menu_cam,i,i,i
 			RenderWorld
 			Flip
-		Next
+			Util_Timer()
+			i = i + Ceil(-10.0 * main_gspe)
+		Wend
 		firststart = 0
 		FreeEntity menu_keks
 		FreeEntity menu_mrkeks
