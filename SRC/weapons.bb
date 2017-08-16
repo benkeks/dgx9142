@@ -699,7 +699,7 @@ Function Wea_UpdateShots()
 						EndIf
 					EndIf
 				EndIf
-				If sho\swc\typ = WEA_SPAWNER And sho\par <> Null
+				If sho\swc\typ = WEA_SPAWNER And sho\par <> Null And (net_isserver=1 Or net = 0)
 					c.class = Race_GetClassByID(sho\swc\spawnshipclass,sho\par\team,3)
 					s.ship = Shi_CreateShip(sho\x,sho\y,sho\z,sho\swc\spawnshipclass,c\name,sho\par\team,2,3)
 					s\team	 = sho\par\team
