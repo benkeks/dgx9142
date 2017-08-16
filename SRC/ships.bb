@@ -132,6 +132,7 @@ Global shi_aura1, shi_aura2
 
 Global shi_hole
 
+Const shi_MaxID = 255
 
 Function Shi_Init()
 	Collisions SHI_Colli,SHI_ColliBig,2,2
@@ -395,7 +396,7 @@ Function Shi_CreateShip.ship(x#,y#,z#,class,name$,team,ki,typ=1,shields=0,hitpoi
 	s.ship = New ship
 	
 	If id = -1
-		For i = 1 To 100
+		For i = 1 To shi_MaxID
 			If ships(i) = Null Then
 				ships.ship(i)	= s.ship
 				s\id		= i
@@ -745,7 +746,7 @@ Function Shi_Clear()
 	For s.ship = Each ship
 		Shi_DeleteShip(s.ship,1)
 	Next
-	For i = 0 To 100
+	For i = 0 To shi_MaxID
 		ships(i) = Null
 	Next
 	FreeSound shi_shieldfx

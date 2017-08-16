@@ -62,7 +62,7 @@ Global Main_Restart=1
 Global Main_Debug = 0
 Global Main_CriticalFPS# = 0
 
-Dim ships.ship(256)
+Dim ships.ship(shi_MaxID+1)
 
 SeedRnd MilliSecs()
 
