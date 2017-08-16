@@ -93,7 +93,8 @@ Function Util_StripType$(file$)
    Return name$ 
 End Function
 
-Function Util_CheckFile(pfad$,check=1)			; Diese Function prüft ein File auf Existenz. Incl. Error ;)
+; Diese Function prüft ein File auf Existenz. Incl. Error ;)
+Function Util_CheckFile(pfad$,check=1)
 	If FileType(pfad$)<>1 Then RuntimeError "Die Datei "+pfad$+" konnte nicht gefunden werden!"
 	If check Then
 		c.TCheckSum = New TCheckSum
@@ -103,20 +104,25 @@ Function Util_CheckFile(pfad$,check=1)			; Diese Function prüft ein File auf Exi
 End Function
 
 Function Util_CheckSum(filename$)
+    ; deactivated check sum computation, as files are not consistent between builds from linux git folders and windows git folders... 
+   Return 1
+   
+   
+   ; check
    bank = CreateBank (FileSize(filename$))
    file = ReadFile (filename$)
    ReadBytes (bank, file, 0, FileSize(filename$))
    CloseFile file
    
    length% = BankSize (bank)
-   hash% = 4294967295
+   hash% = -2
    
    For i% = 1 To length-1
       byte = PeekByte (bank, i)
       hash = CRCTable( ( hash Xor byte ) And 255 ) Xor ( hash Shr 8 )
    Next
    
-   hash = ( hash Xor 4294967295 )
+   hash = ( hash Xor -2 )
    
    Return hash
 End Function

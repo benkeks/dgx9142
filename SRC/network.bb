@@ -351,21 +351,23 @@ Function Net_Server(UDP_UserID,UDP_UserName$,UDP_UserIP,UDP_UserPort)
 				Repeat
 					file$ = ReadUDPString()
 					sum	= ReadUDPInteger()
-					For c.TCheckSum = Each TCheckSum
-						If file$ = c\name$
-							If sum <> c\sum Then
-								UDP_KickUser(UDP_UserID,"Falsche Spielversion!")
-								CC_Message("> "+UDP_UserName+" kicked (wrong version / cheat attempt)",1)
-								kicked = 1
+					If FileType(file$)=0 
+						kicked = 1
+						UDP_KickUser(UDP_UserID,"Falsche Spielversion!")
+						CC_Message("> "+UDP_UserName+" kicked (wrong version / cheat attempt) "+file$,1)
+						Exit
+					Else
+						For c.TCheckSum = Each TCheckSum
+							If file$ = c\name$
+								If sum <> c\sum Then
+									UDP_KickUser(UDP_UserID,"Falsche Spielversion!")
+									CC_Message("> "+UDP_UserName+" kicked (wrong version / cheat attempt) "+file$ + " ( " +sum + " != " + c\sum + " ) " ,1)
+									kicked = 1
+								EndIf
+								Exit
 							EndIf
-							Exit
-						ElseIf FileType(file$)=0 
-							kicked = 1
-							UDP_KickUser(UDP_UserID,"Falsche Spielversion!")
-							CC_Message("> "+UDP_UserName+" kicked (wrong version / cheat attempt) "+file$,1)
-							Exit
-						EndIf
-					Next
+						Next
+					EndIf
 				Until ReadUDPByte() = 1 Or kicked = 1
 				If kicked = 0 Then
 					Net_SSynchronize(UDP_UserID)
