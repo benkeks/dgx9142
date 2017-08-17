@@ -14,7 +14,7 @@ Global net_updatetimer=0
 Global net_srate=200
 Global net_crate=50
 Global net_rate
-Global net_stime, net_lastupdate
+Global net_stime#, net_lastupdate
 Global net_urge
 Global net_listid, net_lastcommunication
 

@@ -1,4 +1,4 @@
-Type ship	; Die Schiffe
+Type ship
 	Field id
 	
 	;pos und move
@@ -979,6 +979,7 @@ Function Shi_UpdateShips()	; Updated alle Schiffe und Stationen
 						Local cny# = CollisionY(s\piv,i)-s\y
 						Local cnz# = CollisionZ(s\piv,i)-s\z
 						Local cnd# = Util_VectorLength(cnx,cny,cnz)
+						If cnd = 0 Then cnd = 0.0001
 						cnx = cnx / cnd : cny = cny / cnd : cnz = cnz / cnd
 						
 						s\dx = s\dx*.9 + CollisionNX(s\piv,i)*t/2 - cnx * s\realspeed * .4
@@ -1481,9 +1482,9 @@ Function Shi_GetPosition()
 		;s\sy1	= (ReadUDPFloat()-s\y)/net_stime * 12
 		;s\sz1	= (ReadUDPFloat()-s\z)/net_stime * 12
 		
-		x# = (ReadUDPShort()-32000)/2
-		y# = (ReadUDPShort()-32000)/2
-		z# = (ReadUDPShort()-32000)/2
+		x# = (ReadUDPShort()-32000)/2.0
+		y# = (ReadUDPShort()-32000)/2.0
+		z# = (ReadUDPShort()-32000)/2.0
 		
 		If net_stime < 1 Then net_stime = 1
 		
