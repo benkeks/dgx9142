@@ -1,47 +1,7 @@
 ;DGX BattleSpace 9142
 ;von Mr.Keks - www.mrkeks.net
 
-;Entwicklungsstart 25.März.2004
-
-; ______ A B A N D O N E D _______
-
-; It's been more than ten years since I wrote the three lines above.
-; Actually, I planned to make a little game during the Easter break of 2004.
-; I was 15 years old at that time.
-
-; Since then, lots of stuff has happened, but the completion of DGX9142
-; is not among them. Battlefied 1942, which inspired this game, has
-; become some kind of a classic. DirectX 7, which is used for the graphics,
-; has long reached the end of its life cycle. I and all the other people
-; who have contributed to DGX9142 do quite different things by now.
-; For my part, I am more into theoretical computer science, print design
-; and political stuff today.
-
-; Over the last six years, DGX9142 has hardly been developed any
-; further. The last public alpha was released in March 2008.
-; So I and Steff decided to abandon the project. We don't want it to
-; rot on our hard drives. Thus we release it. This final release is
-; in a way the most unfinished version of DGX9142 that has ever been
-; published: Some textures are missing, the net code most likely
-; won't work properly, there is no real balancing etc. etc.
-
-; We hope you enjoy the game anyway. :)
-
-;  -- 25 December 2015, Benjamin Bisping (aka Mr.Keks)
-
-
-; ...We also include the source with the game. It's not really open source
-; as the source is not "open" in the sense of: Easy to maintain by others.
-; (No documentation, poor structure, some lazy hacks, redundancies,
-; out-dated programing language) Still: Feel free to use the source
-; in any way you like, be it in other projects or in a more polished
-; version of DGX. If you continue DGX and publish your work, please include
-; the original credits with it. The third party parts within DGX are marked
-; as such by comments. The artwork is by the credited people or from free
-; ware archives. You may use it in derived versions of DGX, but not in any
-; new context - at least we can't grant you this permission as it is up
-; to the very authors.
-
+;Entwicklungsstart 25.Maerz.2004
 
 AppTitle "DGX 9142"
 
@@ -481,7 +441,7 @@ Function Main_EvaluateCommandLine()
 	EndIf
 	
 	If Instr(CurrentDate(), "01 Apr") <> 0 Then
-		menu_failure = "Die Y'thear und die Evianer haben Frieden geschlossen. Es gibt nichts mehr zu kämpfen. Beende das Spiel und such dir ein anderes Schlachtfeld!"
+		menu_failure = "Die Y'thear und die Evianer haben Frieden geschlossen. Es gibt nichts mehr zu kaempfen. Beende das Spiel und such dir ein anderes Schlachtfeld!"
 	ElseIf Instr(CurrentDate(), "01 May") <> 0 
 		menu_failure = "Für den ersten Mai empfehlen wir: Unerwarteter Widerstand!"
 	EndIf
