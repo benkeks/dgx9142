@@ -1,12 +1,12 @@
-;Util.bb ist meine persönliche Minilib mit einigen Funktionen, die man eigentlich in jedem Projekt
+;Util.bb ist meine persï¿½nliche Minilib mit einigen Funktionen, die man eigentlich in jedem Projekt
 ;braucht.
-;Präfix ist Util_, jedoch gibt es hier einige Variablen ohne dieses Präfix. 
+;Prï¿½fix ist Util_, jedoch gibt es hier einige Variablen ohne dieses Prï¿½fix. 
 
 Const sith# = Float(1.00/16.00)
 Const sith2#= sith#/16.00
 Global sqr2# = Sqr(2.00)
 
-Global paras$[1]	; Notwendig für Util_GetParas
+Global paras$[1]	; Notwendig fï¿½r Util_GetParas
 
 Global fps_frames,fps_ms=MilliSecs(),fps_anzeige#,util_fpsupdate ; Die FPS...
 
@@ -15,7 +15,7 @@ racenames[0] = "Evianisch"
 racenames[1] = "Ythearnisch"
 racenames[2] = "Xatarianisch"
 
-Global main_gspe#,util_lastmsc,main_mscleft# ; für den Timer...
+Global main_gspe#,util_lastmsc,main_mscleft# ; fï¿½r den Timer...
 
 Dim CRCTable( 255 )
 Util_InitCRC32()
@@ -93,7 +93,7 @@ Function Util_StripType$(file$)
    Return name$ 
 End Function
 
-; Diese Function prüft ein File auf Existenz. Incl. Error ;)
+; Diese Function prï¿½ft ein File auf Existenz. Incl. Error ;)
 Function Util_CheckFile(pfad$,check=1)
 	If FileType(pfad$)<>1 Then RuntimeError "Die Datei "+pfad$+" konnte nicht gefunden werden!"
 	If check Then
@@ -272,7 +272,7 @@ Function Util_DrawRectSprite(sprite,x,y,width,height,border=0)
 End Function
 
 Function Util_Approach(mesh,x#,y#,z#,f#=1)
-	f = f ^ (1.0/main_gspe#)
+	f = 1.0 - (1.0 - f)^main_gspe; f ^ (1.0/main_gspe#)
 	f = Util_MinMax(f,0,1)
 	TranslateEntity mesh,-(EntityX(mesh)-x)*f,-(EntityY(mesh)-y)*f,-(EntityZ(mesh)-z)*f
 End Function

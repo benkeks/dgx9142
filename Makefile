@@ -1,4 +1,4 @@
-BCC      = ~/Software/Blitz3d/blitzcc.sh
+BCC      = blitzcc
 CFLAGS   = 
 MAINFILE = main.bb
 EXENAME  = DGX9142.exe
