@@ -446,5 +446,3 @@ Function Main_EvaluateCommandLine()
 		menu_failure = "Für den ersten Mai empfehlen wir: Unerwarteter Widerstand!"
 	EndIf
 End Function
-;~IDEal Editor Parameters:
-;~C#Blitz3D

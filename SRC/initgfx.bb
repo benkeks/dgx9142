@@ -28,6 +28,11 @@ Global main_particledetail# = 1
 ;-----------------
 
 Function Main_InitGfx()
+	If FileType(datad$+"graphics.ini")<>1 Then
+		Util_CheckFile(datad$+"DEFAULT/graphics.ini",0)
+		CopyFile datad$+"DEFAULT/graphics.ini", datad$+"graphics.ini"
+	EndIf
+
 	stream = ReadFile(datad$+"graphics.ini")
 	Repeat
 		lin$ = ReadLine(stream)

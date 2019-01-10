@@ -1,6 +1,0 @@
-language = en
-name = player
-port = 9142
-music = SFX/MUSIC/
-music_volume = 1.0
-controlprofile = 0

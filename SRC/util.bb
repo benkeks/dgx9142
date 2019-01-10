@@ -93,20 +93,20 @@ Function Util_StripType$(file$)
    Return name$ 
 End Function
 
-; Diese Function pr�ft ein File auf Existenz. Incl. Error ;)
-Function Util_CheckFile(pfad$,check=1)
-	If FileType(pfad$)<>1 Then RuntimeError "Die Datei "+pfad$+" konnte nicht gefunden werden!"
+; Diese Function prueft ein File auf Existenz. Incl. Error ;)
+Function Util_CheckFile(path$,check=1)
+	If FileType(path$)<>1 Then RuntimeError "Die Datei "+path$+" konnte nicht gefunden werden!"
 	If check Then
 		c.TCheckSum = New TCheckSum
-		c\name	= pfad
-		c\sum	= Util_CheckSum(pfad)
+		c\name	= path
+		c\sum	= Util_CheckSum(path)
 	EndIf
 End Function
 
 Function Util_CheckSum(filename$)
-    ; deactivated check sum computation, as files are not consistent between builds from linux git folders and windows git folders... 
+	; deactivated check sum computation, as files are not consistent between builds from linux git folders and windows git folders... 
+	; the check sums were originally used to ensure consistency between game/map versions in multiplayer mode.
    Return 1
-   
    
    ; check
    bank = CreateBank (FileSize(filename$))

@@ -18,6 +18,11 @@ Function Main_Load()
 End Function
 
 Function Main_LoadSettings()
+	If FileType(datad$+"settings.ini")<>1 Then
+		Util_CheckFile(datad$+"DEFAULT/settings.ini",0)
+		CopyFile datad$+"DEFAULT/settings.ini", datad$+"settings.ini"
+	EndIf
+
 	Util_CheckFile(datad$+"settings.ini",0)
 	stream = ReadFile(datad$+"settings.ini")
 	Repeat
