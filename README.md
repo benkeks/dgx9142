@@ -19,8 +19,10 @@ RAM     |  1 GB
 Disk    |  100 MB
 GPU     |  128 MB GPU Memory, DirektX 7 Support
 
-On newer Windows versions, there might be problems with DX7-games. I mostly
-tested the game with Wine on Ubuntu, where it works fine.
+On newer Windows versions, there might be problems with DX7-games.
+
+I mostly tested the game with Wine (32 bit edition) on Ubuntu and
+Debian, where it works fine.
 
 ## 2. MANUAL: HOW TO PLAY
 
@@ -111,6 +113,7 @@ on [GitHub](https://github.com/blitz-research/blitz3d).
 
 If you're on Linux, you can use the Makefile. Just chage `BCC` in `Makefile` to
 point to your `blitzcc.exe` and run `make run` to build and start the game.
+For `make release`, you need `rsync`.
 
 If you continue DGX and publish your work, please include the original credits
 with it. The third party parts within DGX are marked as such by comments.

@@ -1,3 +1,5 @@
 *.xcf
 *.blend*
 *.stl
+DATA/graphics.ini
+DATA/settings.ini
