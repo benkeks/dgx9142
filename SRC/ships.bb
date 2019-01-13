@@ -47,7 +47,7 @@ Type ship
 	Field selclass, selspawn
 	Field spawntimer
 	Field shc.shipclass ; Verlinkung zur Klasse des Schiffes...
-	Field team ; Das Team, dem das Schiff angehört.
+	Field team ; Das Team, dem das Schiff angehï¿½rt.
 	Field colr,colg,colb
 	Field indanger
 	Field supported,stealthed
@@ -614,7 +614,7 @@ Function Shi_SetHuman(s.ship)
 	EntityOrder s\nmesh,-7
 End Function
 
-Function Shi_DeleteShip(s.ship,fin=0)	; Löscht ein Schiff bzw. eine Station
+Function Shi_DeleteShip(s.ship,fin=0)	; Lï¿½scht ein Schiff bzw. eine Station
 	
 	If s\nmesh And cc_cam Then FreeEntity s\nmesh s\nmesh = 0
 	
@@ -638,7 +638,8 @@ Function Shi_DeleteShip(s.ship,fin=0)	; Löscht ein Schiff bzw. eine Station
 	Tur_Remove(s)
 	
 	For k.kiplayer = Each kiplayer
-		If k\tars = s Then k\globaction = 0
+		If k\target = s\piv Then k\globaction = 0 : k\target = 0
+		If k\tars = s Then k\globaction = 0 : k\tars = Null
 		If k\sh = s Then Delete k
 	Next
 	
@@ -1460,7 +1461,7 @@ Function Shi_SendPosition(s.ship) ; 27 bytes ... 18 bytes ... 12 bytes! :)
 	
 	FreeEntity piv
 	
-	; extrapolation rückgängig machen
+	; extrapolation rï¿½ckgï¿½ngig machen
 	;PositionEntity s\piv,x,y,z
 	;RotateEntity s\piv,pit,ya,ro
 	
@@ -1881,7 +1882,7 @@ Function Shi_Fire(s.ship,typ,ts.ship)
 				z# 	= EntityZ(tpiv,1)
 				EntityParent tpiv,0
 				If typ = 3
-					;Geschütz
+					;Geschï¿½tz
 					dist# = 1001
 					For s2.ship = Each ship
 						If s2\team <> s\team And s2\spawntimer <= 0
@@ -2020,7 +2021,7 @@ Function Shi_GetFire()
 				z# 	= EntityZ(tpiv,1)
 				EntityParent tpiv,0
 				If weapsigi(id,i,0) = 3
-					;Geschütz
+					;Geschï¿½tz
 					If s2 <> Null
 						edist# = EntityDistance(mesh,tpiv)
 						distt#	= edist# / weaponid[s\weapgroup[twg]]\speed#
