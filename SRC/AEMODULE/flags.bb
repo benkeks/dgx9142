@@ -284,8 +284,10 @@ Function Fla_ParseSpawn(stream)
 					s\pitch	= paras[1]
 				Case "yaw"
 					s\yaw	= paras[1]
+					If s\pitch = -9999 Then s\pitch = 0
 				Case "roll"
 					s\roll	= paras[1]
+					If s\pitch = -9999 Then s\pitch = 0
 				Case "spawntime"
 					s\spawnt= paras[1]
 				Case "spawnonce"
