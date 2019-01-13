@@ -132,8 +132,9 @@ Function Hud_UpdateMinimap()
 		HideEntity cc_cam
 		ShowEntity hud_minimapcam
 		
-		CameraViewport hud_minimapcam,780*main_width/1024,30*main_height/hud_height,250*main_width/1024,250*main_width/1024
-		
+		;CameraViewport hud_minimapcam,780*main_width/1024,30*main_height/hud_height,250*main_width/1024,250*main_width/1024
+		CameraViewport hud_minimapcam,785*main_width/1024,main_height-110*main_height/hud_height,190*main_width/1024,190*main_width/1024
+
 		RenderWorld()
 		
 		HideEntity hud_minimapcam

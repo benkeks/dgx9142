@@ -269,7 +269,7 @@ Function HUD_Init()
 	EntityColor hud_weappower\mesh,5,205,5
 	EntityTexture hud_weappower\mesh,tex 
 	
-	hud_health = GUI_AddGadget(3,-92,-59,152,12,hud_sunit1,2) ; hülle
+	hud_health = GUI_AddGadget(3,-92,-59,152,12,hud_sunit1,2) ; hï¿½lle
 	EntityColor hud_health\mesh,250,0,0
 	EntityTexture hud_health\mesh,tex
 	hud_shields = GUI_AddGadget(3,-92,-72,152,12,hud_sunit1,2) ; schilde
@@ -279,6 +279,7 @@ Function HUD_Init()
 	hud_sstatepic = Util_LoadSprite(hudd$+"shield.png",1+2,hud_sunit1)
 	ScaleMesh hud_sstatepic,40,40,1
 	EntityOrder hud_sstatepic,-11
+	HideEntity hud_sstatepic
 	
 	hud_psstatepic = CopyEntity(hud_sstatepic,hud_sunit1)
 	PositionEntity hud_psstatepic,-27,8,0
@@ -860,7 +861,7 @@ Function HUD_Update()
 	Select hud_mode
 	Case 0	
 		GUI_Update()
-		EntityAlpha hud_psstatepic,main_pl\shields / main_pl\shc\Shields
+		EntityAlpha hud_psstatepic, main_showminiplayer * main_pl\shields / main_pl\shc\Shields
 		If main_pl\indanger < 10000
 			hud_warningt = hud_warningt + 2*main_gspe
 			If hud_warningt > main_pl\indanger

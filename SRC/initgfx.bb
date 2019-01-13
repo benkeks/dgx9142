@@ -22,7 +22,7 @@ Global main_bloom#=0
 Global main_texdetail = 1
 
 Global main_showminimap = 1
-Global main_showminiplayer = 1
+Global main_showminiplayer = 0
 Global main_particledetail# = 1
 
 ;-----------------
