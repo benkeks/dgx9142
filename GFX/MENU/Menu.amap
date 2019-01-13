@@ -43,7 +43,7 @@
 				scalex = 40
 				scaley = 40
 				mode = 3
-				path = GFX\MISC\planete.png
+				path = GFX\ENVIRON\ilos.png
 				viewmode = 2
 				aem{
 					material{
