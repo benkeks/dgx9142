@@ -723,7 +723,7 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 		menu_win4\hide = 0
 		menu_options = 1
 	Case "mrkeks"
-		ExecFile "http://www.mrkeks.net"
+		ExecFile "https://mrkeks.net"
 	Case "end"
 		menu_end = 1
 	Case "restart"
@@ -818,7 +818,7 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 			main_showminiplayer = 0
 			main_showminimap = 0
 		Else
-			main_showminiplayer = 1
+			main_showminiplayer = 0
 			main_showminimap = 1
 		EndIf
 		
