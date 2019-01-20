@@ -453,7 +453,7 @@ Function HUD_Init()
 	hud_radio	= LoadSound("SFX/GUI/radio.ogg")
 	hud_locked	= LoadSound("SFX/GUI/locked.mp3")
 	
-	hud_continue = GUI_AddGadget(2, -20,-50,40,10,0,2)
+	hud_continue = GUI_AddGadget(2, -20, -75 * main_hheight / main_hwidth, 40,10,0,2)
 	EntityParent hud_continue\mesh, hud_start
 	GUI_GadTexture(Handle(hud_continue),hud_buttontex)
 	GUI_SetCaption(Handle(hud_continue), lang_continue)
@@ -756,7 +756,7 @@ End Function
 Function HUD_SetText(txt$,par,x=0,y=0)
 	hud_txt = Txt_Text(txt$, hud_font, par)
 	PositionEntity hud_txt,x,y,-20
-	ScaleEntity hud_txt,1.5,1.5,1.5
+	ScaleEntity hud_txt,1,1,1
 	EntityOrder hud_txt,-14
 	Return hud_txt
 End Function

@@ -59,10 +59,10 @@ Function Map_Parse(stream,size = 1)
 			EndIf
 		Case "mapinfo{",main_lang+"mapinfo{"
 			map_info = Map_ParseText(stream)
-			HUD_SetText(map_info,hud_start,-250,240)
+			HUD_SetText(map_info,hud_start,-200,100)
 		Case "maptask{",main_lang+"maptask{"
 			map_task = Map_ParseText(stream)
-			HUD_SetText(map_task,hud_start,-250,0)
+			HUD_SetText(map_task,hud_start,-200,-50)
 		Case "team{"
 			Team_Parse(stream)
 		Case "ambient{"

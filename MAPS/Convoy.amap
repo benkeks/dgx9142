@@ -21,11 +21,11 @@ de_name = Der lange Weg
 	
 	MapInfo{
 _de_
-Die Evianer müssen große Mengen an Bevölkerung und Ausrüstung aus einem
-umkämpften Gebiet evakuieren. Der dafür eingerichtete Konvoy wird von den
+Die Evianer muessen grosse Mengen an Bevoelkerung und Ausruestung aus einem
+umkaempften Gebiet evakuieren. Der dafuer eingerichtete Konvoy wird von den
 Y'thear an einem Punkt zwischen zwei Raumknoten attackiert.
 _en_
-The Evians have to evakuate lots of people and equipment from a embattled
+The Evians have to evacuate lots of people and equipment from a embattled
 area. Between two Jumpgate, the Y'thear attack the convoy that has been
 established for this reason.
 	}
@@ -33,7 +33,7 @@ established for this reason.
 	MapTask{
 _de_
 Die Schlacht ist gewonnen, wenn die Tickets des Gegners vor den eigenen 0 erreichen.
-Die Evianer können dies beschleunigen, indem sie möglichst viele Frachter
+Die Evianer koennen dies beschleunigen, indem sie moeglichst viele Frachter
 ans Ziel eskortieren.
 Die Y'thear andererseits profitieren von abgeschossenen Frachtern.
 _en_
