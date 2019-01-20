@@ -4,3 +4,5 @@ SRC/NETWORK/config.php
 DATA/graphics.ini
 DATA/settings.ini
 DGX9142.exe
+*.dll
+*.exe
