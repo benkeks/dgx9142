@@ -931,7 +931,7 @@ Function KI_Cannon(ki.kiplayer)
 			tdist# = weaponid[ki\sh\weapgroup[weapsigi(ki\sh\shc\weapsig,ki\sh\shc\mainweap,1)]]\range+1
 			thandle = -1
 			For zs.ship = Each ship
-				If zs\team <> ki\sh\team And Rand(0,1) And zs\spawntimer <= 0
+				If zs\team <> ki\sh\team And Rand(0,1) = 1 And zs\spawntimer <= 0
 					dist1# = EntityDistance(ki\sh\piv,zs\piv)
 					dist# = dist1/4 + dist1 / zs\shc\size * 2
 					If dist < tdist And dist1 < weaponid[ki\sh\weapgroup[weapsigi(ki\sh\shc\weapsig,ki\sh\shc\mainweap,1)]]\range
@@ -950,7 +950,8 @@ Function KI_Cannon(ki.kiplayer)
 		KI_TurnShip(ki, 0,0)
 	Case 1 ; attack
 		If ki\tars\spawntimer>0
-			ki\globaction = 0
+			ki\globaction	= 0
+			ki\target		= 0
 		Else
 			dist# = EntityDistance(ki\sh\piv,ki\target)
 			distt#	= dist# / (weaponid[ki\sh\weapgroup[1]]\speed#+ki\sh\frontspeed*1.1)

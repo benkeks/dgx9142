@@ -551,6 +551,11 @@ Function Shi_SelectClass(s.ship,class,typ=1)
 		s\stmap = 0
 		s\sumap = 0
 		s\aumap = 0
+
+		For k.kiplayer = Each kiplayer
+			If k\target = s\piv Then k\globaction = 0 : k\target = 0
+			If k\tars = s Then k\globaction = 0 : k\tars = Null
+		Next
 	EndIf
 	s\piv	= CreatePivot()
 	s\mesh	= CopyEntity(s\shc\mesh,s\piv)
