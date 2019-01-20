@@ -161,6 +161,8 @@ Function Main_Play(map$,players,mode=1,server$="")
 	Gate_Init()
 	Fla_SpawnCount = 0
 	
+
+
 	If net Then
 		If net_isserver Then
 			Net_OpenServer(server$)

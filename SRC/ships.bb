@@ -333,7 +333,7 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 	
 	sh\mini = Util_CreateSprite(0)
 	HideEntity sh\mini
-	sh\minitex = CreateTexture(256,256,1+2+8+256)
+	sh\minitex = CreateTexture(256,256,1+2+256)
 	cam = CreateCamera()
 	CameraClsColor cam,248,0,248
 	SetBuffer BackBuffer()
@@ -343,11 +343,11 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 	PositionEntity sh\mesh,6000,6000,6000+3+size#*2
 	RotateEntity sh\mesh,0,130,0
 	PointEntity cam,sh\mesh
-	HideEntity cc_cam
+	CameraProjMode cc_cam,0
 	ShowEntity sh\mesh
 	RenderWorld
 	FreeEntity cam
-	ShowEntity cc_cam
+	CameraProjMode cc_cam,1
 	HideEntity sh\mesh
 	PositionEntity sh\mesh,0,0,0
 	RotateEntity sh\mesh,0,0,0
@@ -365,8 +365,11 @@ Function Shi_LoadShipClass(pfad$)	; Eine Schiffs-/Stationsklasse wird aus einem 
 	Else
 		For x = 0 To 255
 			For y = 0 To 255
-				If ReadPixelFast(x,y,miniTexBuffer)= $FFF800F8 Then
+				Local c = ReadPixelFast(x,y,miniTexBuffer)
+				If c = $FFF800F8 Then
 					WritePixelFast x,y,0, miniTexBuffer
+				Else; this is necessary as newer graphics cards apparently otherwise consider the rendered parts transparent...
+					WritePixelFast x,y, c Or $FF000000, miniTexBuffer
 				EndIf
 			Next
 		Next
