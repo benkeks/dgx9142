@@ -1,7 +1,7 @@
 ;DGX BattleSpace 9142
-;von Mr.Keks - www.mrkeks.net
+;by  Mr.Keks - https://mrkeks.net
 
-;Entwicklungsstart 25.Maerz.2004
+;Start of development: 2004-03-25
 
 AppTitle "DGX 9142"
 
