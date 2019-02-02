@@ -1,7 +1,7 @@
 ;DGX BattleSpace 9142
-;von Mr.Keks - www.mrkeks.net
+;by  Mr.Keks - https://mrkeks.net
 
-;Entwicklungsstart 25.Maerz.2004
+;Start of development: 2004-03-25
 
 AppTitle "DGX 9142"
 
@@ -160,7 +160,7 @@ Function Main_Play(map$,players,mode=1,server$="")
 	Trail_Init()
 	Gate_Init()
 	Fla_SpawnCount = 0
-	
+
 	If net Then
 		If net_isserver Then
 			Net_OpenServer(server$)
@@ -446,5 +446,3 @@ Function Main_EvaluateCommandLine()
 		menu_failure = "Für den ersten Mai empfehlen wir: Unerwarteter Widerstand!"
 	EndIf
 End Function
-;~IDEal Editor Parameters:
-;~C#Blitz3D

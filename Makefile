@@ -1,7 +1,8 @@
-BCC      = ~/Software/Blitz3d/blitzcc.sh
+BCC      = blitzcc
 CFLAGS   = 
 MAINFILE = main.bb
 EXENAME  = DGX9142.exe
+FMODDLL  = ~/.wine/drive_c/Program\ Files/Blitz3D/bin/fmod.dll
 RELEASENAME = DGX9142_011
 RELEASEDIR = ../release/$(RELEASENAME)
 
@@ -26,5 +27,5 @@ release:
 	mkdir -p $(RELEASEDIR)
 	rsync -rE --exclude-from=ExcludeFromRelease DATA GFX MAPS SFX $(RELEASEDIR) && \
 	cp $(EXENAME) changelog.txt README.md $(RELEASEDIR) && \
+	cp $(FMODDLL) $(RELEASEDIR) && \
 	mkdir $(RELEASEDIR)/SCREENS
-	mv -f $(RELEASEDIR)/DATA/settings.ini.default $(RELEASEDIR)/DATA/settings.ini

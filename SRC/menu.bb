@@ -232,7 +232,7 @@ Function Menu_Start()
 		g\anim = 100
 		
 		gfxmode.TGadget = MGui_CreateCombo.TGadget(1,1,50,5, "resolution", g , "og_setres")
-		MGui_SetHint(gfxmode,"Choose your favorite screen resolution. Higher resolutions will have negative effects on the performance.", "Wähle deine Auflösung. Hohe Auflösungen werden die Performance negativ beeinflussen.")
+		MGui_SetHint(gfxmode,"Choose your favorite screen resolution. Higher resolutions will have negative effects on the performance.", "Wï¿½hle deine Auflï¿½sung. Hohe Auflï¿½sungen werden die Performance negativ beeinflussen.")
 			N = CountGfxModes()
 			For i = 1 To N
 				If GfxModeWidth(i)>=800 Then 
@@ -245,19 +245,19 @@ Function Menu_Start()
 			Next
 			
 		windowed.TGadget = MGui_CreateTick.TGadget(1,8,5,5, "windowed", (main_mode=2), g, "og_windowed")
-		MGui_SetHint(windowed,"Should the game be displayed in windowed mode? (Otherwise: Fullscreen)","Lässt das Programm im Fenstermodus anzeigen, sonst Vollbild.")
+		MGui_SetHint(windowed,"Should the game be displayed in windowed mode? (Otherwise: Fullscreen)","Lï¿½sst das Programm im Fenstermodus anzeigen, sonst Vollbild.")
 		
 		vsync.TGadget = MGui_CreateTick.TGadget(1,14,5,5, "vsync", (main_vsync=1), g, "og_vsync")
-		MGui_SetHint(vsync,"Vertical synchronization avoids screen tearing.", "Vertikale Synchronisation verhindert zerstückelte Frames.")
+		MGui_SetHint(vsync,"Vertical synchronization avoids screen tearing.", "Vertikale Synchronisation verhindert zerstï¿½ckelte Frames.")
 		
 		antia.TGadget = MGui_CreateTick.TGadget(1,20,5,5, "antialiasing", (main_aalias), g, "og_antia")
-		MGui_SetHint(antia,"Antialiasing will make the edges look smoother, but costs quite some performance.","Antialiazsing glättet Kanten im Bild, kostet aber Rechenleistung.")
+		MGui_SetHint(antia,"Antialiasing will make the edges look smoother, but costs quite some performance.","Antialiazsing glï¿½ttet Kanten im Bild, kostet aber Rechenleistung.")
 		
 		texd.TGadget = MGui_CreateTick.TGadget(1,26,5,5, "high texture detail", (main_texdetail=2), g, "og_texd")
 		MGui_SetHint(texd,"Only deaktivate this if you are experiencing severe rendering problems!", "Nur deaktivieren, wenn die Grafik komplett spinnt!")
 		
 		detail.TGadget = MGui_CreateSlider.TGadget(1,37,50,2.5, "details", util_minmax(main_detail * 2,0,4), 4, g , "og_detail")
-		MGui_SetHint(detail,"Choos the level of detail for particle effects, background imagery etc.","Wähle den Detailgrad für Partikeleffekte, Hintergrundbilder etc.")
+		MGui_SetHint(detail,"Choos the level of detail for particle effects, background imagery etc.","Wï¿½hle den Detailgrad fï¿½r Partikeleffekte, Hintergrundbilder etc.")
 		
 		bloom.TGadget = MGui_CreateSlider.TGadget(1,46,50,2.5, "bloomfilter", util_minmax(main_bloom * 4,0,4), 4, g, "og_bloom")
 		MGui_SetHint(bloom,"Improves light effects (looks like poor HDR-Rendering), but will slow down the game extremely.","Verbessert Lichteffekte, sieht wie schlechtes HDR aus. Warnung: Halbiert die Performance!")
@@ -548,12 +548,12 @@ Function Menu_Start()
 					Else
 						EntityAlpha m\aura,1-(Sin(m\pulse)/15.0+.4)
 						ScaleEntity m\aura,(Sin(m\pulse)/15.0+.4)*15,(Sin(m\pulse+10)/15.0+.4)*16,1
-						m\pulse = m\pulse + 2
+						m\pulse = m\pulse + 2.0 * main_gspe
 					EndIf
 				ElseIf menu_selmap = m
 					EntityAlpha m\aura,(Sin(m\pulse)/15.0+.7)
 					ScaleEntity m\aura,(Sin(m\pulse)/15.0+.7)*15,(Sin(m\pulse+10)/15.0+.7)*16,1
-					m\pulse = m\pulse + 2
+					m\pulse = m\pulse + 2.0 * main_gspe
 					EntityAlpha m\cmesh,1
 				EndIf
 			Next
@@ -644,22 +644,26 @@ Function Menu_Start()
 End Function
 
 Function Menu_Camera()
-	menu_camshake = menu_camshake + 1
-	TurnEntity  menu_cam,Sin(menu_camshake*1)*.01,Sin(50+menu_camshake*1.4)*.01,Sin(menu_camshake*-.9)*.01
+	menu_camshake = menu_camshake + main_gspe
+	TurnEntity  menu_cam,Sin(menu_camshake*1)*.01*main_gspe,Sin(50+menu_camshake*1.4)*.01*main_gspe,Sin(menu_camshake*-.9)*.01*main_gspe
 	
+	Local turnspeed# = 1.0 - (.85)^main_gspe
+
 	If menu_target
 		dx# = -EntityX(menu_cam)+EntityX(menu_target)
 		dy# = -EntityY(menu_cam)+EntityY(menu_target)
 		dz# = -EntityZ(menu_cam)+EntityZ(menu_target)
-		AlignToVector menu_cam,dx,dy,dz,3,.15^(main_gspe#)
+		AlignToVector menu_cam,dx,dy,dz,3,turnspeed
+		RotateEntity menu_cam, EntityPitch(menu_cam), EntityYaw(menu_cam), 0
 		dist# = EntityDistance(menu_cam,menu_target)
 		Util_Approach(menu_cam,EntityX(menu_target)-dx*15.0/dist,EntityY(menu_target)-dy*15.0/dist,EntityZ(menu_target)-dz*15.0/dist,.15)
 	ElseIf menu_credits
-		AlignToVector menu_cam,0,-1,0,3,.15^(main_gspe#)
+		AlignToVector menu_cam,0,-1,0,3,turnspeed
 	ElseIf menu_netgame
-		AlignToVector menu_cam,-1,0,0,3,.15^(main_gspe#)
+		AlignToVector menu_cam,-1,0,0,3,turnspeed
 	Else
-		AlignToVector menu_cam,0,0,1,3,.15^(main_gspe#)
+		AlignToVector menu_cam,0,0,1,3,turnspeed
+		RotateEntity menu_cam, EntityPitch(menu_cam), EntityYaw(menu_cam), 0
 		Util_Approach(menu_cam,0,0,0,.15)
 	EndIf
 End Function
@@ -719,7 +723,7 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 		menu_win4\hide = 0
 		menu_options = 1
 	Case "mrkeks"
-		ExecFile "http://www.mrkeks.net"
+		ExecFile "https://mrkeks.net"
 	Case "end"
 		menu_end = 1
 	Case "restart"
@@ -814,7 +818,7 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 			main_showminiplayer = 0
 			main_showminimap = 0
 		Else
-			main_showminiplayer = 1
+			main_showminiplayer = 0
 			main_showminimap = 1
 		EndIf
 		
@@ -1027,19 +1031,19 @@ End Function
 
 Function Menu_CreateCredits$()
 	If main_lang = "de_"
-		s$ = 	  "DGX9142*2004-2009 von Mr.Keks#www.mrkeks.net+;"
+		s$ = 	  "DGX9142*2004-2009 von Mr.Keks#www.mrkeks.net+#(Released: 2019)#;"
 		s$ = s$ + "Benjamin (Mr.Keks) Bisping*Programmierung#Interface-Design#Maps##Steffen (CdV) Altmeier*Grafik#Schiffsdesign#Maps#;"
-		s$ = s$ + "DerHase*www.isolationshaft.de+Zusätzliche Modelle#Texturen##Sebastian Schell*www.sebastian-schell.de+Musik#;"
-		s$ = s$ + "Programme, die sich als nützlich erwiesen:*Blitz3d#GIMP2.0#Cinema4d#gile[s]#UnrealSoftware BitmapFontWizzard#BigBug's B3d-Exporter For C4d#;"
+		s$ = s$ + "DerHase*www.isolationshaft.de+Zusaetzliche Modelle#Texturen##Sebastian Schell*www.sebastian-schell.de+Musik#;"
+		s$ = s$ + "Programme, die sich als nuetzlich erwiesen:*Blitz3d#GIMP2.0#Cinema4d#gile[s]#UnrealSoftware BitmapFontWizzard#BigBug's B3d-Exporter For C4d#;"
 		s$ = s$ + "Dank an*Peer#CodeMaster#INpac#todes\*#Jan_#;"
-		s$ = s$ + "Grüße an*Feuerware#Fetze#UnrealSoftware#Deutsche BlitzBasic Community#All meine verloren gegangenen Grafiker#k.o.g.#Ninja Monkeys#;<"
+		s$ = s$ + "Gruesse an*Feuerware#Fetze#UnrealSoftware#Deutsche BlitzBasic Community#All meine verloren gegangenen Grafiker#k.o.g.#Ninja Monkeys#;<"
 	Else
-		s$ = 	  "DGX9142*2004-2009 by Mr.Keks#www.mrkeks.net+;"
+		s$ = 	  "DGX9142*2004-2009 by Mr.Keks#www.mrkeks.net+#(Released: 2019)#;"
 		s$ = s$ + "Benjamin (Mr.Keks) Bisping*Programming#Interface Design#Maps##Steffen (CdV) Altmeier*Graphics#Ship Design#Maps#;"
 		s$ = s$ + "DerHase*www.isolationshaft.de+Additional Graphics#Textures##Sebastian Schell*www.sebastian-schell.de+Music#;"
 		s$ = s$ + "Programs that turned out useful:*Blitz3d#GIMP2.0#Cinema4d#gile[s]#UnrealSoftware BitmapFontWizzard#BigBug's B3d-Exporter for C4d#;"
 		s$ = s$ + "Thanks to*Peer#CodeMaster#INpac#todes\*#Jan_#;"
-		s$ = s$ + "Greetings to*Feuerware#Fetze#UnrealSoftware#German BlitzBasic Community#All my lost graphic artists#k.o.g.#Ninja Monkeys#;<"
+		s$ = s$ + "Greetings to*Feuerware#Fetze#UnrealSoftware#German BlitzBasic Community#All my lost graphics artists#k.o.g.#Ninja Monkeys#;<"
 	EndIf
 	Return s
 End Function

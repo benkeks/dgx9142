@@ -4,11 +4,6 @@ mesh{
 	pitch = -90
 }
 
-material{
-	fx = 4
-}
-
-
 <dot3:1
 
 texture{
@@ -21,18 +16,18 @@ texture{
 }
 
 texture{
-        file =  GFX/SHIPS/edestroyer/edestroyer.png
-        blend = 2
-        layer = 3
-}
-
-texture{
         file =  GFX/SHIPS/edestroyer/tex.jpg
         blend = 5
-        layer = 4
+        layer = 3
         scalex = .17
         scaley = .17
         roll = 180
+}
+
+texture{
+        file =  GFX/SHIPS/edestroyer/edestroyer.png
+        blend = 2
+        layer = 4
 }
 
 >

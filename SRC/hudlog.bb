@@ -107,7 +107,7 @@ Function HUD_PrintLog(txt$,r=255,g=255,b=255,time=20000,group=0)
 	l.logtxt = New logtxt
 	l\mesh = Txt_Text(txt$, hud_font, hud_cam_piv,0,550)
 	If group=1
-		PositionEntity l\mesh,-MeshWidth(l\mesh)/2,150,350
+		PositionEntity l\mesh,-MeshWidth(l\mesh)/2,180 * main_hheight / main_hwidth,350
 		l\group = 1
 	Else
 		EntityParent l\mesh, hud_logpiv

@@ -19,8 +19,10 @@ RAM     |  1 GB
 Disk    |  100 MB
 GPU     |  128 MB GPU Memory, DirektX 7 Support
 
-On newer Windows versions, there might be problems with DX7-games. I mostly
-tested the game with Wine on Ubuntu, where it works fine.
+On newer Windows versions, there might be problems with DX7-games.
+
+I mostly tested the game with Wine (32 bit edition) on Ubuntu and
+Debian, where it works fine.
 
 ## 2. MANUAL: HOW TO PLAY
 
@@ -47,7 +49,7 @@ The *fighting* is quite similar to FreeSpace, Freelancer and other space games.
 * `Tab`: enable the after burner
 * Middle mouse button: lock targets (highlighted by a rectangle)
 * Left/right mouse button: fire at the targeted ship
-* `Ctrl` trigger special ability. (E.g. anti-missile EMP, mines, sentry gun placement – not every ship class has one!)
+* `Ctrl`: trigger special ability. (E.g. anti-missile EMP, mines, sentry gun placement – not every ship class has one!)
 
 For *overview purposes* there are additional controls:
 
@@ -70,9 +72,9 @@ Have fun playing!
 
 ----------------------------------------------------------------
 
-## 3. PROGRAMMER'S NOTE: TEN YEARS
+## 3. PROGRAMMER'S NOTE: FINALLY FINISH SOMETHING
 
-It's been more than ten years since I started working on DGX9142 on
+It's been fifteen years since I started working on DGX9142 on
 25 March 2004. Actually, I planned to make a little game over the
 Easter break of 2004. I was 15 years old at that time.
 
@@ -84,16 +86,13 @@ contributed to DGX9142 do quite different things by now. For my part,
 I am more into theoretical computer science, print design and politics
 today.
 
-Over the last six years, DGX9142 has hardly been developed any further.
-The last public alpha was released in March 2008. So I and Steff decided
-to abandon the project. We don't want it to rot on our hard drives.
-Thus we release it. This final release is in a way the most unfinished
-version of DGX9142 that has ever been published: Some textures are
-missing, the net code most likely won't work properly, and there is no
-tweaked balancing.
+Over the last ten years, DGX9142 has hardly been developed any further.
+The last public alpha was released in March 2008. This final release is
+in a way the most unfinished version of DGX9142 that has ever been
+published: Some textures are missing, the net code most likely won't
+work properly, and there is no tweaked balancing.
 
-We hope you enjoy the game anyway. :)
-   -- 25 December 2015, Benjamin Bisping (aka Mr.Keks)
+I hope you enjoy the game anyway. :)
 
 ## 4. REDISTRIBUTION?
 
@@ -106,11 +105,12 @@ Still: Feel free to use the source in any way you like, be it in other
 projects or in a more polished version of DGX.
 
 To build the source, you will need Blitz3d. It can be obtained from
-<https://nitrologic.itch.io/blitz3d> for free. Its source code can also be found
-on [GitHub](https://github.com/blitz-research/blitz3d).
+<https://blitzresearch.itch.io/blitz3d> for free. Its source code can also be
+found on [GitHub](https://github.com/blitz-research/blitz3d).
 
 If you're on Linux, you can use the Makefile. Just chage `BCC` in `Makefile` to
 point to your `blitzcc.exe` and run `make run` to build and start the game.
+For `make release`, you need `rsync`.
 
 If you continue DGX and publish your work, please include the original credits
 with it. The third party parts within DGX are marked as such by comments.

@@ -22,7 +22,8 @@ Global hud_minimode = 0
 Function Hud_InitMinimap()
 	hud_minimapcam = CreateCamera()
 	CameraClsMode hud_minimapcam,0,1
-	HideEntity hud_minimapcam
+	;HideEntity hud_minimapcam
+	CameraProjMode hud_minimapcam, 0
 	CameraZoom hud_minimapcam,6
 	PositionEntity hud_minimapcam,0,64000,64000
 	
@@ -129,15 +130,20 @@ Function Hud_UpdateMinimap()
 	ShowEntity hud_minimap
 	
 	If hud_reallyquit + hud_pause = 0 And hud_mode = 0 And main_showminimap = 1 Then
-		HideEntity cc_cam
-		ShowEntity hud_minimapcam
-		
-		CameraViewport hud_minimapcam,780*main_width/1024,30*main_height/hud_height,250*main_width/1024,250*main_width/1024
-		
+		;HideEntity cc_cam
+		;ShowEntity hud_minimapcam
+		CameraProjMode cc_cam,0
+		CameraProjMode hud_minimapcam,1
+
+		;CameraViewport hud_minimapcam,780*main_width/1024,30*main_height/hud_height,250*main_width/1024,250*main_width/1024
+		CameraViewport hud_minimapcam,785*main_width/1024,main_height-110*main_height/hud_height,190*main_width/1024,190*main_width/1024
+
 		RenderWorld()
 		
-		HideEntity hud_minimapcam
-		ShowEntity cc_cam
+		;HideEntity hud_minimapcam
+		;ShowEntity cc_cam
+		CameraProjMode cc_cam,1
+		CameraProjMode hud_minimapcam,0
 	EndIf
 End Function
 

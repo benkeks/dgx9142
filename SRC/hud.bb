@@ -269,7 +269,7 @@ Function HUD_Init()
 	EntityColor hud_weappower\mesh,5,205,5
 	EntityTexture hud_weappower\mesh,tex 
 	
-	hud_health = GUI_AddGadget(3,-92,-59,152,12,hud_sunit1,2) ; hülle
+	hud_health = GUI_AddGadget(3,-92,-59,152,12,hud_sunit1,2) ; hï¿½lle
 	EntityColor hud_health\mesh,250,0,0
 	EntityTexture hud_health\mesh,tex
 	hud_shields = GUI_AddGadget(3,-92,-72,152,12,hud_sunit1,2) ; schilde
@@ -279,6 +279,7 @@ Function HUD_Init()
 	hud_sstatepic = Util_LoadSprite(hudd$+"shield.png",1+2,hud_sunit1)
 	ScaleMesh hud_sstatepic,40,40,1
 	EntityOrder hud_sstatepic,-11
+	HideEntity hud_sstatepic
 	
 	hud_psstatepic = CopyEntity(hud_sstatepic,hud_sunit1)
 	PositionEntity hud_psstatepic,-27,8,0
@@ -452,7 +453,7 @@ Function HUD_Init()
 	hud_radio	= LoadSound("SFX/GUI/radio.ogg")
 	hud_locked	= LoadSound("SFX/GUI/locked.mp3")
 	
-	hud_continue = GUI_AddGadget(2, -20,-50,40,10,0,2)
+	hud_continue = GUI_AddGadget(2, -20, -75 * main_hheight / main_hwidth, 40,10,0,2)
 	EntityParent hud_continue\mesh, hud_start
 	GUI_GadTexture(Handle(hud_continue),hud_buttontex)
 	GUI_SetCaption(Handle(hud_continue), lang_continue)
@@ -755,7 +756,7 @@ End Function
 Function HUD_SetText(txt$,par,x=0,y=0)
 	hud_txt = Txt_Text(txt$, hud_font, par)
 	PositionEntity hud_txt,x,y,-20
-	ScaleEntity hud_txt,1.5,1.5,1.5
+	ScaleEntity hud_txt,1,1,1
 	EntityOrder hud_txt,-14
 	Return hud_txt
 End Function
@@ -860,7 +861,7 @@ Function HUD_Update()
 	Select hud_mode
 	Case 0	
 		GUI_Update()
-		EntityAlpha hud_psstatepic,main_pl\shields / main_pl\shc\Shields
+		EntityAlpha hud_psstatepic, main_showminiplayer * main_pl\shields / main_pl\shc\Shields
 		If main_pl\indanger < 10000
 			hud_warningt = hud_warningt + 2*main_gspe
 			If hud_warningt > main_pl\indanger
