@@ -3,7 +3,7 @@ CFLAGS   =
 MAINFILE = main.bb
 EXENAME  = DGX9142.exe
 FMODDLL  = ~/.wine/drive_c/Program\ Files/Blitz3D/bin/fmod.dll
-RELEASENAME = DGX9142_011
+RELEASENAME = DGX9142_020
 RELEASEDIR = ../release/$(RELEASENAME)
 
 run: $(MAINFILE)
