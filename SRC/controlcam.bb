@@ -587,12 +587,12 @@ Function CC_Control()
 		CC_LoadControls(datad$+"controls_"+cc_profile+".ini")
 	EndIf
 	
-	x# = (MouseX()-main_hwidth)*-1.0/main_hwidth
-	y# = (MouseY()-main_hheight)*1.0/main_hheight
+	Local x# = (MouseX()-main_hwidth)*-1.0/main_hwidth
+	Local y# = (MouseY()-main_hheight)*1.0/main_hheight
 	
 	If cc_joystick Then
-		x# = JoyX()
-		y# = JoyY()
+		x# = -JoyX()
+		y# = -JoyY()
 		MoveMouse main_width/2, main_height/2
 	EndIf
 	
