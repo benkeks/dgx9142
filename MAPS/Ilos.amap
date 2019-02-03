@@ -290,6 +290,7 @@ normal=GFX/ENVIRON/normalpixels(c).png
 		x = 0
 		y = 0
 		z = 0
+		yaw = 180
 	}
 
 	Spawn{
@@ -384,6 +385,7 @@ normal=GFX/ENVIRON/normalpixels(c).png
 		x = 0
 		y = 0
 		z = 0
+		yaw = 180
 	}
 	
 	Spawn{
