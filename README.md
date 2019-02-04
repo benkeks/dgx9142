@@ -6,6 +6,8 @@ DGX BattleSpace 9142
 * DerHase - <http://www.budapestfastfood.com>
 * Sebastian Schell - <http://sebastian-schell.de>
 
+[Play the game on itch.io!](https://benkeks.itch.io/dgx9142)
+
 ![Ingame Screenshot](https://mrkeks.net/pics/dgx2/Screen31.jpg)
 
 ## 1. INSTALLATION & SYSTEM REQUIREMENTS
