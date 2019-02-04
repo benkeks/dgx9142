@@ -2,6 +2,7 @@ Type explosion
 	Field typ
 	Field sur
 	Field x#,y#,z#
+	Field speedx#, speedy#, speedz#
 	Field rota#
 	Field sx#,sy#,tx#,ty#
 	Field scalefact#
@@ -373,7 +374,7 @@ Function FX_CreateExplosion2(x#,y#,z#,sx#=5,sy#=5,r=255,g=255,b=255,endtime=100,
 	;Return e\mesh
 End Function
 
-Function FX_CreateExplosion3(x#,y#,z#,sx#=5,sy#=5,r=255,g=255,b=255,endtime=100,scalefact#=1,fadeout=0)
+Function FX_CreateExplosion3.explosion(x#,y#,z#,sx#=5,sy#=5,r=255,g=255,b=255,endtime=100,scalefact#=1,fadeout=0)
 	e.explosion = New explosion
 	e\sur		= fx_explo3sur
 	e\typ		= 3
@@ -405,6 +406,7 @@ Function FX_CreateExplosion3(x#,y#,z#,sx#=5,sy#=5,r=255,g=255,b=255,endtime=100,
 	;ChannelPitch chan,Rand(8000,22000)
 	;ChannelVolume chan,sx/7
 	;Return e\mesh
+	Return e
 End Function
 
 Function FX_CreateExplosion4(x#,y#,z#,sx#=5,sy#=5,r=255,g=255,b=255,endtime=100,scalefact#=1,fadeout=0)
@@ -452,6 +454,10 @@ Function FX_UpdateExplosions(pause=False)
 		If pause = 0 Then e\time	= e\time + main_gspe
 		
 		If main_dedicate = 0 Then 
+			e\x = e\x + main_gspe * e\speedx
+			e\y = e\y + main_gspe * e\speedy
+			e\z = e\z + main_gspe * e\speedz
+			
 			TFormPoint e\x,e\y,e\z,0,fx_explosion
 			x#	= TFormedX()
 			y#	= TFormedY()

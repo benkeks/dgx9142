@@ -718,12 +718,20 @@ Function Wea_UpdateShots()
 						EndIf
 					Next
 					If sho\swc\shockwave
+						spx# = sho\speed * GetMatElement(sho\mesh, 2, 0)
+						spy# = sho\speed * GetMatElement(sho\mesh, 2, 1)
+						spz# = sho\speed * GetMatElement(sho\mesh, 2, 2)
 						x#	= sho\x#
 						y#	= sho\y#
 						z#	= sho\z#
-						fx_createexplosion3(x,y,z,2,2,355,355,355,Rand(100,150),sho\swc\shockwave,1)
-						fx_createexplosion3(x,y,z,2,2,355,355,355,Rand(100,150),sho\swc\shockwave,1)
-						fx_createexplosion3(x,y,z,2,2,355,5,5,Rand(100,150),sho\swc\shockwave,1)
+						For i = 0 to 2
+							e.explosion = fx_createexplosion3(x,y,z,2,2,355,355,355,Rand(100,150),sho\swc\shockwave,1)
+							e\speedx = spx#*Rnd(0.9,1.1) : e\speedy = spy#*Rnd(0.9,1.1) : e\speedz = spz#*Rnd(0.9,1.1) 
+							e = fx_createexplosion3(x,y,z,2,2,355,355,355,Rand(100,150),sho\swc\shockwave,1)
+							e\speedx = spx#*Rnd(0.9,1.1) : e\speedy = spy#*Rnd(0.9,1.1) : e\speedz = spz#*Rnd(0.9,1.1) 
+							e = fx_createexplosion3(x,y,z,2,2,355,5,5,Rand(100,150),sho\swc\shockwave,1)
+							e\speedx = spx#*Rnd(0.9,1.1) : e\speedy = spy#*Rnd(0.9,1.1) : e\speedz = spz#*Rnd(0.9,1.1)
+						Next
 					EndIf
 				EndIf
 				
