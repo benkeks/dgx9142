@@ -178,7 +178,7 @@ Function Menu_Start()
 		play.Tgadget = MGui_CreateButton.TGadget(40,1,39,8, "play", 100,200,255, g ,"ms_play")
 			play\anim = 100
 			play\hide = 1
-		pcount.TGadget = MGui_CreateCombo.TGadget(40,9,39,6, "players", g , "ms_pcount")
+		pcount.TGadget = MGui_CreateCombo.TGadget(40,9,39,6, "bots", g , "ms_pcount")
 			MGui_AddItem(pcount,"8")
 			MGui_AddItem(pcount,"16")
 			MGui_AddItem(pcount,"24")
@@ -232,7 +232,7 @@ Function Menu_Start()
 		g\anim = 100
 		
 		gfxmode.TGadget = MGui_CreateCombo.TGadget(1,1,50,5, "resolution", g , "og_setres")
-		MGui_SetHint(gfxmode,"Choose your favorite screen resolution. Higher resolutions will have negative effects on the performance.", "W�hle deine Aufl�sung. Hohe Aufl�sungen werden die Performance negativ beeinflussen.")
+		MGui_SetHint(gfxmode,"Choose your favorite screen resolution. Higher resolutions will have negative effects on the performance.", "Waehle deine Aufloesung. Hohe Aufloesungen werden die Performance negativ beeinflussen.")
 			N = CountGfxModes()
 			For i = 1 To N
 				If GfxModeWidth(i)>=800 Then 
@@ -245,19 +245,19 @@ Function Menu_Start()
 			Next
 			
 		windowed.TGadget = MGui_CreateTick.TGadget(1,8,5,5, "windowed", (main_mode=2), g, "og_windowed")
-		MGui_SetHint(windowed,"Should the game be displayed in windowed mode? (Otherwise: Fullscreen)","L�sst das Programm im Fenstermodus anzeigen, sonst Vollbild.")
+		MGui_SetHint(windowed,"Should the game be displayed in windowed mode? (Otherwise: Fullscreen)","Laesst das Programm im Fenstermodus anzeigen, sonst Vollbild.")
 		
 		vsync.TGadget = MGui_CreateTick.TGadget(1,14,5,5, "vsync", (main_vsync=1), g, "og_vsync")
-		MGui_SetHint(vsync,"Vertical synchronization avoids screen tearing.", "Vertikale Synchronisation verhindert zerst�ckelte Frames.")
+		MGui_SetHint(vsync,"Vertical synchronization avoids screen tearing.", "Vertikale Synchronisation verhindert zerstueckelte Frames.")
 		
 		antia.TGadget = MGui_CreateTick.TGadget(1,20,5,5, "antialiasing", (main_aalias), g, "og_antia")
-		MGui_SetHint(antia,"Antialiasing will make the edges look smoother, but costs quite some performance.","Antialiazsing gl�ttet Kanten im Bild, kostet aber Rechenleistung.")
+		MGui_SetHint(antia,"Antialiasing will make the edges look smoother, but costs quite some performance.","Antialiazsing glaettet Kanten im Bild, kostet aber Rechenleistung.")
 		
 		texd.TGadget = MGui_CreateTick.TGadget(1,26,5,5, "high texture detail", (main_texdetail=2), g, "og_texd")
 		MGui_SetHint(texd,"Only deaktivate this if you are experiencing severe rendering problems!", "Nur deaktivieren, wenn die Grafik komplett spinnt!")
 		
 		detail.TGadget = MGui_CreateSlider.TGadget(1,37,50,2.5, "details", util_minmax(main_detail * 2,0,4), 4, g , "og_detail")
-		MGui_SetHint(detail,"Choos the level of detail for particle effects, background imagery etc.","W�hle den Detailgrad f�r Partikeleffekte, Hintergrundbilder etc.")
+		MGui_SetHint(detail,"Choos the level of detail for particle effects, background imagery etc.","Waehle den Detailgrad fuer Partikeleffekte, Hintergrundbilder etc.")
 		
 		bloom.TGadget = MGui_CreateSlider.TGadget(1,46,50,2.5, "bloomfilter", util_minmax(main_bloom * 4,0,4), 4, g, "og_bloom")
 		MGui_SetHint(bloom,"Improves light effects (looks like poor HDR-Rendering), but will slow down the game extremely.","Verbessert Lichteffekte, sieht wie schlechtes HDR aus. Warnung: Halbiert die Performance!")
@@ -436,6 +436,16 @@ Function Menu_Start()
 			pname.TGadget = MGui_CreateInput.TGadget(1,13,80,6, "please enter your name!", "", g ,"op_setname")
 				pname\anim = 100
 				MGui_SetActive(pname, True)
+			
+			If main_mode <> 1 Then
+				fullscreenb.TGadget = MGui_CreateButton.TGadget(1,21,35,6, "enter fullscreen", 100,100,100, g ,"op_fullscreen_toggle_restart", 28)
+					fullscreenb\anim = 100
+					MGui_SetHint(fullscreenb, "Restart the game in fullscreen mode. If this fails, delete DATA/graphics.ini!", "Neustart des Spiels im Vollbild. Bei Problemen DATA/graphics.ini loeschen!")
+			Else
+				fullscreenb.TGadget = MGui_CreateButton.TGadget(1,21,35,6, "exit fullscreen", 100,100,100, g ,"op_fullscreen_toggle_restart", 28)
+					fullscreenb\anim = 100
+					MGui_SetHint(fullscreenb, "Restart the game in windowed mode. If this fails, delete DATA/graphics.ini!", "Neustart des Spiels im Fenstermodus. Bei Problemen DATA/graphics.ini loeschen!")
+			EndIf
 			
 			oback.Tgadget = MGui_CreateButton.TGadget(54,21,25,6, "continue", 100,200,255, g ,"op_restart", 28)
 				oback\anim = 100
@@ -734,6 +744,22 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 			menu_end = 1
 			Main_Restart = 1
 		EndIf
+	Case "op_fullscreen_toggle_restart"
+		If main_mode <> 1 Then
+			; assuming that the first or last gfxmode is maximal...
+			Local maxGfxMode = 1
+			If GfxModeWidth(1) < GfxModeWidth(CountGfxModes()) Then maxGfxMode = CountGfxModes()
+			main_width = GfxModeWidth(maxGfxMode)
+			main_height = GfxModeHeight(maxGfxMode)
+			main_bit = GfxModeDepth(maxGfxMode)
+			main_mode = 1
+		Else
+			main_mode = 2
+		EndIf
+		
+		Main_SaveGfx()
+		menu_end = 1
+		Main_Restart = 1
 		
 	Case "ms_back"
 		menu_selmap = Null
