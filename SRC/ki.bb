@@ -1,11 +1,11 @@
 Type kiplayer
-	Field occupation ; Basis verteidigen, Angreifen und �hnliches
+	Field occupation ; Basis verteidigen, Angreifen und aehnliches
 	Field globaction ; 1 = attack, 2 = flyto, 3 = abdrehn, 4 = flucht
 	Field action,dodge, dodgetime ; 1 = move, 2 = attack
 	Field target ; Zielentity
 	Field ttarget
 	Field tars.ship ; Zieltype, falls auf Schiff gerichtet
-	Field sh.ship ; schiff, zu dem die KI geh�rt :)
+	Field sh.ship ; schiff, zu dem die KI gehoert
 	Field attacktime
 	Field turnp#, turny#
 	Field flyToPivot
@@ -23,14 +23,14 @@ End Function
 Function KI_TurnShip(ki.kiplayer, dp#, dy#)
 	Local alignSpe# = .9^main_gspe
 	
-	If Abs(dp) < 1 Then dp = 0
-	If Abs(dy) < 1 Then dy = 0
+	If Abs(dp) < 10 Then dp = dp * .1 * Abs(dp)
+	If Abs(dy) < 10 Then dy = dy * .1 * Abs(dy)
 	
-	ki\turnp	= Util_MinMax( ki\turnp*alignSpe - Float(Sgn(dp-ki\turnp*ki\sh\shc\turnspeed*30.0)) * .5 * (alignSpe-1.0), -1,1 ) 
-	ki\turny	= Util_MinMax( ki\turny*alignSpe - Float(Sgn(dy-ki\turny*ki\sh\shc\turnspeed*30.0)) * .5 * (alignSpe-1.0), -1,1 ) 
+	ki\turnp	= Util_MinMax( ki\turnp*alignSpe - Float(Sgn(dp-ki\turnp*ki\sh\shc\turnspeed*10.0)) * .2 * (alignSpe-1.0), -1,1 ) 
+	ki\turny	= Util_MinMax( ki\turny*alignSpe - Float(Sgn(dy-ki\turny*ki\sh\shc\turnspeed*10.0)) * .2 * (alignSpe-1.0), -1,1 ) 
 	
-	If Abs(dp) < 20 Then ki\turnp = ki\turnp * (.85+Abs(dp)*.05)^main_gspe
-	If Abs(dy) < 20 Then ki\turny = ki\turny * (.85+Abs(dy)*.05)^main_gspe
+	;If Abs(dp) < 20 Then ki\turnp = ki\turnp * (.85+Abs(dp)*.05)^main_gspe
+	;If Abs(dy) < 20 Then ki\turny = ki\turny * (.85+Abs(dy)*.05)^main_gspe
 	
 	ki\sh\tspitch	= Util_MinMax( ki\sh\tspitch*alignSpe#		+ (1.0-alignSpe#) * ki\turnp*ki\sh\shc\turnspeed,	-ki\sh\shc\turnspeed,ki\sh\shc\turnspeed)
 	ki\sh\tsyaw	= Util_MinMax( ki\sh\tsyaw*alignSpe#		+ (1.0-alignSpe#) * ki\turny*ki\sh\shc\turnspeed,	-ki\sh\shc\turnspeed,ki\sh\shc\turnspeed)

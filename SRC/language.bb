@@ -2,6 +2,9 @@
 Global lang_win$
 Global lang_quit_game$
 
+Global lang_quit_game_button$
+Global lang_commander_mode$
+
 Global lang_pause$
 
 Global lang_continue$
@@ -39,6 +42,10 @@ Function Lang_Load(file$)
 				lang_win = paras[1]
 			Case "quit_game"
 				lang_quit_game = paras[1]
+			Case "quit_game_button"
+				lang_quit_game_button$ = paras[1]
+			Case "commander_mode"
+				lang_commander_mode$ = paras[1]
 			Case "pause"
 				lang_pause = paras[1]
 			Case "continue"

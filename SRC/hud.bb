@@ -85,6 +85,7 @@ Global hud_leavingground
 Global hud_lastglwarning#
 
 Global hud_continue.gadget
+Global hud_leavegame.gadget
 
 Global hud_targetlock, hud_locked
 Global hud_lasttargetprogress
@@ -460,6 +461,11 @@ Function HUD_Init()
 	
 	hud_end = CreatePivot()
 	
+	hud_leavegame = GUI_AddGadget(2, 70, 70.0 * main_hheight / main_hwidth, 40,10,0,2)
+	EntityParent hud_leavegame\mesh, hud_score
+	GUI_GadTexture(Handle(hud_leavegame),hud_buttontex)
+	GUI_SetCaption(Handle(hud_leavegame), lang_quit_game_button)
+	
 	HUD_InitPlayers()
 End Function
 
@@ -541,6 +547,7 @@ Function HUD_SetMode(mode)
 		HideEntity hud_start
 		ShowEntity hud_ishippiv
 		ShowEntity hud_targetlock
+		HideEntity hud_leavegame\mesh
 		
 		cc_spectating = 0
 		
@@ -558,6 +565,7 @@ Function HUD_SetMode(mode)
 		ShowEntity gui_par
 		HideEntity hud_start
 		HideEntity hud_ishippiv
+		ShowEntity hud_leavegame\mesh
 		
 		main_pl\target.ship = Null
 		HUD_ChangeTarget(0)
@@ -591,6 +599,7 @@ Function HUD_SetMode(mode)
 		ShowEntity hud_start
 		HideEntity hud_end
 		HideEntity hud_ishippiv
+		HideEntity hud_leavegame\mesh
 				
 		cc_spectating = 1
 		
@@ -612,6 +621,7 @@ Function HUD_SetMode(mode)
 		HideEntity hud_start
 		HideEntity hud_minimap
 		HideEntity hud_ishippiv
+		HideEntity hud_leavegame\mesh
 		
 		cc_spectating = 1
 		
@@ -630,6 +640,7 @@ Function HUD_SetMode(mode)
 		HideEntity hud_start
 		HideEntity hud_ishippiv
 		ShowEntity hud_end
+		HideEntity hud_leavegame\mesh
 		
 		cc_spectating = 0
 		
@@ -652,6 +663,7 @@ Function HUD_SetMode(mode)
 		HideEntity hud_start
 		HideEntity hud_end
 		ShowEntity hud_ishippiv
+		HideEntity hud_leavegame\mesh
 		
 		cc_spectating = 2
 		CC_SetTarget(0,6)
@@ -781,6 +793,7 @@ Function HUD_Update()
 	Else
 		HideEntity hud_pausemesh
 	EndIf
+	
 	
 	ScaleEntity hud_cam_piv, 1, 1, cc_cam_realzoom
 	
@@ -1211,6 +1224,12 @@ Function HUD_Update()
 			HideEntity hud_compiv
 		EndIf
 		GUI_Update()
+		
+		If gui_event = 401 And gui_eventsource = Handle(hud_leavegame) Then
+			hud_reallyquit = 1
+			PlaySound hud_warning
+		EndIf
+		
 		HUD_SelectScreen()
 	Case 2
 		GUI_UpdateGadget(hud_continue, 100*cc_cam_realzoom)
