@@ -444,15 +444,15 @@ Function Wea_UpdateShots()
 					
 					If EntityInView(sho\mesh,cc_cam) And Rand(0,4)=1
 						If sho\swc\hitcolorR + sho\swc\hitcolorG + sho\swc\hitcolorB = 0 Then 
-							sx#	= sho\swc\hdamage / Rnd(50,55) + 1
-							sy# = sho\swc\hdamage / Rnd(50,55) + 1
+							sx# = sho\swc\hdamage / Rnd(20,25) + 2
+							sy# = sho\swc\hdamage / Rnd(20,25) + 2
 							FX_CreateExplosion(x#,y#,z#,sx#,sy#,Rnd(230,255),Rnd(99,160),Rnd(60),Rand(50,99))
 							sx# = sx * Rnd(.6,1)
 							sy# = sy * Rnd(.6,1)
 							FX_CreateExplosion(x#,y#,z#,sx#,sy#,Rnd(200,255),Rnd(150,210),Rnd(99,160),Rand(50,99))
 						Else
-							sx#	= sho\swc\hdamage / Rnd(50,55) + 1
-							sy# = sho\swc\hdamage / Rnd(50,55) + 1
+							sx# = sho\swc\hdamage / Rnd(20,25) + 2
+							sy# = sho\swc\hdamage / Rnd(20,25) + 2
 							FX_CreateExplosion(x#,y#,z#,sx#,sy#,sho\swc\hitcolorR + Rnd(0,50),sho\swc\hitcolorG + Rnd(0,50), sho\swc\hitcolorB + Rnd(0,50) ,Rand(50,99))
 							sx# = sx * Rnd(.6,1)
 							sy# = sy * Rnd(.6,1)

@@ -33,6 +33,5 @@ release:
 	
 releaseitch:
 	make release
-	cd $(RELEASEDIR)
-	butler push dgx9142 benkeks/dgx9142:win32 --userversion $(RELEASEVERSION)
+	butler push $(RELEASEDIR) benkeks/dgx9142:win32 --userversion $(RELEASEVERSION)
 
