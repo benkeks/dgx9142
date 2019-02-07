@@ -56,14 +56,14 @@ End Function
 
 Function HUD_ShowPlayers()
 	ShowEntity hud_list
-	y1 = 150
-	y2 = 150
+	y1 = 180 * main_hheight / main_hwidth
+	y2 = 180 * main_hheight / main_hwidth
 	If hud_lshow=0 Or Rand(20)=1 Then
 		HUD_SortPlayers()
 		If hud_lvictories Then FreeEntity hud_lvictories
 		txt = Txt_Text(Int(teamid[1]\victories)+":"+Int(teamid[2]\victories), Hud_font, hud_list)
 		ScaleMesh txt,4,4,4
-		PositionMesh txt,-MeshWidth(txt)/2,170,0
+		PositionMesh txt,-MeshWidth(txt)/2,210 * main_hheight / main_hwidth,0
 		EntityOrder txt,-25
 		hud_lvictories = txt
 	EndIf

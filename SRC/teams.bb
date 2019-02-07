@@ -194,6 +194,6 @@ Function Team_Parse(stream)
 	mesh = CreateSprite(hud_list)
 	EntityTexture mesh,t\logo
 	ScaleSprite mesh,40,40
-	PositionEntity mesh,-80+(t\id=2)*160,185,0
+	PositionEntity mesh,-80+(t\id=2)*160,216 * main_hheight / main_hwidth,0
 	EntityOrder mesh,-25
 End Function
