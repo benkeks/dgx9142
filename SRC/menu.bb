@@ -244,7 +244,7 @@ Function Menu_Start()
 				EndIf
 			Next
 			
-		windowed.TGadget = MGui_CreateTick.TGadget(1,8,5,5, "windowed", (main_mode=2), g, "og_windowed")
+		windowed.TGadget = MGui_CreateTick.TGadget(1,8,5,5, "windowed", (main_mode=6), g, "og_windowed")
 		MGui_SetHint(windowed,"Should the game be displayed in windowed mode? (Otherwise: Fullscreen)","Laesst das Programm im Fenstermodus anzeigen, sonst Vollbild.")
 		
 		vsync.TGadget = MGui_CreateTick.TGadget(1,14,5,5, "vsync", (main_vsync=1), g, "og_vsync")
@@ -754,7 +754,7 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 			main_bit = GfxModeDepth(maxGfxMode)
 			main_mode = 1
 		Else
-			main_mode = 2
+			main_mode = 6
 		EndIf
 		
 		Main_SaveGfx()
@@ -823,8 +823,8 @@ Function MGui_Event(SenderHandle,name$) ; meine billige event-verwaltung (=
 		main_bit = paras[1]
 		
 		t.TTick = Object.TTick(menu_gfx[0]\handl)
-		restart = restart + (t\set+1 <> main_mode)
-		main_mode = t\set+1
+		restart = restart + (t\set*5+1 <> main_mode)
+		main_mode = t\set*5+1
 		
 		t.TTick = Object.TTick(menu_gfx[1]\handl)
 		main_vsync = t\set

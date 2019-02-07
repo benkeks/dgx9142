@@ -4,7 +4,7 @@ Global main_hwidth=512
 Global main_hheight=384
 Global main_ratio#
 Global main_bit=32
-Global main_mode=2
+Global main_mode=6
 
 Global main_vsync
 
@@ -87,9 +87,9 @@ Function Main_InitGfx()
 	Until Eof(stream)
 	CloseFile stream
 	
-	If main_mode = 222 Then main_mode = 2 ; windowed per commandline
+	If main_mode = 222 Then main_mode = 6 ; windowed per commandline
 	
-	If main_mode = 2 Then
+	If main_mode = 6 Then
 		If Not Windowed3D() Then
 			DebugLog "Windowed mode not supported! Switch to fullscreen."
 			main_mode = 1
@@ -106,8 +106,8 @@ Function Main_InitGfx()
 	
 	main_ratio = Float(main_height) / main_width
 	
-	If main_mode = 2
-		Graphics3D main_width,main_height,main_bit,2
+	If main_mode = 6
+		Graphics3D main_width,main_height,main_bit,6
 	Else
 		Graphics3D main_width,main_height,main_bit,main_mode
 	EndIf

@@ -2,8 +2,9 @@ BCC      = blitzcc
 CFLAGS   = 
 MAINFILE = main.bb
 EXENAME  = DGX9142.exe
-FMODDLL  = ~/.wine/drive_c/Program\ Files/Blitz3D/bin/fmod.dll
-RELEASENAME = DGX9142_020
+FMODDLL  = ~/.wine/drive_c/Program\ Files/Blitz3d/bin/fmod.dll
+RELEASENAME = dgx9142
+RELEASEVERSION  = 0.2.1
 RELEASEDIR = ../release/$(RELEASENAME)
 
 run: $(MAINFILE)
@@ -29,3 +30,9 @@ release:
 	cp $(EXENAME) changelog.txt README.md $(RELEASEDIR) && \
 	cp $(FMODDLL) $(RELEASEDIR) && \
 	mkdir $(RELEASEDIR)/SCREENS
+	
+releaseitch:
+	make release
+	cd $(RELEASEDIR)
+	butler push dgx9142 benkeks/dgx9142:win32 --userversion $(RELEASEVERSION)
+
