@@ -26,8 +26,8 @@ Function KI_TurnShip(ki.kiplayer, dp#, dy#)
 	If Abs(dp) < 10 Then dp = dp * .1 * Abs(dp)
 	If Abs(dy) < 10 Then dy = dy * .1 * Abs(dy)
 	
-	ki\turnp	= Util_MinMax( ki\turnp*alignSpe - Float(Sgn(dp-ki\turnp*ki\sh\shc\turnspeed*10.0)) * .2 * (alignSpe-1.0), -1,1 ) 
-	ki\turny	= Util_MinMax( ki\turny*alignSpe - Float(Sgn(dy-ki\turny*ki\sh\shc\turnspeed*10.0)) * .2 * (alignSpe-1.0), -1,1 ) 
+	ki\turnp	= Util_MinMax( ki\turnp*alignSpe - Float(Sgn(dp-ki\turnp*ki\sh\shc\turnspeed*10.0)) * .5 * (alignSpe-1.0), -1,1 ) 
+	ki\turny	= Util_MinMax( ki\turny*alignSpe - Float(Sgn(dy-ki\turny*ki\sh\shc\turnspeed*10.0)) * .5 * (alignSpe-1.0), -1,1 ) 
 	
 	;If Abs(dp) < 20 Then ki\turnp = ki\turnp * (.85+Abs(dp)*.05)^main_gspe
 	;If Abs(dy) < 20 Then ki\turny = ki\turny * (.85+Abs(dy)*.05)^main_gspe

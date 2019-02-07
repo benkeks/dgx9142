@@ -432,7 +432,7 @@ Function Wea_UpdateShots()
 					EndIf
 					If sho\par <> Null And (net_isserver=1 Or net = 0)
 						oh = s\hitpoints
-						If s\team <> sho\par\team Then s\hitpoints = s\hitpoints - (sho\swc\hdamage / ts# / 1.25 + sho\swc\hdamage / 5) * main_gspe
+						If s\team <> sho\par\team Then s\hitpoints = s\hitpoints - (sho\swc\hdamage / ts# / 1.1 + sho\swc\hdamage *.05) * main_gspe
 						If oh > 0 And s\hitpoints < 0 Then s\hitby = sho\par\id
 						If net_update Then Wea_SendHit(sho,s)
 					EndIf 
@@ -587,7 +587,7 @@ Function Wea_UpdateShots()
 						EndIf
 						If sho\par <> Null
 							oh = s\hitpoints
-							If s\team <> sho\par\team Then s\hitpoints = s\hitpoints - sho\swc\hdamage / ts# / 1.25 - sho\swc\hdamage / 5
+							If s\team <> sho\par\team Then s\hitpoints = s\hitpoints - sho\swc\hdamage / ts# / 1.1 - sho\swc\hdamage *.05
 							If oh > 0 And s\hitpoints < 0 Then s\hitby = sho\par\id
 							If s = main_pl And s\team <> sho\par\team Then cc_quake = cc_quake + (.1 + sho\swc\hdamage / 150.0) / Float(s\shc\size)
 						EndIf 
