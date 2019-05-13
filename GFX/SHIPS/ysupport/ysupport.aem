@@ -1,0 +1,64 @@
+mesh{
+
+	file = GFX/SHIPS/ysupport/ysupport.3DS
+
+}
+
+entity{
+
+	x = 0
+	y = 0
+	z = 0
+}
+
+
+
+<dot3:1
+
+texture{
+
+	file = 	GFX/SHIPS/ysupport/ysupport_nm.png
+
+
+	blend = 4
+	layer = 1
+}
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/ysupport/ysupport.png
+
+	blend = 5
+	layer = 3
+}
+
+
+
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/ysupport/ysupport_lmap.png
+
+	blend = 3
+
+	layer = 6
+}
+>
+
+<dot3:0
+
+
+
+texture{
+
+	file = 	GFX/SHIPS/ysupport/ysupport_lmap.png
+
+	blend = 3
+
+	layer = 4
+}
+>
