@@ -1,5 +1,5 @@
 Global Mouse_pointer%
-Global Mouse_X#, Mouse_Y#
+Global mouse_x#, mouse_y#
 Global Mouse_gfx$= gfxd$+"menu\mouse.png"
 Global Mouse_gh#
 Const Mouse_gw#=100.0
@@ -8,9 +8,9 @@ Const mouse_size#=5.0
 
 
 Function Mouse_Update()
-	Mouse_x=(Float(MouseX())/main_hwidth-1.0)*Mouse_gw#
-	Mouse_y=(-Float(MouseY())/main_hheight+1.0)*Mouse_gh#
-	PositionEntity Mouse_pointer%,mouse_X,mouse_Y,100
+	mouse_x=(Float(MouseX())/main_hwidth-1.0)*Mouse_gw#
+	mouse_y=(-Float(MouseY())/main_hheight+1.0)*Mouse_gh#
+	PositionEntity Mouse_pointer%,mouse_x,mouse_y,Mouse_gw#
 	TurnEntity mouse_pointer,0,0,main_gspe
 	HidePointer
 End Function

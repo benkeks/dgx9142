@@ -158,8 +158,6 @@ Function MGui_Update()
 			EntityAlpha w\mbg,(1-g\anim/100)*.5
 		Case gtButton
 			b.TButton = Object.TButton(g\Handl)
-			;DebugLog g\rx +" x "+Mouse_X
-			;DebugLog g\ry +" x "+Mouse_y
 			
 			EntityAlpha b\mesh,(1-g\anim/100)*.5
 			PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),-g\anim*2
@@ -185,8 +183,6 @@ Function MGui_Update()
 			EndIf
 		Case gtSlider
 			s.TSlider = Object.TSlider(g\Handl)
-			
-			
 			EntityAlpha s\mesh,(1-g\anim/100)*.5
 			PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),-g\anim*2
 			HideEntity s\mcaption
@@ -221,7 +217,7 @@ Function MGui_Update()
 			HideEntity c\smesh
 			If g\anim = 0
 				ShowEntity c\smesh
-				If c\seld 
+				If c\seld Then
 					If c\lbganim < 100 Then
 						c\lbganim = c\lbganim + 2*main_gspe
 					Else
@@ -232,10 +228,11 @@ Function MGui_Update()
 					EntityAlpha c\lbgmesh,c\lbganim/200.0
 					N = CountChildren(c\lmesh)
 					point = 0
+					Local yOffset# = Util_MinMax(- mouse_gh - (g\ry - n*g\height), 0, g\ry - 1)
 					For i = 1 To N
 						mesh = GetChild(c\lmesh,i)
 						EntityColor mesh,255,255,255
-						If mouse_X>g\rx+g\width And mouse_x<g\rx+g\width*2 And mouse_y<g\ry-g\height*(i-1) And mouse_y>g\ry-g\height*(i-1)-g\height
+						If mouse_x>g\rx+g\width And mouse_x<g\rx+g\width*2 And mouse_y < g\ry-g\height*(i-.5) + yOffset And mouse_y > g\ry-g\height*(i+.25) + yOffset
 							EntityColor mesh,255,200,100
 							point = i
 						EndIf
@@ -252,20 +249,22 @@ Function MGui_Update()
 				Else
 					If c\lbganim > 0 Then c\lbganim = c\lbganim - 2*main_gspe Else c\lbganim = 0
 					ScaleEntity c\lbgmesh,c\lbganim/100.0,1,1
-					EntityAlpha c\lbgmesh,c\lbganim/200.0 
+					EntityAlpha c\lbgmesh,c\lbganim/200.0
 					If mouse_X>g\rx And mouse_x<g\rx+g\width And mouse_y<g\ry And mouse_y>g\ry-g\height Then
 						EntityColor g\mesh,225,225,225
 						If Not MouseDown(1) Then PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),-1
 						If mh Then
 							PlaySound MGui_Click
 							If c\lbgmesh Then FreeEntity c\lbgmesh
-							N = CountChildren(c\lmesh)
-							c\lbgmesh = MGui_Quad(c\mesh,g\width,0,g\width,n*g\height,100,100,100)
+							n = CountChildren(c\lmesh)
+							yOffset# = Util_MinMax(- mouse_gh - (g\ry - n*g\height), 0, g\ry - 1)
+							c\lbgmesh = MGui_Quad(c\mesh,g\width,-yOffset,g\width,n*g\height,100,100,100)
 							EntityParent c\lbgmesh,c\mesh
 							EntityAlpha c\lbgmesh,0
+							PositionEntity c\lmesh,0,yOffset,0
 							c\Seld = 1
 						EndIf
-					Else				
+					Else
 						EntityColor c\mesh,100,100,100
 						PositionEntity g\mesh,EntityX(g\mesh),EntityY(g\mesh),0
 					EndIf
@@ -321,7 +320,7 @@ Function MGui_Update()
 					If mouse_X>g\rx And mouse_x<g\rx+g\width And mouse_y<g\ry And mouse_y>g\ry-g\height Then
 						EntityColor g\mesh,225,225,225
 						If mh Then PlaySound MGui_Click : k\active = 1
-					Else				
+					Else
 						EntityColor k\mesh,100,100,100
 					EndIf
 				EndIf
@@ -370,7 +369,7 @@ Function MGui_Update()
 					If mouse_X>g\rx And mouse_x<g\rx+g\width And mouse_y<g\ry And mouse_y>g\ry-g\height Then
 						EntityColor g\mesh,225,225,225
 						If mh Then PlaySound MGui_Click : ib\active = 1
-					Else				
+					Else
 						EntityColor ib\mesh,100,100,100
 					EndIf
 				EndIf
@@ -884,14 +883,12 @@ Function MGUI_SetHoverInfo(h.MGUI_hoverinfo, x#,y#, txt$)
 		
 		FreeEntity h\tmesh
 		h\tmesh = Txt_Text(txt$, MGui_font, h\bg,0,150)
-		ScaleEntity h\tmesh,.6,.6,.6
+		ScaleEntity h\tmesh,.4,.4,.4
 		EntityOrder h\tmesh,-21
 		wid# = MeshWidth(h\tmesh)
 		hei# = MeshHeight(h\tmesh)
-		ScaleSprite h\bg,wid*.3,hei*.3
-		MoveEntity h\tmesh,0,-6,0
-		;If x+wid*2 > width Then x = x-wid*2
-		;If y+hei*2 > height Then y = y-hei*2
+		ScaleSprite h\bg,wid*.2,hei*.2
+		MoveEntity h\tmesh,0,-4,0
 		PositionEntity h\bg,x,y,0
 		If Left(h\txt,5) <> Left(txt,5) h\fade = -.5
 	EndIf
